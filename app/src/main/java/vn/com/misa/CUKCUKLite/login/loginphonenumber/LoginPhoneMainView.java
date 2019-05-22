@@ -1,4 +1,4 @@
-package vn.com.misa.CUKCUKLite.login.LoginPhoneNumber;
+package vn.com.misa.CUKCUKLite.login.loginphonenumber;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,7 +21,7 @@ import butterknife.OnClick;
 import vn.com.misa.CUKCUKLite.MainApp;
 import vn.com.misa.CUKCUKLite.R;
 
-public class LoginPhoneNumber extends AppCompatActivity implements ILoginContract.ILoginView {
+public class LoginPhoneMainView extends AppCompatActivity implements ILoginContract.ILoginView {
 
     @BindView(R.id.btnBack)
     ImageButton btnBack;
@@ -107,8 +107,7 @@ public class LoginPhoneNumber extends AppCompatActivity implements ILoginContrac
     @Override
     public void showOnSuccess() {
         try {
-            startActivity(new Intent(LoginPhoneNumber.this, MainApp.class));
-            Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(LoginPhoneMainView.this, MainApp.class));
         } catch (Exception e) {
             e.printStackTrace();
         }

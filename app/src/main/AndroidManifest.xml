@@ -9,20 +9,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="vn.com.misa.CUKCUKLite.login.LoginPhoneNumber.LoginPhoneNumber"></activity>
-        <activity android:name="vn.com.misa.CUKCUKLite.SplashApp">
+        <activity android:name=".order.editorder.EditOrder"></activity>
+        <activity android:name=".login.loginphonenumber.LoginPhoneMainView" />
+        <activity android:name=".SplashApp"></activity>
+        <activity android:name=".order.addfood.AddFood" />
+        <activity android:name=".login.LoginMain"></activity>
+        <activity
+            android:name=".MainApp"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="vn.com.misa.CUKCUKLite.order.AddFood.AddFood" />
-        <activity android:name="vn.com.misa.CUKCUKLite.login.LoginApp" />
-        <activity
-            android:name="vn.com.misa.CUKCUKLite.MainApp"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

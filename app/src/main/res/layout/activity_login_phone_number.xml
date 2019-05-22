@@ -3,7 +3,7 @@
     android:id="@+id/layoutLogin"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/color_primary"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/app_name_up_case"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/color_white"
                 android:textSize="@dimen/tv_size_medium"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -96,7 +96,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="0.6dip"
                 android:layout_marginLeft="52.0dip"
-                android:background="@color/colorGray" />
+                android:background="@color/color_gray" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -142,7 +142,7 @@
             android:id="@+id/cbSaveLogin"
             android:text="Lưu tài khoản"
             android:layout_gravity="left"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/color_white"
             android:paddingLeft="@dimen/app_margin_medium"
             android:paddingTop="@dimen/app_margin_medium"
             android:paddingBottom="@dimen/app_margin_medium"
@@ -154,7 +154,7 @@
 
             android:layout_width="fill_parent"
             android:layout_height="@dimen/btn_login_height"
-            android:layout_marginTop="@dimen/app_margin_big"
+            android:layout_marginTop="@dimen/app_margin_large"
             android:background="@drawable/selector_button_login"
             android:text="@string/btn_login"
             android:textAllCaps="true" />
@@ -163,10 +163,10 @@
             android:id="@+id/tvForgotPassword"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/app_margin_big"
+            android:layout_marginTop="@dimen/app_margin_large"
             android:gravity="center_horizontal"
             android:text="@string/et_forgot_password"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/color_white"
             android:textSize="@dimen/tv_size_small" />
 
         <View
@@ -178,7 +178,7 @@
             android:id="@+id/imgInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/app_margin_big"
+            android:layout_marginBottom="@dimen/app_margin_large"
             android:src="@drawable/ic_about_color_main" />
     </LinearLayout>
 </LinearLayout>

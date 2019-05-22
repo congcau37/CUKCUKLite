@@ -17,9 +17,9 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import vn.com.misa.CUKCUKLite.Sale.SaleView;
-import vn.com.misa.CUKCUKLite.order.AddFood.AddFood;
-import vn.com.misa.CUKCUKLite.order.OrderView;
+import vn.com.misa.CUKCUKLite.sale.SaleMainView;
+import vn.com.misa.CUKCUKLite.order.OrderMainView;
+import vn.com.misa.CUKCUKLite.order.addfood.AddFood;
 
 /**
  * Class màn hình chính của ứng dụng
@@ -69,7 +69,7 @@ public class MainApp extends AppCompatActivity
             toggle.syncState();
             navigationView.setNavigationItemSelectedListener(this);
             tvTitleToolbar.setText(R.string.menu_order);
-            initFragment(R.id.content_main, new OrderView());
+            initFragment(R.id.content_main, new OrderMainView());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -113,12 +113,22 @@ public class MainApp extends AppCompatActivity
         return true;
     }
 
+    /**
+     * hàm xử lý sự kiên toolbar
+     * @created_by tdcong
+     * @date 5/22/2019
+     * @param
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         try {
             int id = item.getItemId();
+            Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.content_main);
             if (id == R.id.action_add) {
-                startActivity(new Intent(MainApp.this, AddFood.class));
+                if (currentFragment != null && currentFragment instanceof OrderMainView) {
+                    startActivity(new Intent(MainApp.this, AddFood.class));
+                }
                 return true;
             }
 
@@ -136,10 +146,10 @@ public class MainApp extends AppCompatActivity
 
             if (id == R.id.nav_sale) {
                 tvTitleToolbar.setText(R.string.menu_sale);
-                initFragment(R.id.content_main, new SaleView());
+                initFragment(R.id.content_main, new SaleMainView());
             } else if (id == R.id.nav_order) {
                 tvTitleToolbar.setText(R.string.menu_order);
-                initFragment(R.id.content_main, new OrderView());
+                initFragment(R.id.content_main, new OrderMainView());
             }
         } catch (Exception e) {
             e.printStackTrace();

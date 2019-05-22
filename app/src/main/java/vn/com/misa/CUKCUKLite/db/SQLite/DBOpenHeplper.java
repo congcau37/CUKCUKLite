@@ -21,7 +21,7 @@ import java.sql.SQLException;
  */
 public class DBOpenHeplper extends SQLiteOpenHelper {
 
-    private static String DB_PATH = "/data/data/vn.com.misa.orderdemo/databases/";
+    private static String DB_PATH = "/data/data/vn.com.misa.cukcuklite/databases/";
     private static String DB_NAME = "cukcuk.sqlite";
     private static final int DATABASE_VERSION = 5;
 

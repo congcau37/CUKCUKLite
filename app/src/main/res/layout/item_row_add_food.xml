@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layout_custom"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_marginTop="@dimen/app_margin_small"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/app_margin_small">
 
 
-        <TextView
-            android:id="@+id/tvTitle"
-            android:text="title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/app_margin_small" />
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/app_margin_small"
+        android:text="@string/tv_unit" />
 
-        <TextView
-            android:id="@+id/tvValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/app_margin_small"
-            android:layout_weight="1"
-            android:gravity="right"
-            android:text="value"
-            android:textColor="@color/colorBlack" />
+    <TextView
+        android:id="@+id/tvValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/app_margin_small"
+        android:layout_weight="1"
+        android:gravity="right"
+        android:text="Bát"
+        android:textColor="@color/color_black" />
 
-        <ImageView
-            android:id="@+id/ivNext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+    <ImageView
+        android:id="@+id/ivNext"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_chevron_right" />
 
 </LinearLayout>

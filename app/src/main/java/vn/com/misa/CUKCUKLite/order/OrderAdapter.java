@@ -53,7 +53,7 @@ public class OrderAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         viewHolder.tvFoodName.setText(mData.get(position).getFoodName());
-        viewHolder.tvPrice.setText(String.valueOf(mData.get(position).getPrice()));
+        viewHolder.tvPrice.setText(String.valueOf(mData.get(position).getFoodPrice()));
         return convertView;
     }
 

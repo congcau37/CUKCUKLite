@@ -8,11 +8,13 @@
     android:orientation="horizontal">
 
     <ImageView
-        android:src="@drawable/_8_che_hoa_qua"
+        android:src="@drawable/_6_cam_ep"
         android:id="@+id/imgFood"
         android:layout_gravity="center"
-        android:layout_width="40dp"
-        android:layout_height="40dp" />
+        android:layout_marginLeft="@dimen/app_margin_small"
+        android:background="@drawable/bg_color_round"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,14 +28,14 @@
             android:text="Tên"
             android:textStyle="bold"
             android:textSize="@dimen/tv_size_medium"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/color_black"
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="0dp"
             tools:ignore="DuplicateIds" />
 
         <LinearLayout
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/color_black"
             android:layout_weight="1"
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -49,6 +51,7 @@
             <TextView
                 android:id="@+id/tvPrice"
                 android:text="100"
+                android:textSize="@dimen/tv_size_small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>

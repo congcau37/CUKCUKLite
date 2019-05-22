@@ -1,14 +1,14 @@
-package vn.com.misa.CUKCUKLite.order.AddFood;
+package vn.com.misa.CUKCUKLite.order.addfood;
 
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,6 +21,7 @@ import vn.com.misa.CUKCUKLite.R;
  */
 public class AddFood extends AppCompatActivity {
 
+
     @BindView(R.id.imvBack)
     ImageView imvBack;
     @BindView(R.id.tvTitleToolbar)
@@ -31,12 +32,14 @@ public class AddFood extends AppCompatActivity {
     Toolbar toolbar;
     @BindView(R.id.appBar)
     AppBarLayout appBar;
-    @BindView(R.id.tvUnit)
-    TextView tvUnit;
     @BindView(R.id.frmColor)
     FrameLayout frmColor;
     @BindView(R.id.frmIcon)
     FrameLayout frmIcon;
+    @BindView(R.id.tvPrice)
+    EditText tvPrice;
+    @BindView(R.id.tvUnit)
+    TextView tvUnit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,14 +64,20 @@ public class AddFood extends AppCompatActivity {
         tvTitleToolbar.setText(toolbar.getTitle());
     }
 
-    @OnClick({R.id.imvBack, R.id.tv_saveFood})
+    /**
+     * Hàm xử lý bắt sự kiện view
+     */
+    @OnClick({R.id.imvBack, R.id.tv_saveFood, R.id.tvPrice, R.id.tvUnit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.imvBack:
                 finish();
                 break;
             case R.id.tv_saveFood:
-                Toast.makeText(this, "Cất thành công!", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.tvPrice:
+                break;
+            case R.id.tvUnit:
                 break;
         }
     }

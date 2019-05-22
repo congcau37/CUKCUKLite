@@ -4,7 +4,7 @@
     android:layout_height="fill_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:fitsSystemWindows="true"
-    tools:context=".login.LoginApp"
+    tools:context=".login.LoginMain"
     android:background="@drawable/bg_login">
 
     <RelativeLayout
@@ -13,7 +13,7 @@
 
         <LinearLayout
             android:id="@+id/llLogo"
-            android:layout_marginTop="@dimen/app_margin_big"
+            android:layout_marginTop="@dimen/app_margin_large"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -34,7 +34,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="@dimen/app_margin_big"
+            android:layout_marginTop="@dimen/app_margin_large"
             android:orientation="vertical"
             android:layout_below="@id/llLogo"
             android:layout_width="match_parent"
@@ -42,7 +42,7 @@
 
             <Button
                 android:text="@string/btn_login_facebook"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/color_white"
                 android:layout_marginTop="@dimen/app_margin_small"
                 android:layout_marginLeft="@dimen/app_margin_medium"
                 android:layout_marginRight="@dimen/app_margin_medium"
@@ -51,7 +51,7 @@
                 android:layout_height="@dimen/btn_login_height" />
             <Button
                 android:text="@string/btn_login_google"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/color_white"
                 android:layout_marginTop="@dimen/app_margin_small"
                 android:layout_marginLeft="@dimen/app_margin_medium"
                 android:layout_marginRight="@dimen/app_margin_medium"
@@ -61,7 +61,7 @@
             <Button
                 android:id="@+id/btnLoginPhoneEmail"
                 android:text="@string/btn_login_phone"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/color_white"
                 android:layout_marginTop="@dimen/app_margin_small"
                 android:layout_marginLeft="@dimen/app_margin_medium"
                 android:layout_marginRight="@dimen/app_margin_medium"

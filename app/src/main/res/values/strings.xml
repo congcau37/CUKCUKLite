@@ -11,10 +11,17 @@
     <string name="btn_sign_in">Đăng ký</string>
     <string name="btn_save_login">Lưu thông tin</string>
     <string name="btn_save">Cất</string>
+    <string name="btn_cancel">Hủy bỏ</string>
+
+    <string name="cb_status">Ngừng bán</string>
+
 
     <string name="et_forgot_password">Quên mật khẩu %s</string>
     <string name="et_password_hint">Mật khẩu</string>
     <string name="et_login_number_phone_hint">Số điện thoại hoặc email</string>
+    <string name="et_food_name_hint">Nhập tên món</string>
+    <string name="edit_order">Nhập tên món</string>
+
 
     <string name="menu_sale">Bán hàng</string>
     <string name="menu_order">Thực đơn</string>
@@ -30,10 +37,10 @@
     <string name="toolbar_title_add_food">Thêm món</string>
     <string name="tv_no_account">Bạn chưa có tài khoản?Tạo mới</string>
     <string name="tv_price">Giá bán: </string>
-    <string name="tv_Food_name">Tên món*</string>
-    <string name="tv_unit">Đơn vị tính*</string>
+    <string name="tv_Food_name">Tên món *</string>
+    <string name="tv_unit">Đơn vị tính *</string>
     <string name="tv_color">Màu sắc</string>
     <string name="tv_icon">Biểu tượng</string>
-
+    <string name="tv_status">Trạng thái</string>
 
 </resources>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_white"
-    tools:context=".order.addfood.AddFood">
+    tools:context=".order.editorder.EditOrder">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBar"
@@ -75,8 +75,7 @@
                 android:text="@string/tv_Food_name" />
 
             <EditText
-                android:id="@+id/foodName"
-                android:layout_width="wrap_content"
+                android:layout_width="164dp"
                 android:layout_height="30dp"
                 android:background="@android:color/transparent"
                 android:maxLines="1"
@@ -88,11 +87,11 @@
         </LinearLayout>
 
         <!--<vn.com.misa.CUKCUKLite.order.AddFood.CustomAddFood-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--app:ivNext="@drawable/ic_chevron_right"-->
-            <!--app:tvText="@string/tv_price"-->
-            <!--app:tvValue="0"></vn.com.misa.CUKCUKLite.order.AddFood.CustomAddFood>-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:ivNext="@drawable/ic_chevron_right"-->
+        <!--app:tvText="@string/tv_price"-->
+        <!--app:tvValue="0"></vn.com.misa.CUKCUKLite.order.AddFood.CustomAddFood>-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -129,11 +128,11 @@
             android:background="@color/color_gray" />
 
         <!--<vn.com.misa.CUKCUKLite.order.AddFood.CustomAddFood-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--app:ivNext="@drawable/ic_chevron_right"-->
-            <!--app:tvText="@string/tv_unit"-->
-            <!--app:tvValue="Lon"></vn.com.misa.CUKCUKLite.order.AddFood.CustomAddFood>-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:ivNext="@drawable/ic_chevron_right"-->
+        <!--app:tvText="@string/tv_unit"-->
+        <!--app:tvValue="Lon"></vn.com.misa.CUKCUKLite.order.AddFood.CustomAddFood>-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -174,7 +173,7 @@
             android:layout_marginTop="@dimen/app_margin_small">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="@dimen/app_margin_small"
@@ -218,6 +217,27 @@
                         android:src="@drawable/ic_default" />
                 </FrameLayout>
             </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/app_margin_small"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/app_margin_small"
+                android:text="@string/tv_status" />
+
+            <CheckBox
+                android:id="@+id/cbStatus"
+                android:text="@string/cb_status"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/app_margin_large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </LinearLayout>
 

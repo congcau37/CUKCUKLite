@@ -8,20 +8,20 @@ package vn.com.misa.CUKCUKLite.model;
 public class Food {
     int foodID;
     String foodName;
-    int Price;
-    int UnitID;
-    int Color;
-    int Icon;
-    String Status;
+    int foodPrice;
+    String unitID;
+    String colorBackground;
+    String foodIcon;
+    String foodStatus;
 
-    public Food(int foodID, String foodName, int price, int unitID, int color, int icon, String status) {
+    public Food(int foodID, String foodName, int foodPrice, String unitID, String colorBackground, String foodIcon, String foodStatus) {
         this.foodID = foodID;
         this.foodName = foodName;
-        Price = price;
-        UnitID = unitID;
-        Color = color;
-        Icon = icon;
-        Status = status;
+        this.foodPrice = foodPrice;
+        this.unitID = unitID;
+        this.colorBackground = colorBackground;
+        this.foodIcon = foodIcon;
+        this.foodStatus = foodStatus;
     }
 
     public int getFoodID() {
@@ -40,43 +40,43 @@ public class Food {
         this.foodName = foodName;
     }
 
-    public int getPrice() {
-        return Price;
+    public int getFoodPrice() {
+        return foodPrice;
     }
 
-    public void setPrice(int price) {
-        Price = price;
+    public void setFoodPrice(int foodPrice) {
+        this.foodPrice = foodPrice;
     }
 
-    public int getUnitID() {
-        return UnitID;
+    public String getUnitID() {
+        return unitID;
     }
 
-    public void setUnitID(int unitID) {
-        UnitID = unitID;
+    public void setUnitID(String unitID) {
+        this.unitID = unitID;
     }
 
-    public int getColor() {
-        return Color;
+    public String getColorBackground() {
+        return colorBackground;
     }
 
-    public void setColor(int color) {
-        Color = color;
+    public void setColorBackground(String colorBackground) {
+        this.colorBackground = colorBackground;
     }
 
-    public int getIcon() {
-        return Icon;
+    public String getFoodIcon() {
+        return foodIcon;
     }
 
-    public void setIcon(int icon) {
-        Icon = icon;
+    public void setFoodIcon(String foodIcon) {
+        this.foodIcon = foodIcon;
     }
 
-    public String getStatus() {
-        return Status;
+    public String getFoodStatus() {
+        return foodStatus;
     }
 
-    public void setStatus(String status) {
-        Status = status;
+    public void setFoodStatus(String foodStatus) {
+        this.foodStatus = foodStatus;
     }
 }

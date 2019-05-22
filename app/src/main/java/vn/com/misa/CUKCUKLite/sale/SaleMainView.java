@@ -1,4 +1,4 @@
-package vn.com.misa.CUKCUKLite.Sale;
+package vn.com.misa.CUKCUKLite.sale;
 
 
 import android.os.Bundle;
@@ -12,10 +12,10 @@ import vn.com.misa.CUKCUKLite.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SaleView extends Fragment {
+public class SaleMainView extends Fragment {
 
 
-    public SaleView() {
+    public SaleMainView() {
         // Required empty public constructor
     }
 

@@ -3,9 +3,13 @@ package vn.com.misa.CUKCUKLite.db.SQLite;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
 import java.util.ArrayList;
 import vn.com.misa.CUKCUKLite.db.DataManager;
 import vn.com.misa.CUKCUKLite.model.Food;
+
+import static android.support.constraint.Constraints.TAG;
 
 /**
  *
@@ -28,12 +32,12 @@ public class ControllerSQLite extends DBOpenHeplper implements DataManager.SQLit
             while (!cursor.isAfterLast()) {
                 int foodID = cursor.getInt(cursor.getColumnIndex("foodID"));
                 String foodName = cursor.getString(cursor.getColumnIndex("foodName"));
-                int Price = cursor.getInt(cursor.getColumnIndex("Price"));
-                int Unit = cursor.getInt(cursor.getColumnIndex("UnitID"));
-                int Color = cursor.getInt(cursor.getColumnIndex("Color"));
-                int Icon = cursor.getInt(cursor.getColumnIndex("Icon"));
-                String Status = cursor.getString(cursor.getColumnIndex("Status"));
-                food.add(new Food(foodID, foodName, Price, Unit, Color, Icon, Status));
+                int foodPrice = cursor.getInt(cursor.getColumnIndex("foodPrice"));
+                String unitID = cursor.getString(cursor.getColumnIndex("unitID"));
+                String colorBackground = cursor.getString(cursor.getColumnIndex("colorBackground"));
+                String foodIcon = cursor.getString(cursor.getColumnIndex("foodIcon"));
+                String foodStatus = cursor.getString(cursor.getColumnIndex("foodStatus"));
+                food.add(new Food(foodID, foodName, foodPrice, unitID, colorBackground, foodIcon, foodStatus));
                 cursor.moveToNext();
             }
 

@@ -7,7 +7,7 @@ import android.os.Bundle;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import vn.com.misa.CUKCUKLite.login.LoginApp;
+import vn.com.misa.CUKCUKLite.login.LoginMain;
 
 public class SplashApp extends AppCompatActivity {
 
@@ -17,7 +17,7 @@ public class SplashApp extends AppCompatActivity {
         setContentView(R.layout.activity_splash_app);
         new Timer().schedule(new TimerTask() {
                                  public void run() {
-                                     SplashApp.this.startActivity(new Intent(SplashApp.this, LoginApp.class));
+                                     SplashApp.this.startActivity(new Intent(SplashApp.this, LoginMain.class));
                                      SplashApp.this.finish();
                                  }
                              }

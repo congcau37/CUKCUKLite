@@ -12,7 +12,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import vn.com.misa.CUKCUKLite.R;
-import vn.com.misa.CUKCUKLite.login.LoginPhoneNumber.LoginPhoneNumber;
+import vn.com.misa.CUKCUKLite.login.loginphonenumber.LoginPhoneMainView;
 
 /**
  * class đăng nhập
@@ -20,7 +20,7 @@ import vn.com.misa.CUKCUKLite.login.LoginPhoneNumber.LoginPhoneNumber;
  * @created_by tdcong
  * @date 5/17/2019
  */
-public class LoginApp extends AppCompatActivity {
+public class LoginMain extends AppCompatActivity {
 
     @BindView(R.id.llLogo)
     LinearLayout llLogo;
@@ -46,7 +46,7 @@ public class LoginApp extends AppCompatActivity {
             case R.id.llLogo:
                 break;
             case R.id.btnLoginPhoneEmail:
-                startActivity(new Intent(LoginApp.this,LoginPhoneNumber.class));
+                startActivity(new Intent(LoginMain.this, LoginPhoneMainView.class));
                 break;
             case R.id.tvNoAccount:
                 break;
