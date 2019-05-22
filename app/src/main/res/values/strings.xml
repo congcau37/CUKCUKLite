@@ -12,6 +12,7 @@
     <string name="btn_save_login">Lưu thông tin</string>
     <string name="btn_save">Cất</string>
     <string name="btn_cancel">Hủy bỏ</string>
+    <string name="btn_done">Xong</string>
 
     <string name="cb_status">Ngừng bán</string>
 
@@ -42,5 +43,9 @@
     <string name="tv_color">Màu sắc</string>
     <string name="tv_icon">Biểu tượng</string>
     <string name="tv_status">Trạng thái</string>
+
+    <string name="title_add_order">Thêm món</string>
+    <string name="title_edit_order">Sửa món</string>
+
 
 </resources>

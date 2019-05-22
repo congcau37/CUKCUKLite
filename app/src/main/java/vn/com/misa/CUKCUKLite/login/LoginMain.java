@@ -12,7 +12,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import vn.com.misa.CUKCUKLite.R;
-import vn.com.misa.CUKCUKLite.login.loginphonenumber.LoginPhoneMainView;
+import vn.com.misa.CUKCUKLite.login.loginPhoneNumber.LoginPhoneMainView;
 
 /**
  * class đăng nhập

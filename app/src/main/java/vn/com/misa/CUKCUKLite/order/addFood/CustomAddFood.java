@@ -1,4 +1,4 @@
-package vn.com.misa.CUKCUKLite.order.addfood;
+package vn.com.misa.CUKCUKLite.order.addFood;
 
 import android.content.Context;
 import android.content.res.TypedArray;

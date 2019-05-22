@@ -10,17 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.Unbinder;
 import vn.com.misa.CUKCUKLite.R;
 import vn.com.misa.CUKCUKLite.model.Food;
-import vn.com.misa.CUKCUKLite.order.editorder.EditOrder;
+import vn.com.misa.CUKCUKLite.order.editFood.FormEditFood;
 
 /**
  * Class danh sách thực đơn
@@ -36,7 +34,6 @@ public class OrderMainView extends Fragment implements IOrderContract.IOrderView
     View view;
     OrderAdapter adapter;
     IOrderContract.IOrderPresenter orderPresenter;
-    Unbinder unbinder1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -96,7 +93,7 @@ public class OrderMainView extends Fragment implements IOrderContract.IOrderView
         lvFood.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                startActivity(new Intent(getContext(), EditOrder.class));
+                startActivity(new Intent(getContext(), FormEditFood.class));
             }
         });
     }

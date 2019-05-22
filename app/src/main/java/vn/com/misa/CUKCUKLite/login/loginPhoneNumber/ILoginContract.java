@@ -1,4 +1,4 @@
-package vn.com.misa.CUKCUKLite.login.loginphonenumber;
+package vn.com.misa.CUKCUKLite.login.loginPhoneNumber;
 
 /**
  *

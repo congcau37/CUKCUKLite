@@ -21,10 +21,10 @@
             <TextView
                 android:id="@+id/tvTitleToolbar"
                 android:textSize="@dimen/tv_size_medium"
-                android:gravity="center_horizontal"
+                android:gravity="center"
                 android:textColor="@color/color_white"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent" />
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>

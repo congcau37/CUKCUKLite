@@ -17,9 +17,9 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import vn.com.misa.CUKCUKLite.order.addFood.FormAddFood;
 import vn.com.misa.CUKCUKLite.sale.SaleMainView;
 import vn.com.misa.CUKCUKLite.order.OrderMainView;
-import vn.com.misa.CUKCUKLite.order.addfood.AddFood;
 
 /**
  * Class màn hình chính của ứng dụng
@@ -127,7 +127,7 @@ public class MainApp extends AppCompatActivity
             Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.content_main);
             if (id == R.id.action_add) {
                 if (currentFragment != null && currentFragment instanceof OrderMainView) {
-                    startActivity(new Intent(MainApp.this, AddFood.class));
+                    startActivity(new Intent(MainApp.this, FormAddFood.class));
                 }
                 return true;
             }

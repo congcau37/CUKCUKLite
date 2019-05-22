@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_white"
-    tools:context=".order.editorder.EditOrder">
+    tools:context=".order.editFood.FormEditFood">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBar"
@@ -13,28 +13,27 @@
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-        <android.support.v7.widget.Toolbar
+        <LinearLayout
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/imvBack"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/ivBack"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
+                    android:scaleType="centerInside"
+                    android:background="@drawable/selector_button_back"
                     android:src="@drawable/ic_arrow_back" />
 
                 <TextView
                     android:id="@+id/tvTitleToolbar"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textColor="@color/color_white"
@@ -43,15 +42,15 @@
 
                 <TextView
                     android:id="@+id/tv_saveFood"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginRight="@dimen/app_margin_small"
+                    android:layout_width="@dimen/btn_save_food"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/selector_button_back"
+                    android:gravity="center"
+                    android:paddingRight="@dimen/app_margin_small"
                     android:text="@string/btn_save"
                     android:textColor="@color/color_white"
                     android:textSize="@dimen/tv_size_medium" />
             </LinearLayout>
-        </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 
@@ -71,27 +70,27 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/app_margin_small"
                 android:layout_gravity="center_vertical"
-                android:layout_weight="2"
                 android:text="@string/tv_Food_name" />
 
             <EditText
-                android:layout_width="164dp"
+                android:id="@+id/foodName"
+                android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:background="@android:color/transparent"
                 android:maxLines="1"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="40dp"
-                android:layout_weight="1"
                 android:gravity="right"
+                android:layout_weight="1"
                 android:hint="@string/et_food_name_hint" />
         </LinearLayout>
 
-        <!--<vn.com.misa.CUKCUKLite.order.AddFood.CustomAddFood-->
+        <!--<vn.com.misa.CUKCUKLite.order.FormAddFood.CustomAddFood-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="wrap_content"-->
         <!--app:ivNext="@drawable/ic_chevron_right"-->
         <!--app:tvText="@string/tv_price"-->
-        <!--app:tvValue="0"></vn.com.misa.CUKCUKLite.order.AddFood.CustomAddFood>-->
+        <!--app:tvValue="0"></vn.com.misa.CUKCUKLite.order.FormAddFood.CustomAddFood>-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -127,12 +126,12 @@
             android:layout_height="0.1dip"
             android:background="@color/color_gray" />
 
-        <!--<vn.com.misa.CUKCUKLite.order.AddFood.CustomAddFood-->
+        <!--<vn.com.misa.CUKCUKLite.order.FormAddFood.CustomAddFood-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="wrap_content"-->
         <!--app:ivNext="@drawable/ic_chevron_right"-->
         <!--app:tvText="@string/tv_unit"-->
-        <!--app:tvValue="Lon"></vn.com.misa.CUKCUKLite.order.AddFood.CustomAddFood>-->
+        <!--app:tvValue="Lon"></vn.com.misa.CUKCUKLite.order.FormAddFood.CustomAddFood>-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -248,7 +247,7 @@
         android:layout_marginLeft="@dimen/app_margin_medium"
         android:layout_marginRight="@dimen/app_margin_medium"
         android:layout_marginBottom="@dimen/app_margin_small"
-        android:background="@drawable/bg_button_save"
+        android:background="@drawable/selector_button_ok_popup"
         android:text="@string/btn_save"
         android:textColor="@color/color_white"
         android:textSize="@dimen/tv_size_medium" />

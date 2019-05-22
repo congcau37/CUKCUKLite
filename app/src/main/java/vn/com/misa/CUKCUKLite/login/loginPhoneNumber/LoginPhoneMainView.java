@@ -1,4 +1,4 @@
-package vn.com.misa.CUKCUKLite.login.loginphonenumber;
+package vn.com.misa.CUKCUKLite.login.loginPhoneNumber;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -54,7 +54,7 @@ public class LoginPhoneMainView extends AppCompatActivity implements ILoginContr
     protected void onCreate(Bundle savedInstanceState) {
         try {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_login_phone_number);
+            setContentView(R.layout.activity_login_phone);
             ButterKnife.bind(this);
             initPresenter();
         } catch (Exception e) {
