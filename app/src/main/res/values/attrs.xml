@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Options">
+        <attr name="tvText" format="string" localization="suggested" />
+        <attr name="tvValue" format="string" localization="suggested"/>
+        <attr name="ivNext" format="reference" />
+    </declare-styleable>
+
+</resources>
