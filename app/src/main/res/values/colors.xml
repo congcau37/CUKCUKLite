@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#108FDD</color>
+    <color name="colorPrimaryDark">#108FDD</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorGray">#A39C9C</color>
+    <color name="btnLoginPhoneGreen">#ADE68D</color>
+    <color name="btnLoginGoogleOrange">#E04516</color>
+    <color name="btnLoginFacebookBlue">#365899</color>
+    <color name="colorWhite">#FFFFFF</color>
+</resources>
