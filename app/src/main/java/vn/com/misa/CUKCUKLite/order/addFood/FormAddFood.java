@@ -1,8 +1,12 @@
 package vn.com.misa.CUKCUKLite.order.addFood;
 
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -14,6 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import vn.com.misa.CUKCUKLite.R;
+import vn.com.misa.CUKCUKLite.order.selectUnit.FormSelectUnit;
 
 /**
  * @created_by tdcong
@@ -32,8 +37,6 @@ public class FormAddFood extends AppCompatActivity {
     LinearLayout toolbar;
     @BindView(R.id.appBar)
     AppBarLayout appBar;
-    @BindView(R.id.foodName)
-    EditText foodName;
     @BindView(R.id.tvPrice)
     EditText tvPrice;
     @BindView(R.id.tvUnit)
@@ -42,7 +45,23 @@ public class FormAddFood extends AppCompatActivity {
     FrameLayout frmColor;
     @BindView(R.id.frmIcon)
     FrameLayout frmIcon;
+    @BindView(R.id.tvFoodName)
+    TextView tvFoodName;
+    @BindView(R.id.etFoodName)
+    EditText etFoodName;
+    @BindView(R.id.tvLabelUnit)
+    TextView tvLabelUnit;
+    @BindView(R.id.ivSelectUnit)
+    ImageView ivSelectUnit;
 
+/**
+ * 
+ * @created_by tdcong
+ * @date 5/23/2019
+ * @param 
+ * @return
+ */
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         try {
@@ -50,6 +69,29 @@ public class FormAddFood extends AppCompatActivity {
             setContentView(R.layout.activity_form_add_food);
             ButterKnife.bind(this);
             initToolBar();
+            initView();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * @param
+     * @return
+     * @created_by tdcong
+     * @date 5/23/2019
+     */
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private void initView() {
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                tvFoodName.setText(Html.fromHtml(getString(R.string.tv_food_name), Html.FROM_HTML_MODE_COMPACT));
+                tvLabelUnit.setText(Html.fromHtml(getString(R.string.tv_label_unit), Html.FROM_HTML_MODE_COMPACT));
+            } else {
+                tvFoodName.setText(Html.fromHtml(getString(R.string.tv_food_name)));
+                tvLabelUnit.setText(Html.fromHtml(getString(R.string.tv_label_unit)));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -70,21 +112,41 @@ public class FormAddFood extends AppCompatActivity {
     }
 
     /**
-     * Hàm xử lý các sự kiện view
-     * Create by: trand
-     * Date: 5/22/2019
+     * @param
+     * @return
+     * @created_by tdcong
+     * @date 5/23/2019
      */
-    @OnClick({R.id.ivBack, R.id.tv_saveFood, R.id.tvUnit})
+    @OnClick({R.id.ivBack, R.id.tv_saveFood, R.id.tvUnit, R.id.ivSelectUnit})
     public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.ivBack:
-                finish();
-                break;
-            case R.id.tv_saveFood:
-                break;
-            case R.id.tvUnit:
-                break;
+        try {
+            switch (view.getId()) {
+                case R.id.ivBack:
+                    try {
+                        finish();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case R.id.tv_saveFood:
+                    break;
+                case R.id.tvUnit:
+                    try {
+                        startActivity(new Intent(FormAddFood.this, FormSelectUnit.class));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case R.id.ivSelectUnit:
+                    try {
+                     startActivity(new Intent(FormAddFood.this, FormSelectUnit.class));
+                     } catch (Exception e) {
+                     e.printStackTrace();
+                     }
+                    break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
-
 }

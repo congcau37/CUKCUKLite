@@ -8,8 +8,10 @@
     android:background="@color/color_primary">
 
     <ImageView
-        android:src="@drawable/ic_logo_flow"
+        android:src="@drawable/logocukcuk_splash"
         android:layout_centerInParent="true"
+        android:layout_marginLeft="@dimen/app_margin_large"
+        android:layout_marginRight="@dimen/app_margin_large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 </RelativeLayout>

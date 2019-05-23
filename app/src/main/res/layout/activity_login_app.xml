@@ -85,7 +85,7 @@
             <TextView
                 android:text="Đăng ký"
                 android:textStyle="bold"
-                android:textSize="@dimen/tv_size_medium"
+                android:textSize="@dimen/font_size_medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>

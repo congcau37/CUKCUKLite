@@ -1,4 +1,4 @@
-package vn.com.misa.CUKCUKLite.order;
+package vn.com.misa.CUKCUKLite.order.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -44,16 +44,20 @@ public class OrderAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder;
-        if (convertView == null) {
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.item_list_order, parent, false);
-            viewHolder = new ViewHolder(convertView);
-            convertView.setTag(viewHolder);
-        } else {
-            viewHolder = (ViewHolder) convertView.getTag();
+        try {
+            ViewHolder viewHolder;
+            if (convertView == null) {
+                convertView = LayoutInflater.from(mContext).inflate(R.layout.item_list_order, parent, false);
+                viewHolder = new ViewHolder(convertView);
+                convertView.setTag(viewHolder);
+            } else {
+                viewHolder = (ViewHolder) convertView.getTag();
+            }
+            viewHolder.tvFoodName.setText(mData.get(position).getFoodName());
+            viewHolder.tvPrice.setText(String.valueOf(mData.get(position).getFoodPrice()));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        viewHolder.tvFoodName.setText(mData.get(position).getFoodName());
-        viewHolder.tvPrice.setText(String.valueOf(mData.get(position).getFoodPrice()));
         return convertView;
     }
 
@@ -61,8 +65,12 @@ public class OrderAdapter extends BaseAdapter {
         TextView tvFoodName,tvPrice;
 
         public ViewHolder(View view) {
-            tvFoodName = view.findViewById(R.id.tvFoodName);
-            tvPrice = view.findViewById(R.id.tvPrice);
+            try {
+                tvFoodName = view.findViewById(R.id.tvFoodName);
+                tvPrice = view.findViewById(R.id.tvPrice);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }

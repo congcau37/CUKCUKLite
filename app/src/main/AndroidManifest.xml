@@ -12,7 +12,10 @@
         <activity android:name=".order.selectUnit.FormSelectUnit"></activity>
         <activity android:name=".order.editFood.FormEditFood" />
         <activity android:name=".login.loginPhoneNumber.LoginPhoneMainView" />
-        <activity android:name=".SplashApp" />
+        <activity android:name=".SplashApp" >
+
+        </activity>
+
         <activity android:name=".order.addFood.FormAddFood" />
         <activity android:name=".login.LoginMain" />
         <activity

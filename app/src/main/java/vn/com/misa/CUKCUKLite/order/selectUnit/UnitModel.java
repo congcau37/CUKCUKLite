@@ -1,36 +1,24 @@
-package vn.com.misa.CUKCUKLite.order;
+package vn.com.misa.CUKCUKLite.order.selectUnit;
 
 import android.content.Context;
 
 import vn.com.misa.CUKCUKLite.db.db.ControllerSQLite;
 import vn.com.misa.CUKCUKLite.db.db.DBOpenHeplper;
 
-/**
- *
- * @created_by tdcong
- * @date 5/15/2019
- * @param
- * @return
- */
-public class OrderModel extends DBOpenHeplper implements IOrder {
+public class UnitModel extends DBOpenHeplper implements IUnitModel{
 
     ControllerSQLite controllerSQLite;
 
-    public OrderModel(Context context) {
+    public UnitModel(Context context) {
         super(context);
         controllerSQLite = new ControllerSQLite(context);
         controllerSQLite.createDataBase();
     }
 
-/**
- * Hàm
- * @param
- * @return
- */
     @Override
-    public void getAllFood(IGetAllFoodCallBack callBack) {
+    public void getAllUnit(ICallbackUnit iCallbackUnit) {
         try {
-            callBack.getAllFood(controllerSQLite.getFoodFromDatabase());
+            iCallbackUnit.getAllUnit(controllerSQLite.getUnitFromDatabase());
         } catch (Exception e) {
             e.printStackTrace();
         }

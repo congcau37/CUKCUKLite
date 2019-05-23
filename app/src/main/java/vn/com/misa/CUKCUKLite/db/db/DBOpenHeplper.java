@@ -1,4 +1,4 @@
-package vn.com.misa.CUKCUKLite.db.SQLite;
+package vn.com.misa.CUKCUKLite.db.db;
 
 import android.annotation.TargetApi;
 import android.content.Context;

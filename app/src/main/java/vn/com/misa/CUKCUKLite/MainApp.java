@@ -89,6 +89,13 @@ public class MainApp extends AppCompatActivity
         }
     }
 
+    /**
+     * 
+     * @created_by tdcong
+     * @date 5/23/2019
+     * @param 
+     * @return
+     */
     @Override
     public void onBackPressed() {
         try {
@@ -103,6 +110,13 @@ public class MainApp extends AppCompatActivity
         }
     }
 
+    /**
+     * 
+     * @created_by tdcong
+     * @date 5/23/2019
+     * @param 
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         try {
@@ -138,6 +152,13 @@ public class MainApp extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * 
+     * @created_by tdcong
+     * @date 5/23/2019
+     * @param 
+     * @return
+     */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {

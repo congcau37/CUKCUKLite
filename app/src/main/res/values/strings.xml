@@ -11,18 +11,18 @@
     <string name="btn_sign_in">Đăng ký</string>
     <string name="btn_save_login">Lưu thông tin</string>
     <string name="btn_save">Cất</string>
+    <string name="btn_delete">Xóa</string>
     <string name="btn_cancel">Hủy bỏ</string>
     <string name="btn_done">Xong</string>
+    <string name="content_unit_name">Nhập đơn vị tính</string>
 
     <string name="cb_status">Ngừng bán</string>
 
-
-    <string name="et_forgot_password">Quên mật khẩu %s</string>
+    <string name="et_forgot_password">Quên mật khẩu?</string>
     <string name="et_password_hint">Mật khẩu</string>
     <string name="et_login_number_phone_hint">Số điện thoại hoặc email</string>
     <string name="et_food_name_hint">Nhập tên món</string>
     <string name="edit_order">Nhập tên món</string>
-
 
     <string name="menu_sale">Bán hàng</string>
     <string name="menu_order">Thực đơn</string>
@@ -34,18 +34,16 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
 
-
     <string name="toolbar_title_add_food">Thêm món</string>
     <string name="tv_no_account">Bạn chưa có tài khoản?Tạo mới</string>
     <string name="tv_price">Giá bán: </string>
-    <string name="tv_Food_name">Tên món *</string>
-    <string name="tv_unit">Đơn vị tính *</string>
     <string name="tv_color">Màu sắc</string>
     <string name="tv_icon">Biểu tượng</string>
     <string name="tv_status">Trạng thái</string>
+    <string name="tv_food_name"><![CDATA[Tên món <font color=red>*</font>]]></string>
+    <string name="tv_label_unit"><![CDATA[Đơn vị tính <font color=red>*</font>]]></string>
 
     <string name="title_add_order">Thêm món</string>
     <string name="title_edit_order">Sửa món</string>
-
 
 </resources>

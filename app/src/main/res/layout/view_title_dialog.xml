@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@id/title"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_primary"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tvTitleDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/app_margin_medium"
+        android:layout_marginTop="@dimen/app_margin_medium"
+        android:layout_marginBottom="@dimen/app_margin_medium"
+        android:layout_weight="1.0"
+        android:gravity="center_vertical"
+        android:text="Thêm đơn vị tính"
+        android:textColor="@color/color_white"
+        android:textSize="@dimen/font_size_medium" />
+
+    <ImageButton
+        android:id="@+id/btnTitleClose"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:background="@drawable/bg_action_bar_selector"
+        android:paddingLeft="@dimen/app_margin_medium"
+        android:paddingTop="@dimen/app_margin_small"
+        android:paddingRight="@dimen/app_margin_small"
+        android:paddingBottom="@dimen/app_margin_small"
+        android:src="@drawable/ic_close_white" />
+</LinearLayout>

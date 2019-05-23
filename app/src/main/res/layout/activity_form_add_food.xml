@@ -23,7 +23,7 @@
 
             <ImageView
                 android:id="@+id/ivBack"
-                android:layout_width="50dp"
+                android:layout_width="@dimen/toolbar_back_width"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:scaleType="centerInside"
@@ -37,19 +37,19 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:textColor="@color/color_white"
-                android:textSize="@dimen/tv_size_medium"
+                android:textSize="@dimen/font_size_medium"
                 android:textStyle="normal" />
 
             <TextView
                 android:id="@+id/tv_saveFood"
-                android:layout_width="@dimen/btn_save_food"
+                android:layout_width="@dimen/toolbar_save_width"
                 android:layout_height="match_parent"
                 android:background="@drawable/selector_button_back"
                 android:gravity="center"
                 android:paddingRight="@dimen/app_margin_small"
                 android:text="@string/btn_save"
                 android:textColor="@color/color_white"
-                android:textSize="@dimen/tv_size_medium" />
+                android:textSize="@dimen/font_size_medium" />
         </LinearLayout>
 
     </android.support.design.widget.AppBarLayout>
@@ -63,19 +63,22 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="30dp"
+            android:layout_marginBottom="@dimen/app_margin_small"
             android:layout_marginTop="@dimen/app_margin_small">
 
             <TextView
+                android:id="@+id/tvFoodName"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/app_margin_small"
-                android:layout_gravity="center_vertical"
-                android:text="@string/tv_Food_name" />
+                android:layout_gravity="center_vertical" />
 
             <EditText
-                android:id="@+id/foodName"
+                android:id="@+id/etFoodName"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
+                android:textColor="@color/color_black"
+                android:textSize="@dimen/font_size_medium"
                 android:background="@android:color/transparent"
                 android:maxLines="1"
                 android:layout_gravity="center_vertical"
@@ -85,12 +88,10 @@
                 android:hint="@string/et_food_name_hint" />
         </LinearLayout>
 
-        <!--<vn.com.misa.CUKCUKLite.order.FormAddFood.CustomAddFood-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--app:ivNext="@drawable/ic_chevron_right"-->
-            <!--app:tvText="@string/tv_price"-->
-            <!--app:tvValue="0"></vn.com.misa.CUKCUKLite.order.FormAddFood.CustomAddFood>-->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/view_row_height"
+            android:background="@color/color_gray" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -123,7 +124,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="0.1dip"
+            android:layout_height="@dimen/view_row_height"
             android:background="@color/color_gray" />
 
         <!--<vn.com.misa.CUKCUKLite.order.FormAddFood.CustomAddFood-->
@@ -139,10 +140,10 @@
             android:layout_marginTop="@dimen/app_margin_small">
 
             <TextView
+                android:id="@+id/tvLabelUnit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/app_margin_small"
-                android:text="@string/tv_unit" />
+                android:layout_margin="@dimen/app_margin_small" />
 
             <TextView
                 android:id="@+id/tvUnit"
@@ -152,9 +153,11 @@
                 android:layout_weight="1"
                 android:gravity="right"
                 android:text="Bát"
-                android:textColor="@color/color_black" />
+                android:textColor="@color/color_black"
+                android:textSize="@dimen/font_size_medium"/>
 
             <ImageView
+                android:id="@+id/ivSelectUnit"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
@@ -163,7 +166,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="0.1dip"
+            android:layout_height="@dimen/view_row_height"
             android:background="@color/color_gray" />
 
         <LinearLayout
@@ -229,6 +232,6 @@
         android:background="@drawable/selector_button_ok_popup"
         android:text="@string/btn_save"
         android:textColor="@color/color_white"
-        android:textSize="@dimen/tv_size_medium" />
+        android:textSize="@dimen/font_size_medium" />
 
 </RelativeLayout>

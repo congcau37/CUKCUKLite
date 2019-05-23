@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/app_name_up_case"
                 android:textColor="@color/color_white"
-                android:textSize="@dimen/tv_size_medium"
+                android:textSize="@dimen/font_size_medium"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -74,7 +74,7 @@
                     android:paddingLeft="@dimen/app_margin_medium"
                     android:paddingTop="@dimen/app_margin_medium"
                     android:paddingBottom="@dimen/app_margin_medium"
-                    android:textSize="@dimen/tv_size_small" />
+                    android:textSize="@dimen/font_size_small" />
 
                 <LinearLayout
                     android:id="@+id/lnClearUserName"
@@ -151,9 +151,9 @@
 
         <Button
             android:id="@id/btnLogin"
-
             android:layout_width="fill_parent"
             android:layout_height="@dimen/btn_login_height"
+            android:textColor="@color/color_white"
             android:layout_marginTop="@dimen/app_margin_large"
             android:background="@drawable/selector_button_login"
             android:text="@string/btn_login"
@@ -167,7 +167,7 @@
             android:gravity="center_horizontal"
             android:text="@string/et_forgot_password"
             android:textColor="@color/color_white"
-            android:textSize="@dimen/tv_size_small" />
+            android:textSize="@dimen/font_size_small" />
 
         <View
             android:layout_width="fill_parent"
@@ -179,6 +179,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/app_margin_large"
-            android:src="@drawable/ic_about_color_main" />
+            android:src="@drawable/ic_about" />
     </LinearLayout>
 </LinearLayout>

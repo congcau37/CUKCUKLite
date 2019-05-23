@@ -18,6 +18,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import vn.com.misa.CUKCUKLite.R;
 import vn.com.misa.CUKCUKLite.model.Food;
+import vn.com.misa.CUKCUKLite.order.adapter.OrderAdapter;
 import vn.com.misa.CUKCUKLite.order.editFood.FormEditFood;
 
 /**
@@ -35,6 +36,13 @@ public class OrderMainView extends Fragment implements IOrderContract.IOrderView
     OrderAdapter adapter;
     IOrderContract.IOrderPresenter orderPresenter;
 
+    /**
+     *
+     * @created_by tdcong
+     * @date 5/23/2019
+     * @param
+     * @return
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         try {
@@ -44,6 +52,13 @@ public class OrderMainView extends Fragment implements IOrderContract.IOrderView
         }
     }
 
+    /**
+     *
+     * @created_by tdcong
+     * @date 5/23/2019
+     * @param
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -56,6 +71,13 @@ public class OrderMainView extends Fragment implements IOrderContract.IOrderView
         return view;
     }
 
+    /**
+     *
+     * @created_by tdcong
+     * @date 5/23/2019
+     * @param
+     * @return
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         try {
@@ -116,6 +138,13 @@ public class OrderMainView extends Fragment implements IOrderContract.IOrderView
         }
     }
 
+    /**
+     *
+     * @created_by tdcong
+     * @date 5/23/2019
+     * @param
+     * @return
+     */
     @Override
     public void onDestroyView() {
         try {

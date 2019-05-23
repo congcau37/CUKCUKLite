@@ -7,13 +7,21 @@
     <dimen name="app_margin_large">20dp</dimen>
     <dimen name="btn_login_height">60dp</dimen>
     <dimen name="btn_back_height">50dp</dimen>
-    <dimen name="btn_save_food">50dp</dimen>
-
+    <dimen name="btn_save_food_height">50dp</dimen>
 
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="tv_size_small">16dp</dimen>
+    <dimen name="icon_selected_item_size">28.0dip</dimen>
     <dimen name="nav_header_height">200dp</dimen>
     <dimen name="nav_header_vertical_spacing">8dp</dimen>
-    <dimen name="tv_size_medium">20dp</dimen>
-    <dimen name="tv_size_large">30dp</dimen>
+    <dimen name="min_height_message_dialog">85.0dip</dimen>
+    <dimen name="font_size_medium">20dp</dimen>
+    <dimen name="font_size_small">16dp</dimen>
+    <dimen name="font_size_large">30dp</dimen>
+
+    <dimen name="toolbar_save_width">50dp</dimen>
+    <dimen name="toolbar_add_width">50dp</dimen>
+    <dimen name="toolbar_back_width">50dp</dimen>
+
+    <dimen name="view_row_height">0.100000024dip</dimen>
+
 </resources>

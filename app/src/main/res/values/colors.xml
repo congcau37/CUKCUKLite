@@ -2,11 +2,16 @@
 <resources>
     <color name="color_primary">#147EBE</color>
     <color name="color_primary_dark">#147EBE</color>
+    <color name="color_primary_light">#03A9F4</color>
     <color name="color_accent">#147EBE</color>
-    <color name="color_black">#5F5656</color>
+    <color name="color_black">#2B2B2B</color>
+    <color name="color_black_light">#524E4E</color>
     <color name="color_white">#FFFFFF</color>
-    <color name="color_gray">#C9C7C7</color>
-    <color name="btn_login_phone_green">#ADE68D</color>
+    <color name="color_gray">#E0DADA</color>
+    <color name="color_red">#F44336</color>
+    <color name="btn_login_phone_green">#93CF71</color>
     <color name="btn_login_google_orange">#E04516</color>
     <color name="btn_login_facebook_blue">#365899</color>
+    <color name="btn_delete_orange">#F44336</color>
+
 </resources>

@@ -13,15 +13,19 @@ public class SplashApp extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash_app);
-        new Timer().schedule(new TimerTask() {
-                                 public void run() {
-                                     SplashApp.this.startActivity(new Intent(SplashApp.this, LoginMain.class));
-                                     SplashApp.this.finish();
+        try {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_splash_app);
+            new Timer().schedule(new TimerTask() {
+                                     public void run() {
+                                         SplashApp.this.startActivity(new Intent(SplashApp.this, LoginMain.class));
+                                         SplashApp.this.finish();
+                                     }
                                  }
-                             }
-                , 3000L);
-        return;
+                    , 3000L);
+            return;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
