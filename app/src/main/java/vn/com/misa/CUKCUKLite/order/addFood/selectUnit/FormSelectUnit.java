@@ -1,4 +1,4 @@
-package vn.com.misa.CUKCUKLite.order.selectUnit;
+package vn.com.misa.CUKCUKLite.order.addFood.selectUnit;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -20,7 +21,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import vn.com.misa.CUKCUKLite.R;
 import vn.com.misa.CUKCUKLite.model.Unit;
-import vn.com.misa.CUKCUKLite.order.selectUnit.adapter.UnitAdapter;
+import vn.com.misa.CUKCUKLite.order.OrderMainView;
+import vn.com.misa.CUKCUKLite.order.addFood.selectUnit.adapter.UnitAdapter;
+import vn.com.misa.CUKCUKLite.sale.SaleMainView;
 
 /**
  * 
@@ -48,6 +51,8 @@ public class FormSelectUnit extends AppCompatActivity implements IUnitContract.I
     @BindView(R.id.btnDone)
     Button btnDone;
 
+    String newUnit;
+
     /**
      * @param
      * @return
@@ -73,8 +78,12 @@ public class FormSelectUnit extends AppCompatActivity implements IUnitContract.I
      * @date 5/23/2019
      */
     private void initView() {
-        iUnitPresenter = new UnitPresenter(this, new UnitModel(this));
-        iUnitPresenter.loadUnit();
+        try {
+            iUnitPresenter = new UnitPresenter(this, new UnitModel(this));
+            iUnitPresenter.loadUnit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -85,16 +94,24 @@ public class FormSelectUnit extends AppCompatActivity implements IUnitContract.I
      */
     @OnClick({R.id.ivBack, R.id.ivAddUnit, R.id.btnDone})
     public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.ivBack:
-                finish();
-                break;
-            case R.id.ivAddUnit:
-                showDialogAddUnit();
-                break;
-            case R.id.btnDone:
-                finish();
-                break;
+        try {
+            switch (view.getId()) {
+                case R.id.ivBack:
+                    try {
+                        finish();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case R.id.ivAddUnit:
+                    showDialogAddUnit();
+                    break;
+                case R.id.btnDone:
+                    finish();
+                    break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -115,8 +132,39 @@ public class FormSelectUnit extends AppCompatActivity implements IUnitContract.I
     }
 
     /**
+     *
+     * @created_by tdcong
+     * @date 5/24/2019
      * @param
      * @return
+     */
+    @Override
+    public void saveNewUnitSuccess() {
+        try {
+
+         } catch (Exception e) {
+         e.printStackTrace();
+         }
+    }
+
+    /**
+     *
+     * @created_by tdcong
+     * @date 5/24/2019
+     * @param
+     * @return
+     */
+    @Override
+    public void saveNewUnitFail() {
+        try {
+
+         } catch (Exception e) {
+         e.printStackTrace();
+         }
+    }
+
+    /**
+     *
      * @created_by tdcong
      * @date 5/23/2019
      */
@@ -129,25 +177,57 @@ public class FormSelectUnit extends AppCompatActivity implements IUnitContract.I
             dialog.setCancelable(true);
             dialog.setCanceledOnTouchOutside(true);
 
-            Button dialogButton =  dialog.findViewById(R.id.btnCancel);
+            Button btnCacel =  dialog.findViewById(R.id.btnCancel);
             TextView tvTitle = dialog.findViewById(R.id.tvTitleDialog);
+            final EditText etUnitName = dialog.findViewById(R.id.etUnitName);
             ImageView btnTitleClose = dialog.findViewById(R.id.btnTitleClose);
+            Button btnSave = dialog.findViewById(R.id.btnSave);
 
             btnTitleClose.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    dialog.dismiss();
+                    try {
+                        dialog.dismiss();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             });
-            dialogButton.setOnClickListener(new View.OnClickListener() {
+            btnCacel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    dialog.dismiss();
+                    try {
+                        dialog.dismiss();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            btnSave.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try {
+                        newUnit = etUnitName.getText().toString().trim();
+                        iUnitPresenter.saveNewUnit(newUnit);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             });
             dialog.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     *
+     * @created_by tdcong
+     * @date 5/24/2019
+     * @param
+     * @return
+     */
+    public void checkScreenUit(){
+
     }
 }

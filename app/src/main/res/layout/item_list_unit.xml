@@ -57,6 +57,4 @@
                 android:src="@drawable/ic_edit" />
         </RelativeLayout>
     </LinearLayout>
-
-
 </LinearLayout>

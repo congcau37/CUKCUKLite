@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_white"
-    tools:context=".order.selectUnit.FormSelectUnit">
+    tools:context=".order.addFood.selectUnit.FormSelectUnit">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBar"

@@ -1,24 +1,30 @@
 package vn.com.misa.CUKCUKLite.order.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import vn.com.misa.CUKCUKLite.R;
 import vn.com.misa.CUKCUKLite.model.Food;
 
 /**
- *
  * @created_by tdcong
  * @date 5/17/2019
  */
 public class OrderAdapter extends BaseAdapter {
-    
+
     private Context mContext;
     private List<Food> mData;
 
@@ -55,6 +61,22 @@ public class OrderAdapter extends BaseAdapter {
             }
             viewHolder.tvFoodName.setText(mData.get(position).getFoodName());
             viewHolder.tvPrice.setText(String.valueOf(mData.get(position).getFoodPrice()));
+            String iconName = mData.get(position).getFoodIcon();
+            String backgroundCode = mData.get(position).getColorBackground();
+            try {
+                if (!iconName.equals("")) {
+                    InputStream ims = mContext.getAssets().open("icondefault/" + mData.get(position).getFoodIcon() + ".png"); //mData.get(position).getFoodIcon()
+                    Drawable d = Drawable.createFromStream(ims, null);
+                    viewHolder.ivFood.setImageDrawable(d);
+                    ims.close();
+                }
+                if(!backgroundCode.equals("")){
+                    viewHolder.frmBackgroundColor.setBackground(createCircleBackground(backgroundCode));
+                }
+
+            } catch (IOException ex) {
+                ex.getStackTrace();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -62,15 +84,32 @@ public class OrderAdapter extends BaseAdapter {
     }
 
     private class ViewHolder {
-        TextView tvFoodName,tvPrice;
+        TextView tvFoodName, tvPrice;
+        ImageView ivFood;
+        FrameLayout frmBackgroundColor;
 
         public ViewHolder(View view) {
             try {
                 tvFoodName = view.findViewById(R.id.tvFoodName);
                 tvPrice = view.findViewById(R.id.tvPrice);
+                ivFood = view.findViewById(R.id.ivFood);
+                frmBackgroundColor = view.findViewById(R.id.frmBackgroundColor);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    public GradientDrawable createCircleBackground(String color) {
+        GradientDrawable backgroundCircle = null;
+        try {
+            // tạo background
+            backgroundCircle = new GradientDrawable();
+            backgroundCircle.setShape(GradientDrawable.OVAL);
+            backgroundCircle.setColor(Color.parseColor(color));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return backgroundCircle;
     }
 }

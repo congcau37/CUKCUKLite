@@ -1,4 +1,4 @@
-package vn.com.misa.CUKCUKLite.order.selectUnit.adapter;
+package vn.com.misa.CUKCUKLite.order.addFood.selectUnit.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,14 +9,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
 import vn.com.misa.CUKCUKLite.R;
-import vn.com.misa.CUKCUKLite.model.Food;
 import vn.com.misa.CUKCUKLite.model.Unit;
-import vn.com.misa.CUKCUKLite.order.adapter.OrderAdapter;
 
 /**
  * @param

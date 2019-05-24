@@ -1,4 +1,4 @@
-package vn.com.misa.CUKCUKLite.order.selectUnit;
+package vn.com.misa.CUKCUKLite.order.addFood.selectUnit;
 
 import android.content.Context;
 
@@ -22,5 +22,10 @@ public class UnitModel extends DBOpenHeplper implements IUnitModel{
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void saveNewUnit(String newUnit) {
+        controllerSQLite.saveNewUnit(newUnit);
     }
 }

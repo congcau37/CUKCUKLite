@@ -74,4 +74,13 @@ public class ControllerSQLite extends DBOpenHeplper {
         }
         return unitList;
     }
+
+    public void saveNewUnit(String newUnit){
+        try {
+            SQLiteDatabase db = getWritableDatabase();
+
+         } catch (Exception e) {
+         e.printStackTrace();
+         }
+    }
 }

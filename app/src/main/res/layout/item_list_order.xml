@@ -7,14 +7,20 @@
     android:layout_marginBottom="@dimen/app_margin_small"
     android:orientation="horizontal">
 
-    <ImageView
-        android:src="@drawable/_6_cam_ep"
-        android:id="@+id/imgFood"
+    <FrameLayout
+        android:id="@+id/frmBackgroundColor"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginLeft="@dimen/app_margin_small"
-        android:background="@drawable/bg_color_round"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
+        android:background="#f20">
+
+        <ImageView
+            android:id="@+id/ivFood"
+            android:layout_gravity="center"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

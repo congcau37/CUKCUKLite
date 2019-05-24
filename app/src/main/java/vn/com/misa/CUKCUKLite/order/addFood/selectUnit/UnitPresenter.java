@@ -1,4 +1,4 @@
-package vn.com.misa.CUKCUKLite.order.selectUnit;
+package vn.com.misa.CUKCUKLite.order.addFood.selectUnit;
 
 import java.util.List;
 
@@ -22,5 +22,11 @@ public class UnitPresenter implements IUnitContract.IUnitPresenter {
                 iUnitView.displayUnit(unitList);
             }
         });
+    }
+
+    @Override
+    public void saveNewUnit(String newUnit) {
+
+        iUnitModel.saveNewUnit(newUnit);
     }
 }
