@@ -1,8 +1,10 @@
 package vn.com.misa.CUKCUKLite.order;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import vn.com.misa.CUKCUKLite.model.Food;
+import vn.com.misa.CUKCUKLite.model.Unit;
 
 /**
  * @param
@@ -13,6 +15,7 @@ import vn.com.misa.CUKCUKLite.model.Food;
 public class OrderPresenter implements IOrderContract.IOrderPresenter {
     IOrderContract.IOrderView iOrderView;
     IOrder iOrder;
+    List<Food> mFoodList = new ArrayList<>();
 
     public OrderPresenter(IOrder iOrder, IOrderContract.IOrderView iOrderView) {
         this.iOrder = iOrder;
@@ -30,6 +33,7 @@ public class OrderPresenter implements IOrderContract.IOrderPresenter {
             iOrder.getAllFood(new IOrder.IGetAllFoodCallBack() {
                 @Override
                 public void getAllFood(List<Food> foods) {
+                    mFoodList = foods;
                     iOrderView.displayListOrder(foods);
                 }
             });

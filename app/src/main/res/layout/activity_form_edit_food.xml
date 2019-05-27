@@ -21,36 +21,36 @@
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
 
-                <ImageView
-                    android:id="@+id/ivBack"
-                    android:layout_width="@dimen/toolbar_back_width"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:scaleType="centerInside"
-                    android:background="@drawable/selector_button_back"
-                    android:src="@drawable/ic_arrow_back" />
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="@dimen/toolbar_back_width"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:scaleType="centerInside"
+                android:background="@drawable/selector_button_back"
+                android:src="@drawable/ic_arrow_back" />
 
-                <TextView
-                    android:id="@+id/tvTitleToolbar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:textColor="@color/color_white"
-                    android:textSize="@dimen/font_size_medium"
-                    android:textStyle="normal" />
+            <TextView
+                android:id="@+id/tvTitleToolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/font_size_medium"
+                android:textStyle="normal" />
 
-                <TextView
-                    android:id="@+id/tv_saveFood"
-                    android:layout_width="@dimen/toolbar_save_width"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/selector_button_back"
-                    android:gravity="center"
-                    android:paddingRight="@dimen/app_margin_small"
-                    android:text="@string/btn_save"
-                    android:textColor="@color/color_white"
-                    android:textSize="@dimen/font_size_medium" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/tv_saveFood"
+                android:layout_width="@dimen/toolbar_save_width"
+                android:layout_height="match_parent"
+                android:background="@drawable/selector_button_back"
+                android:gravity="center"
+                android:paddingRight="@dimen/app_margin_small"
+                android:text="@string/btn_save"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/font_size_medium" />
+        </LinearLayout>
 
     </android.support.design.widget.AppBarLayout>
 
@@ -105,7 +105,7 @@
                 android:text="@string/tv_price" />
 
             <EditText
-                android:id="@+id/tvPrice"
+                android:id="@+id/etPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/font_size_medium"
@@ -183,7 +183,7 @@
                 android:text="@string/tv_color" />
 
             <FrameLayout
-                android:id="@+id/frmColor"
+                android:id="@+id/frmBackgroundColor"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="@dimen/app_margin_large"
@@ -208,7 +208,7 @@
                     android:text="@string/tv_icon" />
 
                 <FrameLayout
-                    android:id="@+id/frmIcon"
+                    android:id="@+id/frmBackgroundIcon"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:background="@drawable/bg_color_round">
@@ -241,7 +241,7 @@
                 android:textColor="@color/color_black"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/app_margin_large"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
     </LinearLayout>

@@ -20,6 +20,7 @@ import vn.com.misa.CUKCUKLite.R;
 import vn.com.misa.CUKCUKLite.model.Food;
 import vn.com.misa.CUKCUKLite.order.adapter.OrderAdapter;
 import vn.com.misa.CUKCUKLite.order.editFood.FormEditFood;
+import vn.com.misa.CUKCUKLite.util.ConstantKey;
 
 /**
  * Class danh sách thực đơn
@@ -34,23 +35,8 @@ public class OrderMainView extends Fragment implements IOrderContract.IOrderView
     ListView lvFood;
     View view;
     OrderAdapter adapter;
-    IOrderContract.IOrderPresenter orderPresenter;
+    IOrderContract.IOrderPresenter iOrderPresenter;
 
-    /**
-     *
-     * @created_by tdcong
-     * @date 5/23/2019
-     * @param
-     * @return
-     */
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        try {
-            super.onCreate(savedInstanceState);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     /**
      *
@@ -82,8 +68,18 @@ public class OrderMainView extends Fragment implements IOrderContract.IOrderView
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         try {
             super.onViewCreated(view, savedInstanceState);
-            initView();
+            initPresenter();
+            initView(view);
             initEvent();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void initPresenter() {
+        try {
+            iOrderPresenter = new OrderPresenter(new OrderModel(getContext()), OrderMainView.this);
+            iOrderPresenter.loadAllFood();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -95,13 +91,8 @@ public class OrderMainView extends Fragment implements IOrderContract.IOrderView
      * @created_by tdcong
      * @date 5/17/2019
      */
-    private void initView() {
-        try {
-            orderPresenter = new OrderPresenter(new OrderModel(getContext()), OrderMainView.this);
-            orderPresenter.loadAllFood();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    private void initView(View view) {
+
     }
 
     /**
@@ -115,9 +106,25 @@ public class OrderMainView extends Fragment implements IOrderContract.IOrderView
         lvFood.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                startActivity(new Intent(getContext(), FormEditFood.class));
+                sendDetailFood(position);
             }
         });
+    }
+
+    /**
+     *
+     * @Create_by: trand
+     * @Date: 5/27/2019
+     * @Param:
+     * @Return:
+     */
+    private void sendDetailFood(int position) {
+        Food food = (Food) adapter.getItem(position);
+        Intent intent = new Intent(getContext(), FormEditFood.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(ConstantKey.KEY_SEND_FOOD,food);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     /**

@@ -18,7 +18,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import vn.com.misa.CUKCUKLite.R;
-import vn.com.misa.CUKCUKLite.order.addFood.selectUnit.FormSelectUnit;
+import vn.com.misa.CUKCUKLite.order.selectUnit.FormSelectUnit;
+import vn.com.misa.CUKCUKLite.order.selectUnit.IUnitContract;
+import vn.com.misa.CUKCUKLite.order.selectUnit.UnitModel;
+import vn.com.misa.CUKCUKLite.order.selectUnit.UnitPresenter;
 
 /**
  * @created_by tdcong
@@ -37,7 +40,7 @@ public class FormAddFood extends AppCompatActivity {
     LinearLayout toolbar;
     @BindView(R.id.appBar)
     AppBarLayout appBar;
-    @BindView(R.id.tvPrice)
+    @BindView(R.id.etPrice)
     EditText tvPrice;
     @BindView(R.id.tvUnit)
     TextView tvUnit;
@@ -54,13 +57,8 @@ public class FormAddFood extends AppCompatActivity {
     @BindView(R.id.ivSelectUnit)
     ImageView ivSelectUnit;
 
-/**
- * 
- * @created_by tdcong
- * @date 5/23/2019
- * @param 
- * @return
- */
+    IUnitContract.IUnitPresenter iUnitPresenter;
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,11 +66,16 @@ public class FormAddFood extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_form_add_food);
             ButterKnife.bind(this);
+            initPresenter();
             initToolBar();
             initView();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void initPresenter() {
+
     }
 
     /**

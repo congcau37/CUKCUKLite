@@ -1,6 +1,7 @@
-package vn.com.misa.CUKCUKLite.order.addFood.selectUnit;
+package vn.com.misa.CUKCUKLite.order.selectUnit;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -21,15 +22,14 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import vn.com.misa.CUKCUKLite.R;
 import vn.com.misa.CUKCUKLite.model.Unit;
-import vn.com.misa.CUKCUKLite.order.OrderMainView;
-import vn.com.misa.CUKCUKLite.order.addFood.selectUnit.adapter.UnitAdapter;
-import vn.com.misa.CUKCUKLite.sale.SaleMainView;
+import vn.com.misa.CUKCUKLite.order.selectUnit.adapter.UnitAdapter;
+import vn.com.misa.CUKCUKLite.order.editFood.FormEditFood;
+import vn.com.misa.CUKCUKLite.util.ConstantKey;
 
 /**
- * 
+ * @param
  * @created_by tdcong
  * @date 5/23/2019
- * @param 
  * @return
  */
 public class FormSelectUnit extends AppCompatActivity implements IUnitContract.IUnitView {
@@ -52,6 +52,8 @@ public class FormSelectUnit extends AppCompatActivity implements IUnitContract.I
     Button btnDone;
 
     String newUnit;
+    Unit unitSelected;
+    Dialog dialogAddUnit;
 
     /**
      * @param
@@ -65,22 +67,22 @@ public class FormSelectUnit extends AppCompatActivity implements IUnitContract.I
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_form_select_unit);
             ButterKnife.bind(this);
-            initView();
+            initPresenter();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     /**
-     * @param
-     * @return
-     * @created_by tdcong
-     * @date 5/23/2019
+     * @Create_by: trand
+     * @Date: 5/27/2019
+     * @Param:
+     * @Return:
      */
-    private void initView() {
+    private void initPresenter() {
         try {
-            iUnitPresenter = new UnitPresenter(this, new UnitModel(this));
-            iUnitPresenter.loadUnit();
+            iUnitPresenter = new UnitPresenter(new UnitModel(this), this);
+            iUnitPresenter.loadAllUnit();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -107,6 +109,7 @@ public class FormSelectUnit extends AppCompatActivity implements IUnitContract.I
                     showDialogAddUnit();
                     break;
                 case R.id.btnDone:
+                    sendUnitSelected();
                     finish();
                     break;
             }
@@ -125,79 +128,100 @@ public class FormSelectUnit extends AppCompatActivity implements IUnitContract.I
     public void displayUnit(List<Unit> unitList) {
         try {
             adapter = new UnitAdapter(this, unitList);
+            loadUnitSelected();
             lvUnit.setAdapter(adapter);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    /**
-     *
-     * @created_by tdcong
-     * @date 5/24/2019
-     * @param
-     * @return
-     */
-    @Override
-    public void saveNewUnitSuccess() {
-        try {
-
-         } catch (Exception e) {
-         e.printStackTrace();
-         }
+    private void sendUnitSelected() {
+        unitSelected = adapter.getUnitCurrentSelected();
+        Intent intent= getIntent();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(ConstantKey.KEY_SEND_UNIT,unitSelected);
+        intent.putExtra(ConstantKey.KEY_SEND_UNIT,bundle);
+        setResult(1,intent);
     }
 
     /**
-     *
-     * @created_by tdcong
-     * @date 5/24/2019
+     * @Create_by: trand
+     * @Date: 5/27/2019
+     */
+    private void loadUnitSelected() {
+        try {
+            Bundle bundle = getIntent().getBundleExtra(ConstantKey.KEY_SEND_UNIT);
+            unitSelected = (Unit) bundle.getSerializable(ConstantKey.KEY_SEND_UNIT);
+            adapter.setCurrentSelected(unitSelected.getUnitID());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * @param
      * @return
+     * @created_by tdcong
+     * @date 5/24/2019
+     */
+    @Override
+    public void saveNewUnitSuccess(Unit unit) {
+        try {
+            dialogAddUnit.dismiss();
+            finish();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * @Create_by: trand
+     * @Date: 5/27/2019
      */
     @Override
     public void saveNewUnitFail() {
         try {
 
-         } catch (Exception e) {
-         e.printStackTrace();
-         }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
-     *
      * @created_by tdcong
      * @date 5/23/2019
      */
     public void showDialogAddUnit() {
         try {
-            final Dialog dialog = new Dialog(this,R.style.Theme_Dialog);
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            dialog.setContentView(R.layout.dialog_add_edit_unit);
-            getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
-            dialog.setCancelable(true);
-            dialog.setCanceledOnTouchOutside(true);
+            dialogAddUnit = new Dialog(this, R.style.Theme_Dialog);
+            dialogAddUnit.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialogAddUnit.setContentView(R.layout.dialog_add_edit_unit);
+            getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            dialogAddUnit.setCancelable(true);
+            dialogAddUnit.setCanceledOnTouchOutside(true);
 
-            Button btnCacel =  dialog.findViewById(R.id.btnCancel);
-            TextView tvTitle = dialog.findViewById(R.id.tvTitleDialog);
-            final EditText etUnitName = dialog.findViewById(R.id.etUnitName);
-            ImageView btnTitleClose = dialog.findViewById(R.id.btnTitleClose);
-            Button btnSave = dialog.findViewById(R.id.btnSave);
+            Button btnCancel = dialogAddUnit.findViewById(R.id.btnCancel);
+            TextView tvTitle = dialogAddUnit.findViewById(R.id.tvTitleDialog);
+            final EditText etUnitName = dialogAddUnit.findViewById(R.id.etUnitName);
+            ImageView btnTitleClose = dialogAddUnit.findViewById(R.id.btnTitleClose);
+            Button btnSave = dialogAddUnit.findViewById(R.id.btnSave);
 
             btnTitleClose.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     try {
-                        dialog.dismiss();
+                        dialogAddUnit.dismiss();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
             });
-            btnCacel.setOnClickListener(new View.OnClickListener() {
+            btnCancel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     try {
-                        dialog.dismiss();
+                        dialogAddUnit.dismiss();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -209,25 +233,25 @@ public class FormSelectUnit extends AppCompatActivity implements IUnitContract.I
                     try {
                         newUnit = etUnitName.getText().toString().trim();
                         iUnitPresenter.saveNewUnit(newUnit);
+                        dialogAddUnit.dismiss();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
             });
-            dialog.show();
+            dialogAddUnit.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     /**
-     *
-     * @created_by tdcong
-     * @date 5/24/2019
      * @param
      * @return
+     * @created_by tdcong
+     * @date 5/24/2019
      */
-    public void checkScreenUit(){
+    public void checkScreenUit() {
 
     }
 }

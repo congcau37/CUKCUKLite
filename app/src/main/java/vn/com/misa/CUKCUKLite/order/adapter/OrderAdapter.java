@@ -18,6 +18,7 @@ import java.util.List;
 
 import vn.com.misa.CUKCUKLite.R;
 import vn.com.misa.CUKCUKLite.model.Food;
+import vn.com.misa.CUKCUKLite.util.AppUtil;
 
 /**
  * @created_by tdcong
@@ -33,21 +34,49 @@ public class OrderAdapter extends BaseAdapter {
         this.mData = mData;
     }
 
+    /**
+     *
+     * @Create_by: trand
+     * @Date: 5/27/2019
+     * @Param:
+     * @Return:
+     */
     @Override
     public int getCount() {
         return mData.size();
     }
 
+    /**
+     *
+     * @Create_by: trand
+     * @Date: 5/27/2019
+     * @Param:
+     * @Return:
+     */
     @Override
     public Object getItem(int position) {
         return mData.get(position);
     }
 
+    /**
+     *
+     * @Create_by: trand
+     * @Date: 5/27/2019
+     * @Param:
+     * @Return:
+     */
     @Override
     public long getItemId(int position) {
         return position;
     }
 
+    /**
+     *
+     * @Create_by: trand
+     * @Date: 5/27/2019
+     * @Param:
+     * @Return:
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         try {
@@ -71,7 +100,7 @@ public class OrderAdapter extends BaseAdapter {
                     ims.close();
                 }
                 if(!backgroundCode.equals("")){
-                    viewHolder.frmBackgroundColor.setBackground(createCircleBackground(backgroundCode));
+                    viewHolder.frmBackgroundColor.setBackground(AppUtil.createCircleBackground(backgroundCode));
                 }
 
             } catch (IOException ex) {
@@ -83,6 +112,13 @@ public class OrderAdapter extends BaseAdapter {
         return convertView;
     }
 
+    /**
+     *
+     * @Create_by: trand
+     * @Date: 5/27/2019
+     * @Param:
+     * @Return:
+     */
     private class ViewHolder {
         TextView tvFoodName, tvPrice;
         ImageView ivFood;
@@ -91,25 +127,12 @@ public class OrderAdapter extends BaseAdapter {
         public ViewHolder(View view) {
             try {
                 tvFoodName = view.findViewById(R.id.tvFoodName);
-                tvPrice = view.findViewById(R.id.tvPrice);
+                tvPrice = view.findViewById(R.id.etPrice);
                 ivFood = view.findViewById(R.id.ivFood);
                 frmBackgroundColor = view.findViewById(R.id.frmBackgroundColor);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-    }
-
-    public GradientDrawable createCircleBackground(String color) {
-        GradientDrawable backgroundCircle = null;
-        try {
-            // tạo background
-            backgroundCircle = new GradientDrawable();
-            backgroundCircle.setShape(GradientDrawable.OVAL);
-            backgroundCircle.setColor(Color.parseColor(color));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return backgroundCircle;
     }
 }

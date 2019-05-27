@@ -3,6 +3,7 @@ package vn.com.misa.CUKCUKLite.order;
 import java.util.List;
 
 import vn.com.misa.CUKCUKLite.model.Food;
+import vn.com.misa.CUKCUKLite.model.Unit;
 
 /**
  *
@@ -14,9 +15,13 @@ public interface IOrderContract {
     interface IOrderView {
 
         void displayListOrder(List<Food> arrayList);
+
+
+    }
+    interface IOrderPresenter {
+
+        void loadAllFood();
+
     }
 
-    interface IOrderPresenter {
-        void loadAllFood();
-    }
 }

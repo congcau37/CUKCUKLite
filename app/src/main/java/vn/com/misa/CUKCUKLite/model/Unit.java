@@ -1,6 +1,8 @@
 package vn.com.misa.CUKCUKLite.model;
 
-public class Unit {
+import java.io.Serializable;
+
+public class Unit implements Serializable {
     String unitName;
     int unitID;
 

@@ -1,20 +1,22 @@
 package vn.com.misa.CUKCUKLite.model;
 
+import java.io.Serializable;
+
 /**
  * class món ăn
  * @created_by tdcong
  * @date 5/20/2019
  */
-public class Food {
+public class Food implements Serializable {
     int foodID;
     String foodName;
-    int foodPrice;
-    String unitID;
+    long foodPrice;
+    int unitID;
     String colorBackground;
     String foodIcon;
     String foodStatus;
 
-    public Food(int foodID, String foodName, int foodPrice, String unitID, String colorBackground, String foodIcon, String foodStatus) {
+    public Food(int foodID, String foodName, long foodPrice, int unitID, String colorBackground, String foodIcon, String foodStatus) {
         this.foodID = foodID;
         this.foodName = foodName;
         this.foodPrice = foodPrice;
@@ -40,19 +42,19 @@ public class Food {
         this.foodName = foodName;
     }
 
-    public int getFoodPrice() {
+    public long getFoodPrice() {
         return foodPrice;
     }
 
-    public void setFoodPrice(int foodPrice) {
+    public void setFoodPrice(long foodPrice) {
         this.foodPrice = foodPrice;
     }
 
-    public String getUnitID() {
+    public int getUnitID() {
         return unitID;
     }
 
-    public void setUnitID(String unitID) {
+    public void setUnitID(int unitID) {
         this.unitID = unitID;
     }
 

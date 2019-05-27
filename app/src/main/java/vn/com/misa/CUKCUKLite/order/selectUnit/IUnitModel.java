@@ -1,4 +1,4 @@
-package vn.com.misa.CUKCUKLite.order.addFood.selectUnit;
+package vn.com.misa.CUKCUKLite.order.selectUnit;
 
 import java.util.List;
 
@@ -11,5 +11,9 @@ public interface IUnitModel {
 
     void getAllUnit(ICallbackUnit iCallbackUnit);
 
-    void saveNewUnit(String newUnit);
+    boolean saveNewUnit(String newUnitName);
+
+    int getUnitID(String newUnitName);
+
+    Unit getUnit(int unitID);
 }

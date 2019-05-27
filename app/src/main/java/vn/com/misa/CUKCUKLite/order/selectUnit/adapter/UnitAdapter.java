@@ -1,4 +1,4 @@
-package vn.com.misa.CUKCUKLite.order.addFood.selectUnit.adapter;
+package vn.com.misa.CUKCUKLite.order.selectUnit.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -24,7 +24,8 @@ import vn.com.misa.CUKCUKLite.model.Unit;
 public class UnitAdapter extends BaseAdapter {
     private Context mContext;
     private List<Unit> mData;
-    private int currentSelected = 1;
+    private Unit unitCurrentSelected = null;
+    int currentSelected;
 
     public UnitAdapter(Context mContext, List<Unit> mData) {
         this.mContext = mContext;
@@ -58,6 +59,7 @@ public class UnitAdapter extends BaseAdapter {
                 viewHolder = (UnitAdapter.ViewHolder) convertView.getTag();
             }
             final Unit unit = mData.get(position);
+//            currentSelected = unitCurrentSelected.getUnitID();
             viewHolder.tvUnitName.setText(unit.getUnitName());
             if (unit.getUnitID() == currentSelected) {
                 viewHolder.ivChecked.setVisibility(View.VISIBLE);
@@ -67,7 +69,8 @@ public class UnitAdapter extends BaseAdapter {
             viewHolder.lnRowUnit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    currentSelected = unit.getUnitID();
+                    currentSelected= mData.get(position).getUnitID();
+                    setUnitCurrentSelected(new Unit(mData.get(position).getUnitName(),currentSelected));
                     notifyDataSetChanged();
                 }
             });
@@ -78,6 +81,13 @@ public class UnitAdapter extends BaseAdapter {
         return convertView;
     }
 
+    /**
+     *
+     * @Create_by: trand
+     * @Date: 5/27/2019
+     * @Param:
+     * @Return:
+     */
     private class ViewHolder {
         TextView tvUnitName;
         ImageView ivChecked;
@@ -94,5 +104,38 @@ public class UnitAdapter extends BaseAdapter {
                 e.printStackTrace();
             }
         }
+    }
+
+    /**
+     *
+     * @Create_by: trand
+     * @Date: 5/27/2019
+     * @Param:
+     * @Return:
+     */
+    public void setCurrentSelected(int currentSelected) {
+        this.currentSelected = currentSelected;
+    }
+
+    /**
+     *
+     * @Create_by: trand
+     * @Date: 5/27/2019
+     * @Param:
+     * @Return:
+     */
+    public Unit getUnitCurrentSelected() {
+        return unitCurrentSelected;
+    }
+
+    /**
+     *
+     * @Create_by: trand
+     * @Date: 5/27/2019
+     * @Param:
+     * @Return:
+     */
+    public void setUnitCurrentSelected(Unit unitCurrentSelected) {
+        this.unitCurrentSelected = unitCurrentSelected;
     }
 }
