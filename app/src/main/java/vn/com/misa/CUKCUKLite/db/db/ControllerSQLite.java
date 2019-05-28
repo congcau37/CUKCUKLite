@@ -12,23 +12,22 @@ import vn.com.misa.CUKCUKLite.model.Food;
 import vn.com.misa.CUKCUKLite.model.Unit;
 
 /**
- * @created_by tdcong
- * @date 5/20/2019
+ * Lớp chứa các phương thức truy vấn
+ * @Create_by: trand
+ * @Date: 5/28/2019
  */
 public class ControllerSQLite extends DBOpenHeplper {
 
     public ControllerSQLite(Context context) {
-
         super(context);
     }
 
     /**
-     * hàm lấy danh sách món ăn từ database
-     *
-     * @param
-     * @return
-     * @created_by tdcong
-     * @date 5/23/2019
+     * Hàm lấy danh sách món ăn trong thực đơn
+     * @Create_by: trand
+     * @Date: 5/28/2019
+     * @Param:
+     * @Return: List<Food>
      */
     public List<Food> getFoodFromDatabase() {
         List<Food> foodList = new ArrayList<>();
@@ -55,6 +54,13 @@ public class ControllerSQLite extends DBOpenHeplper {
         return foodList;
     }
 
+    /**
+     * Hàm lấy danh sách đơn vị
+     * @Create_by: trand
+     * @Date: 5/28/2019
+     * @Param:
+     * @Return: List<Unit>
+     */
     public List<Unit> getUnitFromDatabase() {
         List<Unit> unitList = new ArrayList<>();
         try {
@@ -76,8 +82,11 @@ public class ControllerSQLite extends DBOpenHeplper {
     }
 
     /**
-     * Create by: trand
-     * Date: 5/26/2019
+     * Hàm thêm mới đơn vị tính
+     * @Create_by: trand
+     * @Date: 5/28/2019
+     * @Param: newUnitName
+     * @Return: result
      */
     public boolean saveNewUnit(String newUnitName) {
         boolean result = false;
@@ -97,11 +106,11 @@ public class ControllerSQLite extends DBOpenHeplper {
     }
 
     /**
-     *
+     * Hàm cập nhật đơn vị tính
      * @Create_by: trand
      * @Date: 5/28/2019
-     * @Param:
-     * @Return:
+     * @Param: unit
+     * @Return: result
      */
     public boolean updateUnit(Unit unit) {
         boolean result = false;
@@ -112,7 +121,7 @@ public class ControllerSQLite extends DBOpenHeplper {
             int unitID = unit.getUnitID();
             values.put("unitName", unitName);
             values.put("unitID", unitID);
-            long rs = db.update("unit", values, "unitID" + "=" + unitID,null);
+            long rs = db.update("unit", values, "unitID" + "=" + unitID, null);
             if (rs > 0) {
                 result = true;
             }
@@ -124,10 +133,11 @@ public class ControllerSQLite extends DBOpenHeplper {
     }
 
     /**
+     * Hàm lấy ra mã ID đơn vị tính
      * @Create_by: trand
-     * @Date: 5/27/2019
-     * @Param:
-     * @Return:
+     * @Date: 5/28/2019
+     * @Param: newUnitName
+     * @Return: unitID
      */
     public int getUnitID(String newUnitName) {
         int unitID = 0;
@@ -147,10 +157,11 @@ public class ControllerSQLite extends DBOpenHeplper {
     }
 
     /**
+     * Hàm lấy ra đơn vị dựa theo ID
      * @Create_by: trand
      * @Date: 5/27/2019
-     * @Param:
-     * @Return:
+     * @Param: unitID
+     * @Return: unit
      */
     public Unit getUnit(int unitID) {
         Unit unit = null;
@@ -170,16 +181,17 @@ public class ControllerSQLite extends DBOpenHeplper {
     }
 
     /**
+     * Hàm kiểm tra đơn vị tính đã được sử dụng trong bảng food hay chưa
      * @Create_by: trand
      * @Date: 5/28/2019
-     * @Param:
-     * @Return:
+     * @Param: unitID
+     * @Return: boolean
      */
     public boolean checkUnit(int unitID) {
         try {
             SQLiteDatabase db = getReadableDatabase();
             Cursor cursor = db.rawQuery("SELECT * FROM food WHERE unitID = '" + unitID + "'", null);
-            if (cursor.getCount() >0) {
+            if (cursor.getCount() > 0) {
                 return true;
             }
             cursor.close();
@@ -191,17 +203,18 @@ public class ControllerSQLite extends DBOpenHeplper {
     }
 
     /**
+     * Hàm xóa đơn vị tính
      * @Create_by: trand
      * @Date: 5/28/2019
-     * @Param:
-     * @Return:
+     * @Param: unitID
+     * @Return: boolean
      */
     public boolean deleteUnit(int unitID) {
         try {
             if (checkUnit(unitID) == false) {
                 try {
                     SQLiteDatabase db = getWritableDatabase();
-                    long rs = db.delete("unit", "unitID="+unitID, null);
+                    long rs = db.delete("unit", "unitID=" + unitID, null);
                     if (rs > 0) {
                         return true;
                     }
@@ -215,5 +228,77 @@ public class ControllerSQLite extends DBOpenHeplper {
             e.printStackTrace();
         }
         return false;
+    }
+
+    /**
+     * Hàm thêm mới món ăn
+     * @Create_by: trand
+     * @Date: 5/28/2019
+     * @Param: newFood
+     * @Return: result
+     */
+    public boolean saveNewFood(Food newFood) {
+        boolean result = false;
+        try {
+            SQLiteDatabase db = getWritableDatabase();
+            ContentValues values = new ContentValues();
+            String foodName = newFood.getFoodName();
+            long foodPrice = newFood.getFoodPrice();
+            int unitID = newFood.getUnitID();
+            String colorBackground = newFood.getColorBackground();
+            String foodIcon = newFood.getFoodIcon();
+            String foodStatus = newFood.getFoodStatus();
+            values.put("foodName", foodName);
+            values.put("foodPrice", foodPrice);
+            values.put("unitID", unitID);
+            values.put("colorBackground", colorBackground);
+            values.put("foodIcon", foodIcon);
+            values.put("foodStatus", foodStatus);
+            long rs = db.insert("food", null, values);
+            if (rs > 0) {
+                result = true;
+            }
+            db.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    /**
+     * Hàm cập nhật món ăn
+     * @Create_by: trand
+     * @Date: 5/28/2019
+     * @Param: food
+     * @Return: result
+     */
+    public boolean updateFood(Food food) {
+        boolean result = false;
+        try {
+            SQLiteDatabase db = getWritableDatabase();
+            ContentValues values = new ContentValues();
+            int foodID = food.getFoodID();
+            String foodName = food.getFoodName();
+            long foodPrice = food.getFoodPrice();
+            int unitID = food.getUnitID();
+            String colorBackground = food.getColorBackground();
+            String foodIcon = food.getFoodIcon();
+            String foodStatus = food.getFoodStatus();
+            values.put("foodID", foodID);
+            values.put("foodName", foodName);
+            values.put("foodPrice", foodPrice);
+            values.put("unitID", unitID);
+            values.put("colorBackground", colorBackground);
+            values.put("foodIcon", foodIcon);
+            values.put("foodStatus", foodStatus);
+            long rs = db.update("food", values, "foodID" + "=" + foodID, null);
+            if (rs > 0) {
+                result = true;
+            }
+            db.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }

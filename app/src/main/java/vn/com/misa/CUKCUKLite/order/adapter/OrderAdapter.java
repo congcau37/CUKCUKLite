@@ -1,5 +1,6 @@
 package vn.com.misa.CUKCUKLite.order.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -21,8 +22,9 @@ import vn.com.misa.CUKCUKLite.model.Food;
 import vn.com.misa.CUKCUKLite.util.AppUtil;
 
 /**
- * @created_by tdcong
- * @date 5/17/2019
+ * Lớp adapter của danh sách món ăn
+ * @Create_by: trand
+ * @Date: 5/28/2019
  */
 public class OrderAdapter extends BaseAdapter {
 
@@ -35,11 +37,11 @@ public class OrderAdapter extends BaseAdapter {
     }
 
     /**
-     *
+     * Hàm lấy ra size
      * @Create_by: trand
      * @Date: 5/27/2019
      * @Param:
-     * @Return:
+     * @Return: int
      */
     @Override
     public int getCount() {
@@ -47,10 +49,10 @@ public class OrderAdapter extends BaseAdapter {
     }
 
     /**
-     *
+     * Hàm lấy ra đối tượng món ăn tại từng vị trí
      * @Create_by: trand
      * @Date: 5/27/2019
-     * @Param:
+     * @Param: position
      * @Return:
      */
     @Override
@@ -59,11 +61,11 @@ public class OrderAdapter extends BaseAdapter {
     }
 
     /**
-     *
+     * hàm lấy ra vị trí
      * @Create_by: trand
      * @Date: 5/27/2019
-     * @Param:
-     * @Return:
+     * @Param: position
+     * @Return: position
      */
     @Override
     public long getItemId(int position) {
@@ -71,12 +73,13 @@ public class OrderAdapter extends BaseAdapter {
     }
 
     /**
-     *
+     * Hàm lấy ra view
      * @Create_by: trand
      * @Date: 5/27/2019
-     * @Param:
-     * @Return:
+     * @Param: position, convertView, parent
+     * @Return: View
      */
+    @SuppressLint("ResourceType")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         try {
@@ -88,19 +91,29 @@ public class OrderAdapter extends BaseAdapter {
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
-            viewHolder.tvFoodName.setText(mData.get(position).getFoodName());
-            viewHolder.tvPrice.setText(String.valueOf(mData.get(position).getFoodPrice()));
-            String iconName = mData.get(position).getFoodIcon();
-            String backgroundCode = mData.get(position).getColorBackground();
+            Food food = mData.get(position);
+            viewHolder.tvFoodName.setText(food.getFoodName());
+            viewHolder.tvPrice.setText(String.valueOf(food.getFoodPrice()));
+            String iconName = food.getFoodIcon();
+            String backgroundCode = food.getColorBackground();
             try {
                 if (!iconName.equals("")) {
-                    InputStream ims = mContext.getAssets().open("icondefault/" + mData.get(position).getFoodIcon() + ".png"); //mData.get(position).getFoodIcon()
+                    //Xử lý khi có ảnh
+                    InputStream ims = mContext.getAssets().open("icondefault/" + food.getFoodIcon() + ".png");
+                    Drawable d = Drawable.createFromStream(ims, null);
+                    viewHolder.ivFood.setImageDrawable(d);
+                    ims.close();
+                }else {
+                    //Xử lý khi không có ảnh sẽ lấy ảnh mặc định
+                    InputStream ims = mContext.getAssets().open("icondefault/ic_default.png");
                     Drawable d = Drawable.createFromStream(ims, null);
                     viewHolder.ivFood.setImageDrawable(d);
                     ims.close();
                 }
                 if(!backgroundCode.equals("")){
                     viewHolder.frmBackgroundColor.setBackground(AppUtil.createCircleBackground(backgroundCode));
+                }else {
+                    viewHolder.frmBackgroundColor.setBackground(AppUtil.createCircleBackground(mContext.getString(R.color.color_primary)));
                 }
 
             } catch (IOException ex) {
@@ -113,11 +126,9 @@ public class OrderAdapter extends BaseAdapter {
     }
 
     /**
-     *
+     * Lớp ViewHolder
      * @Create_by: trand
      * @Date: 5/27/2019
-     * @Param:
-     * @Return:
      */
     private class ViewHolder {
         TextView tvFoodName, tvPrice;

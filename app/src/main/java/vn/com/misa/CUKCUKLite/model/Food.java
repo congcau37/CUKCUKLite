@@ -3,7 +3,7 @@ package vn.com.misa.CUKCUKLite.model;
 import java.io.Serializable;
 
 /**
- * class món ăn
+ * Lớp món ăn
  * @created_by tdcong
  * @date 5/20/2019
  */

@@ -22,8 +22,7 @@ import vn.com.misa.CUKCUKLite.sale.SaleMainView;
 import vn.com.misa.CUKCUKLite.order.OrderMainView;
 
 /**
- * Class màn hình chính của ứng dụng
- *
+ * Lớp màn hình chính của ứng dụng
  * @created_by tdcong
  * @date 5/17/2019
  */

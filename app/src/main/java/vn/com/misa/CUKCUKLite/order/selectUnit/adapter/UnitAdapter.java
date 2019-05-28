@@ -17,10 +17,9 @@ import vn.com.misa.CUKCUKLite.model.Unit;
 import vn.com.misa.CUKCUKLite.util.helper.UnitListener;
 
 /**
- * @param
+ * Lớp adapter đơn vị
  * @created_by tdcong
  * @date 5/23/2019
- * @return
  */
 public class UnitAdapter extends BaseAdapter {
     private Context mContext;
@@ -35,6 +34,13 @@ public class UnitAdapter extends BaseAdapter {
         this.mData = mData;
     }
 
+    /**
+     * Hàm gán listener
+     * @Create_by: trand
+     * @Date: 5/29/2019
+     * @Param: UnitListener
+     * @Return:
+     */
     public void setUnitListener(UnitListener unitListener) {
         this.unitListener = unitListener;
     }
@@ -66,7 +72,7 @@ public class UnitAdapter extends BaseAdapter {
                 viewHolder = (UnitAdapter.ViewHolder) convertView.getTag();
             }
             final Unit unit = mData.get(position);
-            currentSelected = unitCurrentSelected.getUnitID();
+            currentSelected = unitCurrentSelected.getUnitID(); //lấy ra id đơn vị đã chọn từ CSDL
             viewHolder.tvUnitName.setText(unit.getUnitName());
             if (unit.getUnitID() == currentSelected) {
                 viewHolder.ivChecked.setVisibility(View.VISIBLE);
@@ -112,6 +118,7 @@ public class UnitAdapter extends BaseAdapter {
     }
 
     /**
+     * Lớp viewholder
      * @Create_by: trand
      * @Date: 5/27/2019
      * @Param:
@@ -136,19 +143,21 @@ public class UnitAdapter extends BaseAdapter {
     }
 
     /**
+     * Hàm lấy ra đơn vị đã chọn
      * @Create_by: trand
      * @Date: 5/27/2019
      * @Param:
-     * @Return:
+     * @Return: Unit
      */
     public Unit getUnitCurrentSelected() {
         return unitCurrentSelected;
     }
 
     /**
+     * Hàm gán đơn vị đã chọn
      * @Create_by: trand
      * @Date: 5/27/2019
-     * @Param:
+     * @Param: Unit
      * @Return:
      */
     public void setUnitCurrentSelected(Unit unitCurrentSelected) {

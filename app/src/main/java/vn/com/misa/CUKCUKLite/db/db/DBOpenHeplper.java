@@ -14,10 +14,9 @@ import java.io.OutputStream;
 import java.sql.SQLException;
 
 /**
- * Class tạo và coppy database
- *
- * @created_by tdcong
- * @date 5/20/2019
+ * Lớp khởi tạo và sao chép database
+ * @Create_by: trand
+ * @Date: 5/28/2019
  */
 public class DBOpenHeplper extends SQLiteOpenHelper {
 

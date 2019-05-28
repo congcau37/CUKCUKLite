@@ -6,11 +6,10 @@ import vn.com.misa.CUKCUKLite.db.db.ControllerSQLite;
 import vn.com.misa.CUKCUKLite.db.db.DBOpenHeplper;
 
 /**
- *
+ * Lớp model thực đơn
  * @created_by tdcong
  * @date 5/15/2019
- * @param
- * @return
+
  */
 public class OrderModel extends DBOpenHeplper implements IOrder {
 
@@ -22,11 +21,11 @@ public class OrderModel extends DBOpenHeplper implements IOrder {
         controllerSQLite.createDataBase();
     }
 
-/**
- * Hàm
- * @param
- * @return
- */
+    /**
+     * Hàm lấy ra danh sách món ăn trong thực đơn
+     * @param callBack
+     * @return
+     */
     @Override
     public void getAllFood(IGetAllFoodCallBack callBack) {
         try {

@@ -1,16 +1,18 @@
 package vn.com.misa.CUKCUKLite.login.loginPhoneNumber;
 
 /**
- *
- * @created_by tdcong
- * @date 5/20/2019
+ * Lớp model đăng nhập bằng điện thoại
+ * @Create_by: trand
+ * @Date: 5/28/2019
  */
 public class LoginModel implements ILogin {
 
     /**
      * Hàm lấy ra tài khoản
-     * @param
-     * @return
+     * @Create_by: trand
+     * @Date: 5/28/2019
+     * @Param: userName, passWord, callback
+     * @Return:
      */
     @Override
     public void getAccount(String userName, String passWord, IGetAccountCallback callback) {
@@ -19,8 +21,10 @@ public class LoginModel implements ILogin {
 
     /**
      * Hàm kiểm tra tài khoản
-     * @param
-     * @return
+     * @Create_by: trand
+     * @Date: 5/28/2019
+     * @Param: userName, passWord
+     * @Return: boolean
      */
     @Override
     public boolean checkAccountDB(String userName, String passWord) {

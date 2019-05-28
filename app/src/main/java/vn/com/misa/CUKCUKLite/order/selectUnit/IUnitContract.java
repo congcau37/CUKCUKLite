@@ -29,13 +29,6 @@ public interface IUnitContract {
 
     }
 
-    /**
-     *
-     * @Create_by: trand
-     * @Date: 5/27/2019
-     * @Param:
-     * @Return:
-     */
     interface IUnitPresenter {
         void loadAllUnit();
 

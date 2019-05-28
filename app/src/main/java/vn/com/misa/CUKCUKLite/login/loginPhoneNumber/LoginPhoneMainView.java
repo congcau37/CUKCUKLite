@@ -21,6 +21,13 @@ import butterknife.OnClick;
 import vn.com.misa.CUKCUKLite.MainApp;
 import vn.com.misa.CUKCUKLite.R;
 
+/**
+ * Lớp đăng nhập bằng tài khoản số điện thoại
+ * @Create_by: trand
+ * @Date: 5/28/2019
+ * @Param:
+ * @Return:
+ */
 public class LoginPhoneMainView extends AppCompatActivity implements ILoginContract.ILoginView {
 
     @BindView(R.id.btnBack)
@@ -62,6 +69,13 @@ public class LoginPhoneMainView extends AppCompatActivity implements ILoginContr
         }
     }
 
+    /**
+     * hàm xử lý các sự kiên
+     * @Create_by: trand
+     * @Date: 5/28/2019
+     * @Param:
+     * @Return:
+     */
     @OnClick({R.id.btnBack, R.id.btnLogin})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -75,7 +89,11 @@ public class LoginPhoneMainView extends AppCompatActivity implements ILoginContr
     }
 
     /**
-     * Hàm khởi tạo presenter
+     * Hàm ánh khởi tạo presenter
+     * @Create_by: trand
+     * @Date: 5/28/2019
+     * @Param:
+     * @Return:
      */
     private void initPresenter() {
         iLoginPresenter = new LoginPresenter(new LoginModel(), this);
@@ -83,6 +101,10 @@ public class LoginPhoneMainView extends AppCompatActivity implements ILoginContr
 
     /**
      * Hàm lấy thông tin đăng nhập
+     * @Create_by: trand
+     * @Date: 5/28/2019
+     * @Param:
+     * @Return:
      */
     public void getTextAccount() {
         try {
@@ -97,8 +119,7 @@ public class LoginPhoneMainView extends AppCompatActivity implements ILoginContr
     }
 
     /**
-     * Hàm
-     *
+     * Hàm xử lý khi đăng nhâp thành công
      * @param
      * @return
      * @created_by tdcong
@@ -114,6 +135,7 @@ public class LoginPhoneMainView extends AppCompatActivity implements ILoginContr
     }
 
     /**
+     * Hàm xử lý khi đăng nhập thất bại
      * @param
      * @return
      * @created_by tdcong
@@ -129,12 +151,11 @@ public class LoginPhoneMainView extends AppCompatActivity implements ILoginContr
     }
 
     /**
-     * hàm lưu trạng thái
-     *
-     * @param
-     * @return
-     * @created_by tdcong
-     * @date 5/17/2019
+     * Hàm lưu trạng thái đăng nhập
+     * @Create_by: trand
+     * @Date: 5/28/2019
+     * @Param:
+     * @Return:
      */
     public void savingPreferences() {
         try {
@@ -159,7 +180,11 @@ public class LoginPhoneMainView extends AppCompatActivity implements ILoginContr
     }
 
     /**
-     * hàm đọc trạng thái đã lưu trước đó
+     * Hàm đọc trạng thái đăng nhập đã lưu
+     * @Create_by: trand
+     * @Date: 5/28/2019
+     * @Param:
+     * @Return:
      */
     public void restoringPreferences() {
         try {

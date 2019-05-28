@@ -4,11 +4,9 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
 /**
- *
+ * Lớp chuyển đổi định dạng
  * @Create_by: trand
  * @Date: 5/27/2019
- * @Param:
- * @Return:
  */
 public class Converter {
     /**
@@ -28,9 +26,13 @@ public class Converter {
         return status;
     }
 
-    public static String convertToCurrency(float number) {
-        NumberFormat formatter = new DecimalFormat("###,###,###.##");
-        return formatter.format(number);
+    public static long convertToLong(String number) {
+        String currency="";
+        String [] splitNumber = number.split(",");
+        for (String newNumber: splitNumber) {
+        currency += newNumber;
+        }
+        return Long.parseLong(String.valueOf(currency));
     }
 
     public static String convertToCurrency(long number) {

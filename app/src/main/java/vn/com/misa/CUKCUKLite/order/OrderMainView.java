@@ -69,13 +69,19 @@ public class OrderMainView extends Fragment implements IOrderContract.IOrderView
         try {
             super.onViewCreated(view, savedInstanceState);
             initPresenter();
-            initView(view);
             initEvent();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Hàm khởi tạp presenter
+     * @Create_by: trand
+     * @Date: 5/28/2019
+     * @Param:
+     * @Return:
+     */
     private void initPresenter() {
         try {
             iOrderPresenter = new OrderPresenter(new OrderModel(getContext()), OrderMainView.this);
@@ -83,16 +89,6 @@ public class OrderMainView extends Fragment implements IOrderContract.IOrderView
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * @param
-     * @return
-     * @created_by tdcong
-     * @date 5/17/2019
-     */
-    private void initView(View view) {
-
     }
 
     /**
@@ -112,10 +108,10 @@ public class OrderMainView extends Fragment implements IOrderContract.IOrderView
     }
 
     /**
-     *
+     * Hàm gửi chị tiết món ăn đã chọn từ danh sách
      * @Create_by: trand
      * @Date: 5/27/2019
-     * @Param:
+     * @Param: position
      * @Return:
      */
     private void sendDetailFood(int position) {
@@ -128,9 +124,8 @@ public class OrderMainView extends Fragment implements IOrderContract.IOrderView
     }
 
     /**
-     * Hàm hiển thị danh sach thực đơn
-     *
-     * @param
+     * Hàm hiển thị danh sach món ăn trong thực đơn
+     * @param arrayList
      * @return
      * @created_by tdcong
      * @date 5/17/2019
@@ -144,22 +139,4 @@ public class OrderMainView extends Fragment implements IOrderContract.IOrderView
             e.printStackTrace();
         }
     }
-
-    /**
-     *
-     * @created_by tdcong
-     * @date 5/23/2019
-     * @param
-     * @return
-     */
-    @Override
-    public void onDestroyView() {
-        try {
-            super.onDestroyView();
-            unbinder.unbind();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
 }

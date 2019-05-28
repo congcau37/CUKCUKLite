@@ -4,6 +4,11 @@ import java.util.List;
 
 import vn.com.misa.CUKCUKLite.model.Unit;
 
+/**
+ * Lớp model đơn vị
+ * @Create_by: trand
+ * @Date: 5/29/2019
+ */
 public interface IUnitModel {
     interface ICallbackUnit {
         void getAllUnit(List<Unit> unitList);
@@ -15,7 +20,7 @@ public interface IUnitModel {
 
     boolean updateUnit(Unit unit);
 
-    int getUnitID(String newUnitName);
+    int getUnitID(String unitName);
 
     Unit getUnit(int unitID);
 

@@ -9,6 +9,11 @@ import java.util.TimerTask;
 
 import vn.com.misa.CUKCUKLite.login.LoginMain;
 
+/**
+ * Lớp màn hình chờ
+ * @Create_by: trand
+ * @Date: 5/29/2019
+ */
 public class SplashApp extends AppCompatActivity {
 
     @Override

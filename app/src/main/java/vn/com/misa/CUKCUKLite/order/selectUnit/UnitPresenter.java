@@ -4,6 +4,13 @@ import java.util.List;
 
 import vn.com.misa.CUKCUKLite.model.Unit;
 
+/**
+ * Lớp presenter đơn vị
+ * @Create_by: trand
+ * @Date: 5/29/2019
+ * @Param:
+ * @Return:
+ */
 public class UnitPresenter implements IUnitContract.IUnitPresenter {
 
     IUnitContract.IUnitView iUnitView;
@@ -17,7 +24,7 @@ public class UnitPresenter implements IUnitContract.IUnitPresenter {
     }
 
     /**
-     *
+     * Hàm hiển thị danh sách đơn vị
      * @Create_by: trand
      * @Date: 5/27/2019
      * @Param:
@@ -38,10 +45,10 @@ public class UnitPresenter implements IUnitContract.IUnitPresenter {
     }
 
     /**
-     *
+     * Hàm thêm mới đơn vị
      * @Create_by: trand
      * @Date: 5/27/2019
-     * @Param:
+     * @Param: newUnitName
      * @Return:
      */
     @Override
@@ -67,11 +74,11 @@ public class UnitPresenter implements IUnitContract.IUnitPresenter {
     }
 
     /**
-     *
+     * Hàm kiểm tra đơn vị đã tồn tại chưa
      * @Create_by: trand
      * @Date: 5/28/2019
-     * @Param:
-     * @Return:
+     * @Param: unitName
+     * @Return: boolean
      */
     @Override
     public boolean checkUnitData(final String unitName) {
@@ -89,7 +96,7 @@ public class UnitPresenter implements IUnitContract.IUnitPresenter {
     }
 
     /**
-     *
+     * Hàm cập nhật đơn vị
      * @Create_by: trand
      * @Date: 5/28/2019
      * @Param:
@@ -111,10 +118,10 @@ public class UnitPresenter implements IUnitContract.IUnitPresenter {
     }
 
     /**
-     *
+     * hàm lấy đơn vị theo ID
      * @Create_by: trand
      * @Date: 5/27/2019
-     * @Param:
+     * @Param: unitID
      * @Return:
      */
     @Override
@@ -129,10 +136,10 @@ public class UnitPresenter implements IUnitContract.IUnitPresenter {
     }
 
     /**
-     *
+     * Hàm xóa đơn vị
      * @Create_by: trand
      * @Date: 5/28/2019
-     * @Param: 
+     * @Param: unitID
      * @Return: 
      */
     @Override

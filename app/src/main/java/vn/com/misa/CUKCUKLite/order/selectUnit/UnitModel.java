@@ -7,17 +7,13 @@ import vn.com.misa.CUKCUKLite.db.db.DBOpenHeplper;
 import vn.com.misa.CUKCUKLite.model.Unit;
 
 /**
+ * Lớp model đơn vị
  * Create by: trand
  * Date: 5/26/2019
  */
 public class UnitModel extends DBOpenHeplper implements IUnitModel {
-
     ControllerSQLite controllerSQLite;
 
-    /**
-     * Create by: trand
-     * Date: 5/26/2019
-     */
     public UnitModel(Context context) {
         super(context);
         controllerSQLite = new ControllerSQLite(context);
@@ -25,8 +21,11 @@ public class UnitModel extends DBOpenHeplper implements IUnitModel {
     }
 
     /**
-     * Create by: trand
-     * Date: 5/26/2019
+     * Hàm hiển thị danh sách đơn vị
+     * @Create_by: trand
+     * @Date: 5/27/2019
+     * @Param:
+     * @Return:
      */
     @Override
     public void getAllUnit(ICallbackUnit iCallbackUnit) {
@@ -38,8 +37,11 @@ public class UnitModel extends DBOpenHeplper implements IUnitModel {
     }
 
     /**
-     * Create by: trand
-     * Date: 5/26/2019
+     * Hàm thêm mới đơn vị
+     * @Create_by: trand
+     * @Date: 5/27/2019
+     * @Param: newUnitName
+     * @Return:
      */
     @Override
     public boolean saveNewUnit(String newUnitName) {
@@ -53,16 +55,17 @@ public class UnitModel extends DBOpenHeplper implements IUnitModel {
     }
 
     /**
+     * Hàm lấy ra đơn vị theo tên
      * @Create_by: trand
      * @Date: 5/27/2019
-     * @Param:
+     * @Param: unitName
      * @Return:
      */
     @Override
-    public int getUnitID(String newUnitName) {
+    public int getUnitID(String unitName) {
         int unitID = 0;
         try {
-            unitID = controllerSQLite.getUnitID(newUnitName);
+            unitID = controllerSQLite.getUnitID(unitName);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -86,6 +89,13 @@ public class UnitModel extends DBOpenHeplper implements IUnitModel {
         return unit;
     }
 
+    /**
+     * Hàm xóa đơn vị
+     * @Create_by: trand
+     * @Date: 5/28/2019
+     * @Param: unitID
+     * @Return:
+     */
     @Override
     public boolean deleteUnit(int unitID) {
         boolean check = controllerSQLite.deleteUnit(unitID);
@@ -95,6 +105,13 @@ public class UnitModel extends DBOpenHeplper implements IUnitModel {
         return false;
     }
 
+    /**
+     * Hàm cập nhật đơn vị
+     * @Create_by: trand
+     * @Date: 5/28/2019
+     * @Param:
+     * @Return:
+     */
     @Override
     public boolean updateUnit(Unit unit) {
         boolean result = false;

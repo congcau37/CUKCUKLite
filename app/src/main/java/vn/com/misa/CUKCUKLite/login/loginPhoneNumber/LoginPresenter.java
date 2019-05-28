@@ -1,9 +1,9 @@
 package vn.com.misa.CUKCUKLite.login.loginPhoneNumber;
 
 /**
- *
- * @created_by tdcong
- * @date 5/20/2019
+ * Lớp presenter đăng nhập bằng điện thoại
+ * @Create_by: trand
+ * @Date: 5/28/2019
  */
 public class LoginPresenter implements ILoginContract.ILoginPresenter {
 

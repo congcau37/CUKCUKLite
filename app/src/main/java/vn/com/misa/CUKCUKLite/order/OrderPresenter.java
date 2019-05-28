@@ -7,8 +7,7 @@ import vn.com.misa.CUKCUKLite.model.Food;
 import vn.com.misa.CUKCUKLite.model.Unit;
 
 /**
- * @param
- * @return
+ * Lớp presenter thực đơn
  * @created_by tdcong
  * @date 5/10/2019
  */
@@ -23,7 +22,7 @@ public class OrderPresenter implements IOrderContract.IOrderPresenter {
     }
 
     /**
-     * Hàm
+     * Hàm lấy ra danh sách món ăn trong thực đơn
      * @param
      * @return
      */

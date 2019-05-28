@@ -15,8 +15,7 @@ import vn.com.misa.CUKCUKLite.R;
 import vn.com.misa.CUKCUKLite.login.loginPhoneNumber.LoginPhoneMainView;
 
 /**
- * class đăng nhập
- *
+ * Lớp đăng nhập chính
  * @created_by tdcong
  * @date 5/17/2019
  */
@@ -40,6 +39,13 @@ public class LoginMain extends AppCompatActivity {
         }
     }
 
+    /**
+     * Hàm xử lý các sự kiên
+     * @Create_by: trand
+     * @Date: 5/28/2019
+     * @Param:
+     * @Return:
+     */
     @OnClick({R.id.llLogo, R.id.btnLoginPhoneEmail, R.id.tvNoAccount})
     public void onViewClicked(View view) {
         switch (view.getId()) {

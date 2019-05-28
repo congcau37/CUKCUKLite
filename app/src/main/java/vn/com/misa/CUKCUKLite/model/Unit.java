@@ -2,6 +2,11 @@ package vn.com.misa.CUKCUKLite.model;
 
 import java.io.Serializable;
 
+/**
+ * Lớp đơn vị tính
+ * @Create_by: trand
+ * @Date: 5/28/2019
+ */
 public class Unit implements Serializable {
     String unitName;
     int unitID;

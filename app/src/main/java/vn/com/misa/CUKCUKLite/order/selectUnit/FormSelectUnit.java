@@ -32,12 +32,13 @@ import vn.com.misa.CUKCUKLite.util.ConstantKey;
 import vn.com.misa.CUKCUKLite.util.helper.UnitListener;
 
 /**
+ * Lớp chọn đơn vị
  * @param
  * @created_by tdcong
  * @date 5/23/2019
  * @return
  */
-public class FormSelectUnit extends AppCompatActivity implements IUnitContract.IUnitView,UnitListener{
+public class FormSelectUnit extends AppCompatActivity implements IUnitContract.IUnitView, UnitListener {
 
     UnitAdapter adapter;
     IUnitContract.IUnitPresenter iUnitPresenter;
@@ -57,14 +58,10 @@ public class FormSelectUnit extends AppCompatActivity implements IUnitContract.I
     Button btnDone;
 
     Unit unitSelected;
-    Dialog dialogAddUnit,dialogDeleteUnit,dialogEditUnit;
+    Dialog dialogAddUnit, dialogDeleteUnit, dialogEditUnit;
+    final int REQUEST_CODE = 0;
+    final int RESULT_CODE = 1;
 
-    /**
-     * @param
-     * @return
-     * @created_by tdcong
-     * @date 5/23/2019
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         try {
@@ -78,6 +75,7 @@ public class FormSelectUnit extends AppCompatActivity implements IUnitContract.I
     }
 
     /**
+     * Hàm khởi tạp presenter
      * @Create_by: trand
      * @Date: 5/27/2019
      * @Param:
@@ -93,6 +91,7 @@ public class FormSelectUnit extends AppCompatActivity implements IUnitContract.I
     }
 
     /**
+     * Hàm xử lý sự kiện view
      * @param
      * @return
      * @created_by tdcong
@@ -123,7 +122,8 @@ public class FormSelectUnit extends AppCompatActivity implements IUnitContract.I
     }
 
     /**
-     * @param
+     * Hàm hiển thị danh sách đơn vị
+     * @param unitList
      * @return
      * @created_by tdcong
      * @date 5/23/2019
@@ -141,7 +141,7 @@ public class FormSelectUnit extends AppCompatActivity implements IUnitContract.I
     }
 
     /**
-     *
+     * Hàm gửi đơn vị đã chọn
      * @Create_by: trand
      * @Date: 5/28/2019
      * @Param:
@@ -154,22 +154,23 @@ public class FormSelectUnit extends AppCompatActivity implements IUnitContract.I
             Bundle bundle = new Bundle();
             bundle.putSerializable(ConstantKey.KEY_SEND_UNIT, unitSelected);
             intent.putExtra(ConstantKey.KEY_SEND_UNIT, bundle);
-            setResult(1, intent);
+            setResult(RESULT_CODE, intent);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     /**
-     *
+     * Hàm lấy ra đơn vị đã chọn
      * @Create_by: trand
      * @Date: 5/28/2019
-     * @Param: 
-     * @Return: 
+     * @Param:
+     * @Return:
      */
     private void loadUnitSelected() {
         try {
             Bundle bundle = getIntent().getBundleExtra(ConstantKey.KEY_SEND_UNIT);
+//            String keyScreen = bundle.getString(ConstantKey.KEY_SCREEN);
             unitSelected = (Unit) bundle.getSerializable(ConstantKey.KEY_SEND_UNIT);
             adapter.setUnitCurrentSelected(unitSelected);
         } catch (Exception e) {
@@ -177,13 +178,13 @@ public class FormSelectUnit extends AppCompatActivity implements IUnitContract.I
         }
     }
 
-   /**
-    *
-    * @Create_by: trand
-    * @Date: 5/28/2019
-    * @Param: 
-    * @Return: 
-    */
+    /**
+     * Hàm hiển thị khi thêm mới đơn vị thành công
+     * @Create_by: trand
+     * @Date: 5/28/2019
+     * @Param: newUnit
+     * @Return:
+     */
     @Override
     public void saveNewUnitSuccess(Unit newUnit) {
         try {
@@ -198,11 +199,11 @@ public class FormSelectUnit extends AppCompatActivity implements IUnitContract.I
     }
 
     /**
-     *
+     * Hàm hiển thị khi thêm mới đơn vị thất bại
      * @Create_by: trand
      * @Date: 5/28/2019
-     * @Param: 
-     * @Return: 
+     * @Param: error
+     * @Return:
      */
     @Override
     public void saveNewUnitFail(String error) {
@@ -214,10 +215,10 @@ public class FormSelectUnit extends AppCompatActivity implements IUnitContract.I
     }
 
     /**
-     *
+     * Hàm xóa đơn vị
      * @Create_by: trand
      * @Date: 5/28/2019
-     * @Param:
+     * @Param: unitID
      * @Return:
      */
     @Override
@@ -226,7 +227,7 @@ public class FormSelectUnit extends AppCompatActivity implements IUnitContract.I
     }
 
     /**
-     *
+     * Hàm hiển thị cập nhật đơn vị thành công
      * @Create_by: trand
      * @Date: 5/28/2019
      * @Param:
@@ -243,7 +244,7 @@ public class FormSelectUnit extends AppCompatActivity implements IUnitContract.I
     }
 
     /**
-     *
+     * Hàm hiển thị cập nhật đơn vị thất bại
      * @Create_by: trand
      * @Date: 5/28/2019
      * @Param:
@@ -255,7 +256,7 @@ public class FormSelectUnit extends AppCompatActivity implements IUnitContract.I
     }
 
     /**
-     *
+     * Hàm hiển thị xóa đơn vị thành công
      * @Create_by: trand
      * @Date: 5/28/2019
      * @Param:
@@ -271,7 +272,7 @@ public class FormSelectUnit extends AppCompatActivity implements IUnitContract.I
     }
 
     /**
-     *
+     * Hàm hiển thị xóa đơn vị thất bại
      * @Create_by: trand
      * @Date: 5/28/2019
      * @Param:
@@ -287,7 +288,7 @@ public class FormSelectUnit extends AppCompatActivity implements IUnitContract.I
     }
 
     /**
-     *
+     * Hàm hiển thị dialog Thêm đơn vị
      * @Create_by: trand
      * @Date: 5/28/2019
      * @Param:
@@ -347,7 +348,7 @@ public class FormSelectUnit extends AppCompatActivity implements IUnitContract.I
     }
 
     /**
-     *
+     * Hàm hiển thị dialog sửa đơn vị
      * @Create_by: trand
      * @Date: 5/28/2019
      * @Param:
@@ -399,6 +400,7 @@ public class FormSelectUnit extends AppCompatActivity implements IUnitContract.I
                     try {
                         String newUnitName = etUnitName.getText().toString().trim();
                         unit.setUnitName(newUnitName);
+                        iUnitPresenter.updateUnit(unit);
                         dialogEditUnit.dismiss();
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -412,14 +414,14 @@ public class FormSelectUnit extends AppCompatActivity implements IUnitContract.I
     }
 
     /**
-     *
+     * Hàm hiển thị dialog xóa đơn vị
      * @Create_by: trand
      * @Date: 5/28/2019
      * @Param:
      * @Return:
      */
     @Override
-    public void showDialogDeleteUnit(final Unit unit){
+    public void showDialogDeleteUnit(final Unit unit) {
         try {
             dialogDeleteUnit = new Dialog(this, R.style.Theme_Dialog);
             dialogDeleteUnit.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -467,15 +469,5 @@ public class FormSelectUnit extends AppCompatActivity implements IUnitContract.I
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * @param
-     * @return
-     * @created_by tdcong
-     * @date 5/24/2019
-     */
-    public void checkScreenUit() {
-
     }
 }
