@@ -17,8 +17,15 @@ public interface IUnitContract {
 
         void saveNewUnitSuccess(Unit newUnit);
 
-        void saveNewUnitFail();
+        void saveNewUnitFail(String error);
 
+        void updateUnitSuccess();
+
+        void updateUnitFail();
+
+        void deleteUnitSuccess();
+
+        void deleteUnitFail();
 
     }
 
@@ -34,7 +41,13 @@ public interface IUnitContract {
 
         void saveNewUnit(String newUnitName);
 
+        void updateUnit(Unit unit);
+
         Unit getUnit(int unitID);
+
+        void deleteUnit(int unitID);
+
+        boolean checkUnitData(String unitName);
 
     }
 }

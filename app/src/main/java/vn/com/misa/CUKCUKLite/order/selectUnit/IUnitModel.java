@@ -13,7 +13,11 @@ public interface IUnitModel {
 
     boolean saveNewUnit(String newUnitName);
 
+    boolean updateUnit(Unit unit);
+
     int getUnitID(String newUnitName);
 
     Unit getUnit(int unitID);
+
+    boolean deleteUnit(int unitID);
 }

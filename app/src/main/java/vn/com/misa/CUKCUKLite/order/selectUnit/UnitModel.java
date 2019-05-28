@@ -7,7 +7,6 @@ import vn.com.misa.CUKCUKLite.db.db.DBOpenHeplper;
 import vn.com.misa.CUKCUKLite.model.Unit;
 
 /**
- *
  * Create by: trand
  * Date: 5/26/2019
  */
@@ -16,7 +15,6 @@ public class UnitModel extends DBOpenHeplper implements IUnitModel {
     ControllerSQLite controllerSQLite;
 
     /**
-     *
      * Create by: trand
      * Date: 5/26/2019
      */
@@ -27,7 +25,6 @@ public class UnitModel extends DBOpenHeplper implements IUnitModel {
     }
 
     /**
-     *
      * Create by: trand
      * Date: 5/26/2019
      */
@@ -41,7 +38,6 @@ public class UnitModel extends DBOpenHeplper implements IUnitModel {
     }
 
     /**
-     *
      * Create by: trand
      * Date: 5/26/2019
      */
@@ -49,7 +45,7 @@ public class UnitModel extends DBOpenHeplper implements IUnitModel {
     public boolean saveNewUnit(String newUnitName) {
         boolean result = false;
         try {
-           result = controllerSQLite.saveNewUnit(newUnitName);
+            result = controllerSQLite.saveNewUnit(newUnitName);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -57,7 +53,6 @@ public class UnitModel extends DBOpenHeplper implements IUnitModel {
     }
 
     /**
-     *
      * @Create_by: trand
      * @Date: 5/27/2019
      * @Param:
@@ -75,7 +70,6 @@ public class UnitModel extends DBOpenHeplper implements IUnitModel {
     }
 
     /**
-     *
      * @Create_by: trand
      * @Date: 5/27/2019
      * @Param:
@@ -90,6 +84,26 @@ public class UnitModel extends DBOpenHeplper implements IUnitModel {
             e.printStackTrace();
         }
         return unit;
+    }
+
+    @Override
+    public boolean deleteUnit(int unitID) {
+        boolean check = controllerSQLite.deleteUnit(unitID);
+        if (check == true){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean updateUnit(Unit unit) {
+        boolean result = false;
+        try {
+            result = controllerSQLite.updateUnit(unit);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
 

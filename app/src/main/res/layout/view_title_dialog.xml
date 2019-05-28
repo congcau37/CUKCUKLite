@@ -16,7 +16,7 @@
         android:layout_marginBottom="@dimen/app_margin_medium"
         android:layout_weight="1.0"
         android:gravity="center_vertical"
-        android:text="Thêm đơn vị tính"
+        android:text="CUKCUK LITE"
         android:textColor="@color/color_white"
         android:textSize="@dimen/font_size_medium" />
 

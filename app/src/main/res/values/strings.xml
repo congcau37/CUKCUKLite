@@ -14,6 +14,8 @@
     <string name="btn_delete">Xóa</string>
     <string name="btn_cancel">Hủy bỏ</string>
     <string name="btn_done">Xong</string>
+    <string name="btn_no">Không</string>
+    <string name="btn_yes">Có</string>
     <string name="content_unit_name">Nhập đơn vị tính</string>
 
     <string name="cb_status">Ngừng bán</string>
@@ -42,8 +44,11 @@
     <string name="tv_status">Trạng thái</string>
     <string name="tv_food_name"><![CDATA[Tên món <font color=red>*</font>]]></string>
     <string name="tv_label_unit"><![CDATA[Đơn vị tính <font color=red>*</font>]]></string>
+    <string name="tv_dialog_delete_unit"><![CDATA[Bạn có chắc chắn muốn xóa đơn vị tính <font style=bold;color=black></font> không?]]></string>
 
     <string name="title_add_order">Thêm món</string>
     <string name="title_edit_order">Sửa món</string>
+    <string name="tv_title_edit_unit">Sủa đơn vị tính</string>
+    <string name="tv_title_add_unit">Thêm đơn vị tính</string>
 
 </resources>

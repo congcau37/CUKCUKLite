@@ -8,6 +8,8 @@ public class UnitPresenter implements IUnitContract.IUnitPresenter {
 
     IUnitContract.IUnitView iUnitView;
     IUnitModel iUnitModel;
+    boolean checkUnit;
+    String error = "";
 
     public UnitPresenter( IUnitModel iUnitModel, IUnitContract.IUnitView iUnitView) {
         this.iUnitModel = iUnitModel;
@@ -46,18 +48,66 @@ public class UnitPresenter implements IUnitContract.IUnitPresenter {
     public void saveNewUnit(String newUnitName) {
         boolean result;
         try {
-            result = iUnitModel.saveNewUnit(newUnitName);
-            if(result==true){
-                int newunitID = iUnitModel.getUnitID(newUnitName);
-                Unit newUnit = new Unit(newUnitName,newunitID);
-                iUnitView.saveNewUnitSuccess(newUnit);
+            if (checkUnitData(newUnitName) == false){
+                result = iUnitModel.saveNewUnit(newUnitName);
+                if(result==true){
+                    int newunitID = iUnitModel.getUnitID(newUnitName);
+                    Unit newUnit = new Unit(newUnitName,newunitID);
+                    iUnitView.saveNewUnitSuccess(newUnit);
+                }else {
+                    iUnitView.saveNewUnitFail(error);
+                }
             }else {
-                iUnitView.saveNewUnitFail();
+                error = "Đơn vị <"+newUnitName+"> đã tồn tại";
+                iUnitView.saveNewUnitFail(error);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+    /**
+     *
+     * @Create_by: trand
+     * @Date: 5/28/2019
+     * @Param:
+     * @Return:
+     */
+    @Override
+    public boolean checkUnitData(final String unitName) {
+        iUnitModel.getAllUnit(new IUnitModel.ICallbackUnit() {
+            @Override
+            public void getAllUnit(List<Unit> unitList) {
+                for (int i = 0;i<unitList.size();i++){
+                    if(unitName.equals(unitList.get(i).getUnitName())){
+                        checkUnit = true;
+                    }
+                }
+            }
+        });
+        return checkUnit;
+    }
+
+    /**
+     *
+     * @Create_by: trand
+     * @Date: 5/28/2019
+     * @Param:
+     * @Return:
+     */
+    @Override
+    public void updateUnit(Unit unit) {
+        boolean result;
+        try {
+            result = iUnitModel.updateUnit(unit);
+            if(result==true){
+                iUnitView.updateUnitSuccess();
+            }else {
+                iUnitView.updateUnitFail();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -77,4 +127,26 @@ public class UnitPresenter implements IUnitContract.IUnitPresenter {
         }
         return unit;
     }
+
+    /**
+     *
+     * @Create_by: trand
+     * @Date: 5/28/2019
+     * @Param: 
+     * @Return: 
+     */
+    @Override
+    public void deleteUnit(int unitID) {
+        boolean check = iUnitModel.deleteUnit(unitID);
+        try {
+            if(check==true){
+                iUnitView.deleteUnitSuccess();
+            }else {
+                iUnitView.deleteUnitFail();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

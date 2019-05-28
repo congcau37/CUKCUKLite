@@ -47,9 +47,8 @@ public class ControllerSQLite extends DBOpenHeplper {
                 foodList.add(new Food(foodID, foodName, foodPrice, unitID, colorBackground, foodIcon, foodStatus));
                 cursor.moveToNext();
             }
-
             cursor.close();
-
+            db.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -68,9 +67,8 @@ public class ControllerSQLite extends DBOpenHeplper {
                 unitList.add(new Unit(unitName, unitID));
                 cursor.moveToNext();
             }
-
             cursor.close();
-
+            db.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -78,11 +76,10 @@ public class ControllerSQLite extends DBOpenHeplper {
     }
 
     /**
-     *
      * Create by: trand
      * Date: 5/26/2019
      */
-    public boolean saveNewUnit(String newUnitName){
+    public boolean saveNewUnit(String newUnitName) {
         boolean result = false;
         try {
             SQLiteDatabase db = getWritableDatabase();
@@ -92,28 +89,57 @@ public class ControllerSQLite extends DBOpenHeplper {
             if (rs > 0) {
                 result = true;
             }
+            db.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return result;
     }
 
-/**
- *
- * @Create_by: trand
- * @Date: 5/27/2019
- * @Param:
- * @Return:
- */
-    public int getUnitID(String newUnitName){
+    /**
+     *
+     * @Create_by: trand
+     * @Date: 5/28/2019
+     * @Param:
+     * @Return:
+     */
+    public boolean updateUnit(Unit unit) {
+        boolean result = false;
+        try {
+            SQLiteDatabase db = getWritableDatabase();
+            ContentValues values = new ContentValues();
+            String unitName = unit.getUnitName();
+            int unitID = unit.getUnitID();
+            values.put("unitName", unitName);
+            values.put("unitID", unitID);
+            long rs = db.update("unit", values, "unitID" + "=" + unitID,null);
+            if (rs > 0) {
+                result = true;
+            }
+            db.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    /**
+     * @Create_by: trand
+     * @Date: 5/27/2019
+     * @Param:
+     * @Return:
+     */
+    public int getUnitID(String newUnitName) {
         int unitID = 0;
         try {
             SQLiteDatabase db = getReadableDatabase();
-            Cursor cursor=db.rawQuery("SELECT * FROM unit WHERE unitName= '"+newUnitName+"'",null);
+            Cursor cursor = db.rawQuery("SELECT * FROM unit WHERE unitName= '" + newUnitName + "'", null);
             if (cursor != null) {
                 cursor.moveToFirst();
                 unitID = cursor.getInt(cursor.getColumnIndex("unitID"));
             }
+            cursor.close();
+            db.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -121,24 +147,73 @@ public class ControllerSQLite extends DBOpenHeplper {
     }
 
     /**
-     *
      * @Create_by: trand
      * @Date: 5/27/2019
      * @Param:
      * @Return:
      */
-    public Unit getUnit(int unitID){
+    public Unit getUnit(int unitID) {
         Unit unit = null;
         try {
             SQLiteDatabase db = getReadableDatabase();
-            Cursor cursor=db.rawQuery("SELECT * FROM unit WHERE unitID = '"+unitID+"'",null);
+            Cursor cursor = db.rawQuery("SELECT * FROM unit WHERE unitID = '" + unitID + "'", null);
             if (cursor != null) {
                 cursor.moveToFirst();
-                unit = new Unit(cursor.getString(cursor.getColumnIndex("unitName")),unitID);
+                unit = new Unit(cursor.getString(cursor.getColumnIndex("unitName")), unitID);
             }
+            cursor.close();
+            db.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return unit;
+    }
+
+    /**
+     * @Create_by: trand
+     * @Date: 5/28/2019
+     * @Param:
+     * @Return:
+     */
+    public boolean checkUnit(int unitID) {
+        try {
+            SQLiteDatabase db = getReadableDatabase();
+            Cursor cursor = db.rawQuery("SELECT * FROM food WHERE unitID = '" + unitID + "'", null);
+            if (cursor.getCount() >0) {
+                return true;
+            }
+            cursor.close();
+            db.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     * @Create_by: trand
+     * @Date: 5/28/2019
+     * @Param:
+     * @Return:
+     */
+    public boolean deleteUnit(int unitID) {
+        try {
+            if (checkUnit(unitID) == false) {
+                try {
+                    SQLiteDatabase db = getWritableDatabase();
+                    long rs = db.delete("unit", "unitID="+unitID, null);
+                    if (rs > 0) {
+                        return true;
+                    }
+                    db.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

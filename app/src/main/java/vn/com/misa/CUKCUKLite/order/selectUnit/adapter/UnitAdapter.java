@@ -14,6 +14,7 @@ import java.util.List;
 
 import vn.com.misa.CUKCUKLite.R;
 import vn.com.misa.CUKCUKLite.model.Unit;
+import vn.com.misa.CUKCUKLite.util.helper.UnitListener;
 
 /**
  * @param
@@ -24,12 +25,18 @@ import vn.com.misa.CUKCUKLite.model.Unit;
 public class UnitAdapter extends BaseAdapter {
     private Context mContext;
     private List<Unit> mData;
+
+    private UnitListener unitListener;
     private Unit unitCurrentSelected = null;
-    int currentSelected;
+    private int currentSelected;
 
     public UnitAdapter(Context mContext, List<Unit> mData) {
         this.mContext = mContext;
         this.mData = mData;
+    }
+
+    public void setUnitListener(UnitListener unitListener) {
+        this.unitListener = unitListener;
     }
 
     @Override
@@ -59,7 +66,7 @@ public class UnitAdapter extends BaseAdapter {
                 viewHolder = (UnitAdapter.ViewHolder) convertView.getTag();
             }
             final Unit unit = mData.get(position);
-//            currentSelected = unitCurrentSelected.getUnitID();
+            currentSelected = unitCurrentSelected.getUnitID();
             viewHolder.tvUnitName.setText(unit.getUnitName());
             if (unit.getUnitID() == currentSelected) {
                 viewHolder.ivChecked.setVisibility(View.VISIBLE);
@@ -69,9 +76,32 @@ public class UnitAdapter extends BaseAdapter {
             viewHolder.lnRowUnit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    currentSelected= mData.get(position).getUnitID();
-                    setUnitCurrentSelected(new Unit(mData.get(position).getUnitName(),currentSelected));
-                    notifyDataSetChanged();
+                    try {
+                        currentSelected = unit.getUnitID();
+                        setUnitCurrentSelected(new Unit(unit.getUnitName(), currentSelected));
+                        notifyDataSetChanged();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+            viewHolder.lnRowUnit.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    if(unitListener!=null){
+                        unitListener.showDialogDeleteUnit(unit);
+                    }
+                    return false;
+                }
+            });
+
+            viewHolder.rlEditUnit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(unitListener!=null){
+                        unitListener.showDialogEditUnit(unit);
+                    }
                 }
             });
 
@@ -82,7 +112,6 @@ public class UnitAdapter extends BaseAdapter {
     }
 
     /**
-     *
      * @Create_by: trand
      * @Date: 5/27/2019
      * @Param:
@@ -107,18 +136,6 @@ public class UnitAdapter extends BaseAdapter {
     }
 
     /**
-     *
-     * @Create_by: trand
-     * @Date: 5/27/2019
-     * @Param:
-     * @Return:
-     */
-    public void setCurrentSelected(int currentSelected) {
-        this.currentSelected = currentSelected;
-    }
-
-    /**
-     *
      * @Create_by: trand
      * @Date: 5/27/2019
      * @Param:
@@ -129,7 +146,6 @@ public class UnitAdapter extends BaseAdapter {
     }
 
     /**
-     *
      * @Create_by: trand
      * @Date: 5/27/2019
      * @Param:

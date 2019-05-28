@@ -270,7 +270,27 @@ public class FormEditFood extends AppCompatActivity implements IUnitContract.IUn
     }
 
     @Override
-    public void saveNewUnitFail() {
+    public void saveNewUnitFail(String error) {
+
+    }
+
+    @Override
+    public void updateUnitSuccess() {
+
+    }
+
+    @Override
+    public void updateUnitFail() {
+
+    }
+
+    @Override
+    public void deleteUnitSuccess() {
+
+    }
+
+    @Override
+    public void deleteUnitFail() {
 
     }
 }
