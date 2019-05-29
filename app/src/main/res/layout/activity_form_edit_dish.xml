@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    tools:context=".screen.editdish.EditDishActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <LinearLayout
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="@dimen/toolbar_back_width"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:scaleType="centerInside"
+                android:background="@drawable/selector_button_back"
+                android:src="@drawable/ic_arrow_back" />
+
+            <TextView
+                android:id="@+id/tvTitleToolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/font_size_medium"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/tvSaveDish"
+                android:layout_width="@dimen/toolbar_save_width"
+                android:layout_height="match_parent"
+                android:background="@drawable/selector_button_back"
+                android:gravity="center"
+                android:paddingRight="@dimen/app_margin_small"
+                android:text="@string/btn_save"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/font_size_medium" />
+        </LinearLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/appBar"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginBottom="@dimen/app_margin_small"
+            android:layout_marginTop="@dimen/app_margin_small">
+
+            <TextView
+                android:id="@+id/tvdishName"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/app_margin_small"
+                android:layout_gravity="center_vertical" />
+
+            <EditText
+                android:id="@+id/etDishName"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:textSize="@dimen/font_size_medium"
+                android:textColor="@color/color_black"
+                android:background="@android:color/transparent"
+                android:maxLines="1"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="40dp"
+                android:gravity="right"
+                android:layout_weight="1"
+                android:hint="@string/et_food_name_hint" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/view_row_height"
+            android:background="@color/color_gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/app_margin_small">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/app_margin_small"
+                android:text="@string/tv_price" />
+
+            <EditText
+                android:id="@+id/etPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/font_size_medium"
+                android:inputType="number"
+                android:layout_margin="@dimen/app_margin_small"
+                android:background="@android:color/transparent"
+                android:hint="0"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:textColor="@color/color_black" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_chevron_right" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/view_row_height"
+            android:background="@color/color_gray" />
+
+        <!--<vn.com.misa.CUKCUKLite.order.AddDishActivity.CustomAddFood-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:ivNext="@drawable/ic_chevron_right"-->
+        <!--app:tvText="@string/tv_unit"-->
+        <!--app:tvValue="Lon"></vn.com.misa.CUKCUKLite.order.AddDishActivity.CustomAddFood>-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/app_margin_small">
+
+            <TextView
+                android:id="@+id/tvLabelUnit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/app_margin_small" />
+
+            <TextView
+                android:id="@+id/tvUnit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/font_size_medium"
+                android:layout_margin="@dimen/app_margin_small"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="Bát"
+                android:textColor="@color/color_black" />
+
+            <ImageView
+                android:id="@+id/ivSelectUnit"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_chevron_right" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/view_row_height"
+            android:background="@color/color_gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/app_margin_small">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/app_margin_small"
+                android:text="@string/tv_color" />
+
+            <FrameLayout
+                android:id="@+id/frmBackgroundColor"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="@dimen/app_margin_large"
+                android:background="@drawable/bg_color_round">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_color_lens_black_50dp" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/app_margin_small"
+                    android:text="@string/tv_icon" />
+
+                <FrameLayout
+                    android:id="@+id/frmBackgroundIcon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_color_round">
+
+                    <ImageView
+                        android:id="@+id/ivDish"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:scaleType="fitXY"
+                        android:layout_gravity="center"/>
+                </FrameLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/app_margin_small"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/app_margin_small"
+                android:text="@string/tv_status" />
+
+            <CheckBox
+                android:id="@+id/cbStatus"
+                android:text="@string/cb_status"
+                android:textSize="@dimen/font_size_medium"
+                android:textColor="@color/color_black"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/app_margin_large"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/app_margin_small"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnDelete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/app_margin_medium"
+            android:layout_marginRight="@dimen/app_margin_medium"
+            android:background="@drawable/selector_button_delete_popup"
+            android:text="@string/btn_delete"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/font_size_medium" />
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="@dimen/app_margin_medium"
+            android:background="@drawable/selector_button_ok_popup"
+            android:text="@string/btn_save"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/font_size_medium" />
+
+    </LinearLayout>
+
+</RelativeLayout>

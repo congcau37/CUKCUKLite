@@ -15,7 +15,7 @@
         android:layout_marginLeft="@dimen/app_margin_small">
 
         <ImageView
-            android:id="@+id/ivFood"
+            android:id="@+id/ivDish"
             android:layout_gravity="center"
             android:layout_width="50dp"
             android:layout_height="50dp" />
@@ -29,7 +29,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tvFoodName"
+            android:id="@+id/tvdishName"
             android:text="Tên"
             android:textStyle="bold"
             android:textSize="@dimen/font_size_small"

@@ -16,9 +16,9 @@ public class Converter {
      * @Param:
      * @Return:
      */
-    public static boolean convertStatusOrder(String num) {
+    public static boolean convertStatusOrder(String dStatus) {
         boolean status;
-        if (num.equals("1")) {
+        if (dStatus.equals("false")) {
             status = false;
         } else {
             status = true;
