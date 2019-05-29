@@ -68,7 +68,7 @@
                     android:layout_weight="1.0"
                     android:background="@android:color/transparent"
                     android:drawableLeft="@drawable/ic_person"
-                    android:hint="@string/et_login_number_phone_hint"
+                    android:hint="@string/number_phone_or_email"
                     android:imeOptions="actionNext"
                     android:inputType="textEmailAddress"
                     android:paddingLeft="@dimen/app_margin_medium"
@@ -113,7 +113,7 @@
                     android:background="@android:color/transparent"
                     android:drawableLeft="@drawable/ic_pass"
                     android:gravity="center_vertical"
-                    android:hint="@string/et_password_hint"
+                    android:hint="@string/password_hint"
                     android:imeOptions="actionDone"
                     android:inputType="textPassword"
                     android:paddingLeft="@dimen/app_margin_medium"
@@ -156,7 +156,7 @@
             android:textColor="@color/color_white"
             android:layout_marginTop="@dimen/app_margin_large"
             android:background="@drawable/selector_button_login"
-            android:text="@string/btn_login"
+            android:text="@string/login"
             android:textAllCaps="true" />
 
         <TextView
@@ -165,7 +165,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/app_margin_large"
             android:gravity="center_horizontal"
-            android:text="@string/et_forgot_password"
+            android:text="@string/forgot_password"
             android:textColor="@color/color_white"
             android:textSize="@dimen/font_size_small" />
 

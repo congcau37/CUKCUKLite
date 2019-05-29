@@ -16,6 +16,9 @@ public class Dish implements Serializable {
     String dishIcon;
     String dishStatus;
 
+    public Dish() {
+    }
+
     public Dish(int dishID, String dishName, long dishPrice, int unitID, String colorBackground, String dishIcon, String dishStatus) {
         this.dishID = dishID;
         this.dishName = dishName;

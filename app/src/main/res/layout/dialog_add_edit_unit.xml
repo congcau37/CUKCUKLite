@@ -27,7 +27,7 @@
             android:background="@android:color/transparent"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:hint="@string/content_unit_name"
+            android:hint="@string/enter_unit"
             android:paddingTop="@dimen/app_margin_medium"
             android:paddingBottom="@dimen/app_margin_medium"
             android:scrollHorizontally="true"
@@ -51,7 +51,7 @@
             android:layout_height="40dp"
             android:layout_gravity="center_vertical"
             android:background="@drawable/bg_white_no_border_radius_selector"
-            android:text="@string/btn_cancel"
+            android:text="@string/cancel"
             android:textAllCaps="true"
             android:textColor="@drawable/selector_text_in_button_cancel" />
 
@@ -61,7 +61,7 @@
             android:layout_height="40dp"
             android:layout_gravity="center_vertical"
             android:background="@drawable/selector_button_ok_popup"
-            android:text="@string/btn_save"
+            android:text="@string/save"
             android:textAllCaps="true"
             android:layout_margin="@dimen/app_margin_small"
             android:textColor="@color/color_white" />

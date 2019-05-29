@@ -9,12 +9,12 @@ import vn.com.misa.CUKCUKLite.model.Dish;
  * @Param:
  * @Return:
  */
-public class AddDishPresenter implements AddDishContract.IPresenter {
+public class AddDishPresenter implements IAddDishContract.IPresenter {
     IAddDishModel iAddDishModel;
-    AddDishContract.IView iView;
+    IAddDishContract.IView iView;
     String error = "";
 
-    public AddDishPresenter(IAddDishModel iAddDishModel, AddDishContract.IView iView) {
+    public AddDishPresenter(IAddDishModel iAddDishModel, IAddDishContract.IView iView) {
         this.iAddDishModel = iAddDishModel;
         this.iView = iView;
     }
@@ -38,28 +38,6 @@ public class AddDishPresenter implements AddDishContract.IPresenter {
                 iView.saveNewDishFail(error);
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Hàm cập nhật món ăn
-     * @Create_by: trand
-     * @Date: 5/28/2019
-     * @Param: Dish
-     * @Return:
-     */
-    @Override
-    public void updateDish(Dish dish) {
-        boolean result;
-        try {
-            result = iAddDishModel.updateDish(dish);
-            if (result == true) {
-                iView.updateDishSuccess();
-            } else {
-                iView.updateDishFail();
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }

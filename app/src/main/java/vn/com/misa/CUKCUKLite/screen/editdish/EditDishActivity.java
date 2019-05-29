@@ -34,9 +34,6 @@ import vn.com.misa.CUKCUKLite.screen.chooseunit.ChooseActivity;
 import vn.com.misa.CUKCUKLite.screen.chooseunit.IChooseUnitContract;
 import vn.com.misa.CUKCUKLite.screen.chooseunit.ChooseUnitModel;
 import vn.com.misa.CUKCUKLite.screen.chooseunit.ChooseUnitPresenter;
-import vn.com.misa.CUKCUKLite.screen.adddish.AddDishContract;
-import vn.com.misa.CUKCUKLite.screen.adddish.AddDishModel;
-import vn.com.misa.CUKCUKLite.screen.adddish.AddDishPresenter;
 import vn.com.misa.CUKCUKLite.util.AppUtil;
 import vn.com.misa.CUKCUKLite.util.ConstantKey;
 import vn.com.misa.CUKCUKLite.util.helper.Converter;
@@ -48,7 +45,7 @@ import vn.com.misa.CUKCUKLite.util.helper.Converter;
  * @Param:
  * @Return:
  */
-public class EditDishActivity extends AppCompatActivity implements IChooseUnitContract.IView, AddDishContract.IView {
+public class EditDishActivity extends AppCompatActivity implements IChooseUnitContract.IView, IEditDishContract.IView {
 
     @BindView(R.id.ivBack)
     ImageView imvBack;
@@ -86,7 +83,7 @@ public class EditDishActivity extends AppCompatActivity implements IChooseUnitCo
     Button btnSave;
 
     IChooseUnitContract.IPresenter iPresenterUnit;
-    AddDishContract.IPresenter iPresenterDish;
+    IEditDishContract.IPresenter iPresenterDish;
     Dish detailDish;
     Unit unitSelected;
     int foodID;
@@ -120,7 +117,7 @@ public class EditDishActivity extends AppCompatActivity implements IChooseUnitCo
     private void initPresenter() {
         try {
             iPresenterUnit = new ChooseUnitPresenter(new ChooseUnitModel(this), this);
-            iPresenterDish = new AddDishPresenter(new AddDishModel(this), this);
+            iPresenterDish = new EditDishPresenter(new EditDishModel(this), this);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -199,11 +196,11 @@ public class EditDishActivity extends AppCompatActivity implements IChooseUnitCo
     private void initView() {
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                tvFoodName.setText(Html.fromHtml(getString(R.string.tv_food_name), Html.FROM_HTML_MODE_COMPACT));
-                tvLabelUnit.setText(Html.fromHtml(getString(R.string.tv_label_unit), Html.FROM_HTML_MODE_COMPACT));
+                tvFoodName.setText(Html.fromHtml(getString(R.string.dish_name), Html.FROM_HTML_MODE_COMPACT));
+                tvLabelUnit.setText(Html.fromHtml(getString(R.string.label_unit), Html.FROM_HTML_MODE_COMPACT));
             } else {
-                tvFoodName.setText(Html.fromHtml(getString(R.string.tv_food_name)));
-                tvLabelUnit.setText(Html.fromHtml(getString(R.string.tv_label_unit)));
+                tvFoodName.setText(Html.fromHtml(getString(R.string.dish_name)));
+                tvLabelUnit.setText(Html.fromHtml(getString(R.string.label_unit)));
             }
 
             if (detailDish.getDishStatus().equals(ConstantKey.SELLING)) {
@@ -215,7 +212,7 @@ public class EditDishActivity extends AppCompatActivity implements IChooseUnitCo
             cbStatus.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (isChecked == false) {
+                    if (!isChecked) {
                         foodStatus = ConstantKey.SELLING;
                     } else {
                         foodStatus = ConstantKey.STOP_SALE;
@@ -226,8 +223,8 @@ public class EditDishActivity extends AppCompatActivity implements IChooseUnitCo
             etPrice.addTextChangedListener(new TextWatcher() {
                 public void onTextChanged(CharSequence s, int start, int before,
                                           int count) {
-                    if(etPrice.getText().toString().equals("") ) {
-                        etPrice.setText("0");
+                    if(etPrice.getText().toString().equals(ConstantKey.VALUE_EMPTY) ) {
+                        etPrice.setText(ConstantKey.VALUE_ZERO);
                     }
                 }
                 public void beforeTextChanged(CharSequence s, int start, int count,
@@ -250,7 +247,7 @@ public class EditDishActivity extends AppCompatActivity implements IChooseUnitCo
      */
     private void initToolBar() {
         try {
-            tvTitleToolbar.setText(getString(R.string.title_edit_order));
+            tvTitleToolbar.setText(getString(R.string.edit_dish));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -275,9 +272,6 @@ public class EditDishActivity extends AppCompatActivity implements IChooseUnitCo
                     }
                     break;
                 case R.id.tvSaveDish:
-                    updateFood();
-                    finish();
-                    break;
                 case R.id.btnSave:
                     updateFood();
                     finish();
@@ -399,16 +393,6 @@ public class EditDishActivity extends AppCompatActivity implements IChooseUnitCo
 
     @Override
     public void deleteUnitFail() {
-
-    }
-
-    @Override
-    public void saveNewDishSuccess() {
-
-    }
-
-    @Override
-    public void saveNewDishFail(String error) {
 
     }
 

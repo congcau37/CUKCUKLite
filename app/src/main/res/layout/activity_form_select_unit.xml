@@ -67,7 +67,7 @@
         android:layout_marginRight="@dimen/app_margin_medium"
         android:layout_marginBottom="@dimen/app_margin_small"
         android:background="@drawable/selector_button_ok_popup"
-        android:text="@string/btn_done"
+        android:text="@string/done"
         android:textColor="@color/color_white"
         android:textSize="@dimen/font_size_medium" />
 </RelativeLayout>

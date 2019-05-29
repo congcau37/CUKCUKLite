@@ -1,11 +1,11 @@
-package vn.com.misa.CUKCUKLite.screen.login.loginPhoneNumber;
+package vn.com.misa.CUKCUKLite.screen.login.loginphone;
 
 /**
  *
  * @created_by tdcong
  * @date 5/20/2019
  */
-public interface ILogin {
+public interface ILoginPhoneModel {
     interface IGetAccountCallback {
         void checkAccount(boolean check);
     }

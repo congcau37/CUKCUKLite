@@ -19,7 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import vn.com.misa.CUKCUKLite.R;
 import vn.com.misa.CUKCUKLite.screen.adddish.AddDishActivity;
-import vn.com.misa.CUKCUKLite.screen.sale.SaleMainView;
+import vn.com.misa.CUKCUKLite.screen.sale.SaleActivity;
 import vn.com.misa.CUKCUKLite.screen.menu.MenuActivity;
 
 /**
@@ -167,7 +167,7 @@ public class HomeActivity extends AppCompatActivity
 
             if (id == R.id.nav_sale) {
                 tvTitleToolbar.setText(R.string.menu_sale);
-                initFragment(R.id.content_main, new SaleMainView());
+                initFragment(R.id.content_main, new SaleActivity());
             } else if (id == R.id.nav_order) {
                 tvTitleToolbar.setText(R.string.menu_order);
                 initFragment(R.id.content_main, new MenuActivity());

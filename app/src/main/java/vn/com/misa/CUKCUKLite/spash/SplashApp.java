@@ -8,7 +8,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import vn.com.misa.CUKCUKLite.R;
-import vn.com.misa.CUKCUKLite.screen.login.LoginMain;
+import vn.com.misa.CUKCUKLite.screen.login.LoginActivity;
 
 /**
  * Lớp màn hình chờ
@@ -24,7 +24,7 @@ public class SplashApp extends AppCompatActivity {
             setContentView(R.layout.activity_splash_app);
             new Timer().schedule(new TimerTask() {
                                      public void run() {
-                                         SplashApp.this.startActivity(new Intent(SplashApp.this, LoginMain.class));
+                                         SplashApp.this.startActivity(new Intent(SplashApp.this, LoginActivity.class));
                                          SplashApp.this.finish();
                                      }
                                  }

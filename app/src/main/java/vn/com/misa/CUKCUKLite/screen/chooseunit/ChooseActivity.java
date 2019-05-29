@@ -305,7 +305,7 @@ public class ChooseActivity extends AppCompatActivity implements IChooseUnitCont
             TextView tvTitle = dialogAddUnit.findViewById(R.id.tvTitleDialog);
             final EditText etUnitName = dialogAddUnit.findViewById(R.id.etUnitName);
             ImageView btnTitleClose = dialogAddUnit.findViewById(R.id.btnTitleClose);
-            tvTitle.setText(getString(R.string.tv_title_add_unit));
+            tvTitle.setText(getString(R.string.add_unit));
 
             btnTitleClose.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -368,7 +368,7 @@ public class ChooseActivity extends AppCompatActivity implements IChooseUnitCont
             ImageView btnTitleClose = dialogEditUnit.findViewById(R.id.btnTitleClose);
 
             String uniName = unit.getUnitName();
-            tvTitle.setText(getString(R.string.tv_title_edit_unit));
+            tvTitle.setText(getString(R.string.edit_unit));
             etUnitName.setText(uniName);
 
             btnTitleClose.setOnClickListener(new View.OnClickListener() {
@@ -434,9 +434,9 @@ public class ChooseActivity extends AppCompatActivity implements IChooseUnitCont
 
             final int unitID = unit.getUnitID();
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                tvConfirm.setText(Html.fromHtml(getString(R.string.tv_dialog_delete_unit), Html.FROM_HTML_MODE_COMPACT));
+                tvConfirm.setText(Html.fromHtml(getString(R.string.you_can_delete_unit), Html.FROM_HTML_MODE_COMPACT));
             } else {
-                tvConfirm.setText(Html.fromHtml(getString(R.string.tv_dialog_delete_unit)));
+                tvConfirm.setText(Html.fromHtml(getString(R.string.you_can_delete_unit)));
             }
 
             btnNo.setOnClickListener(new View.OnClickListener() {

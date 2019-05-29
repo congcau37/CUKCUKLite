@@ -12,14 +12,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import vn.com.misa.CUKCUKLite.R;
-import vn.com.misa.CUKCUKLite.screen.login.loginPhoneNumber.LoginPhoneMainView;
+import vn.com.misa.CUKCUKLite.screen.login.loginphone.LoginPhoneActivity;
 
 /**
  * Lớp đăng nhập chính
  * @created_by tdcong
  * @date 5/17/2019
  */
-public class LoginMain extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     @BindView(R.id.llLogo)
     LinearLayout llLogo;
@@ -52,7 +52,7 @@ public class LoginMain extends AppCompatActivity {
             case R.id.llLogo:
                 break;
             case R.id.btnLoginPhoneEmail:
-                startActivity(new Intent(LoginMain.this, LoginPhoneMainView.class));
+                startActivity(new Intent(LoginActivity.this, LoginPhoneActivity.class));
                 break;
             case R.id.tvNoAccount:
                 break;

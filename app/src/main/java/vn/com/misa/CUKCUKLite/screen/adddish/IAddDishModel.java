@@ -8,6 +8,5 @@ import vn.com.misa.CUKCUKLite.model.Dish;
  * @Date: 5/29/2019
  */
 public interface IAddDishModel {
-    boolean updateDish(Dish dish);
     boolean saveNewDish(Dish newDish);
 }

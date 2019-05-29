@@ -49,7 +49,7 @@
             android:layout_height="40dp"
             android:layout_gravity="center_vertical"
             android:background="@drawable/bg_white_no_border_radius_selector"
-            android:text="@string/btn_no"
+            android:text="@string/no"
             android:textAllCaps="true"
             android:textColor="@drawable/selector_text_in_button_cancel" />
 
@@ -59,7 +59,7 @@
             android:layout_height="40dp"
             android:layout_gravity="center_vertical"
             android:background="@drawable/selector_button_ok_popup"
-            android:text="@string/btn_yes"
+            android:text="@string/yes"
             android:textAllCaps="true"
             android:layout_margin="@dimen/app_margin_small"
             android:textColor="@color/color_white" />

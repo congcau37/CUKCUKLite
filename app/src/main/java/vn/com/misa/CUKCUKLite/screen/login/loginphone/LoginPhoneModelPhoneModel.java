@@ -1,11 +1,11 @@
-package vn.com.misa.CUKCUKLite.screen.login.loginPhoneNumber;
+package vn.com.misa.CUKCUKLite.screen.login.loginphone;
 
 /**
  * Lớp model đăng nhập bằng điện thoại
  * @Create_by: trand
  * @Date: 5/28/2019
  */
-public class LoginModel implements ILogin {
+public class LoginPhoneModelPhoneModel implements ILoginPhoneModel {
 
     /**
      * Hàm lấy ra tài khoản

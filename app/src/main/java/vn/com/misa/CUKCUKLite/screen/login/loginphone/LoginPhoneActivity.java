@@ -1,4 +1,4 @@
-package vn.com.misa.CUKCUKLite.screen.login.loginPhoneNumber;
+package vn.com.misa.CUKCUKLite.screen.login.loginphone;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -28,7 +28,7 @@ import vn.com.misa.CUKCUKLite.R;
  * @Param:
  * @Return:
  */
-public class LoginPhoneMainView extends AppCompatActivity implements ILoginContract.ILoginView {
+public class LoginPhoneActivity extends AppCompatActivity implements ILoginPhoneContract.ILoginView {
 
     @BindView(R.id.btnBack)
     ImageButton btnBack;
@@ -96,7 +96,7 @@ public class LoginPhoneMainView extends AppCompatActivity implements ILoginContr
      * @Return:
      */
     private void initPresenter() {
-        iLoginPresenter = new LoginPresenter(new LoginModel(), this);
+        iLoginPresenter = new LoginPresenter(new LoginPhoneModelPhoneModel(), this);
     }
 
     /**
@@ -111,7 +111,7 @@ public class LoginPhoneMainView extends AppCompatActivity implements ILoginContr
             userName = edUserName.getText().toString().trim();
             passWord = edPassword.getText().toString().trim();
 
-            String pass= String.format(getString(R.string.et_forgot_password),passWord);
+            String pass= String.format(getString(R.string.forgot_password),passWord);
             Log.d("SBC", pass);
         } catch (Exception e) {
             e.printStackTrace();
@@ -128,7 +128,7 @@ public class LoginPhoneMainView extends AppCompatActivity implements ILoginContr
     @Override
     public void showOnSuccess() {
         try {
-            startActivity(new Intent(LoginPhoneMainView.this, HomeActivity.class));
+            startActivity(new Intent(LoginPhoneActivity.this, HomeActivity.class));
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -10,9 +10,11 @@ import java.util.List;
 
 import vn.com.misa.CUKCUKLite.model.Dish;
 import vn.com.misa.CUKCUKLite.model.Unit;
+import vn.com.misa.CUKCUKLite.util.ConstantKey;
 
 /**
  * Lớp chứa các phương thức truy vấn
+ *
  * @Create_by: trand
  * @Date: 5/28/2019
  */
@@ -24,6 +26,7 @@ public class ControllerSQLite extends DBOpenHeplper {
 
     /**
      * Hàm lấy danh sách món ăn trong thực đơn
+     *
      * @Create_by: trand
      * @Date: 5/28/2019
      * @Param:
@@ -36,13 +39,13 @@ public class ControllerSQLite extends DBOpenHeplper {
             Cursor cursor = db.rawQuery("SELECT * from dish", null);
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
-                int foodID = cursor.getInt(cursor.getColumnIndex("dishID"));
-                String foodName = cursor.getString(cursor.getColumnIndex("dishName"));
-                int foodPrice = cursor.getInt(cursor.getColumnIndex("dishPrice"));
-                int unitID = cursor.getInt(cursor.getColumnIndex("unitID"));
-                String colorBackground = cursor.getString(cursor.getColumnIndex("colorBackground"));
-                String foodIcon = cursor.getString(cursor.getColumnIndex("dishIcon"));
-                String foodStatus = cursor.getString(cursor.getColumnIndex("dishStatus"));
+                int foodID = cursor.getInt(cursor.getColumnIndex(ConstantKey.COLUMN_NAME_DISH_ID));
+                String foodName = cursor.getString(cursor.getColumnIndex(ConstantKey.COLUMN_NAME_DISH_NAME));
+                int foodPrice = cursor.getInt(cursor.getColumnIndex(ConstantKey.COLUMN_NAME_DISH_PRICE));
+                int unitID = cursor.getInt(cursor.getColumnIndex(ConstantKey.COLUMN_NAME_UNIT_ID));
+                String colorBackground = cursor.getString(cursor.getColumnIndex(ConstantKey.COLUMN_NAME_COLOR));
+                String foodIcon = cursor.getString(cursor.getColumnIndex(ConstantKey.COLUMN_NAME_ICON));
+                String foodStatus = cursor.getString(cursor.getColumnIndex(ConstantKey.COLUMN_NAME_STATUS));
                 dishList.add(new Dish(foodID, foodName, foodPrice, unitID, colorBackground, foodIcon, foodStatus));
                 cursor.moveToNext();
             }
@@ -56,6 +59,7 @@ public class ControllerSQLite extends DBOpenHeplper {
 
     /**
      * Hàm lấy danh sách đơn vị
+     *
      * @Create_by: trand
      * @Date: 5/28/2019
      * @Param:
@@ -68,8 +72,8 @@ public class ControllerSQLite extends DBOpenHeplper {
             Cursor cursor = db.rawQuery("SELECT * from unit", null);
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
-                String unitName = cursor.getString(cursor.getColumnIndex("unitName"));
-                int unitID = cursor.getInt(cursor.getColumnIndex("unitID"));
+                String unitName = cursor.getString(cursor.getColumnIndex(ConstantKey.COLUMN_NAME_UNIT_NAME));
+                int unitID = cursor.getInt(cursor.getColumnIndex(ConstantKey.COLUMN_NAME_UNIT_ID));
                 unitList.add(new Unit(unitName, unitID));
                 cursor.moveToNext();
             }
@@ -83,6 +87,7 @@ public class ControllerSQLite extends DBOpenHeplper {
 
     /**
      * Hàm thêm mới đơn vị tính
+     *
      * @Create_by: trand
      * @Date: 5/28/2019
      * @Param: newUnitName
@@ -93,8 +98,8 @@ public class ControllerSQLite extends DBOpenHeplper {
         try {
             SQLiteDatabase db = getWritableDatabase();
             ContentValues values = new ContentValues();
-            values.put("unitName", newUnitName);
-            long rs = db.insert("unit", null, values);
+            values.put(ConstantKey.COLUMN_NAME_UNIT_NAME, newUnitName);
+            long rs = db.insert(ConstantKey.TABLE_NAME_UNIT, null, values);
             if (rs > 0) {
                 result = true;
             }
@@ -107,6 +112,7 @@ public class ControllerSQLite extends DBOpenHeplper {
 
     /**
      * Hàm cập nhật đơn vị tính
+     *
      * @Create_by: trand
      * @Date: 5/28/2019
      * @Param: unit
@@ -119,9 +125,9 @@ public class ControllerSQLite extends DBOpenHeplper {
             ContentValues values = new ContentValues();
             String unitName = unit.getUnitName();
             int unitID = unit.getUnitID();
-            values.put("unitName", unitName);
-            values.put("unitID", unitID);
-            long rs = db.update("unit", values, "unitID" + "=" + unitID, null);
+            values.put(ConstantKey.COLUMN_NAME_UNIT_NAME, unitName);
+            values.put(ConstantKey.COLUMN_NAME_UNIT_ID, unitID);
+            long rs = db.update(ConstantKey.TABLE_NAME_UNIT, values, ConstantKey.COLUMN_NAME_UNIT_ID + "=" + unitID, null);
             if (rs > 0) {
                 result = true;
             }
@@ -134,6 +140,7 @@ public class ControllerSQLite extends DBOpenHeplper {
 
     /**
      * Hàm lấy ra mã ID đơn vị tính
+     *
      * @Create_by: trand
      * @Date: 5/28/2019
      * @Param: newUnitName
@@ -146,7 +153,7 @@ public class ControllerSQLite extends DBOpenHeplper {
             Cursor cursor = db.rawQuery("SELECT * FROM unit WHERE unitName= '" + newUnitName + "'", null);
             if (cursor != null) {
                 cursor.moveToFirst();
-                unitID = cursor.getInt(cursor.getColumnIndex("unitID"));
+                unitID = cursor.getInt(cursor.getColumnIndex(ConstantKey.COLUMN_NAME_UNIT_ID));
             }
             cursor.close();
             db.close();
@@ -158,6 +165,7 @@ public class ControllerSQLite extends DBOpenHeplper {
 
     /**
      * Hàm lấy ra đơn vị dựa theo ID
+     *
      * @Create_by: trand
      * @Date: 5/27/2019
      * @Param: unitID
@@ -170,7 +178,7 @@ public class ControllerSQLite extends DBOpenHeplper {
             Cursor cursor = db.rawQuery("SELECT * FROM unit WHERE unitID = '" + unitID + "'", null);
             if (cursor != null) {
                 cursor.moveToFirst();
-                unit = new Unit(cursor.getString(cursor.getColumnIndex("unitName")), unitID);
+                unit = new Unit(cursor.getString(cursor.getColumnIndex(ConstantKey.COLUMN_NAME_UNIT_NAME)), unitID);
             }
             cursor.close();
             db.close();
@@ -182,6 +190,7 @@ public class ControllerSQLite extends DBOpenHeplper {
 
     /**
      * Hàm kiểm tra đơn vị tính đã được sử dụng trong bảng food hay chưa
+     *
      * @Create_by: trand
      * @Date: 5/28/2019
      * @Param: unitID
@@ -204,6 +213,7 @@ public class ControllerSQLite extends DBOpenHeplper {
 
     /**
      * Hàm xóa đơn vị tính
+     *
      * @Create_by: trand
      * @Date: 5/28/2019
      * @Param: unitID
@@ -211,10 +221,10 @@ public class ControllerSQLite extends DBOpenHeplper {
      */
     public boolean deleteUnit(int unitID) {
         try {
-            if (checkUnit(unitID) == false) {
+            if (!checkUnit(unitID)) {
                 try {
                     SQLiteDatabase db = getWritableDatabase();
-                    long rs = db.delete("unit", "unitID=" + unitID, null);
+                    long rs = db.delete(ConstantKey.TABLE_NAME_UNIT, ConstantKey.COLUMN_NAME_UNIT_ID + "=" + unitID, null);
                     if (rs > 0) {
                         return true;
                     }
@@ -232,6 +242,7 @@ public class ControllerSQLite extends DBOpenHeplper {
 
     /**
      * Hàm thêm mới món ăn
+     *
      * @Create_by: trand
      * @Date: 5/28/2019
      * @Param: newDish
@@ -242,19 +253,19 @@ public class ControllerSQLite extends DBOpenHeplper {
         try {
             SQLiteDatabase db = getWritableDatabase();
             ContentValues values = new ContentValues();
-            String foodName = newDish.getDishName();
-            long foodPrice = newDish.getDishPrice();
+            String dishName = newDish.getDishName();
+            long dishPrice = newDish.getDishPrice();
             int unitID = newDish.getUnitID();
             String colorBackground = newDish.getColorBackground();
-            String foodIcon = newDish.getDishIcon();
-            String foodStatus = newDish.getDishStatus();
-            values.put("dishName", foodName);
-            values.put("dishPrice", foodPrice);
-            values.put("unitID", unitID);
-            values.put("colorBackground", colorBackground);
-            values.put("dishIcon", foodIcon);
-            values.put("dishStatus", foodStatus);
-            long rs = db.insert("dish", null, values);
+            String Icon = newDish.getDishIcon();
+            String Status = newDish.getDishStatus();
+            values.put(ConstantKey.COLUMN_NAME_DISH_NAME, dishName);
+            values.put(ConstantKey.COLUMN_NAME_DISH_PRICE, dishPrice);
+            values.put(ConstantKey.COLUMN_NAME_UNIT_ID, unitID);
+            values.put(ConstantKey.COLUMN_NAME_COLOR, colorBackground);
+            values.put(ConstantKey.COLUMN_NAME_ICON, Icon);
+            values.put(ConstantKey.COLUMN_NAME_STATUS, Status);
+            long rs = db.insert(ConstantKey.TABLE_NAME_DISH, null, values);
             if (rs > 0) {
                 result = true;
             }
@@ -267,6 +278,7 @@ public class ControllerSQLite extends DBOpenHeplper {
 
     /**
      * Hàm cập nhật món ăn
+     *
      * @Create_by: trand
      * @Date: 5/28/2019
      * @Param: dish
@@ -277,21 +289,20 @@ public class ControllerSQLite extends DBOpenHeplper {
         try {
             SQLiteDatabase db = getWritableDatabase();
             ContentValues values = new ContentValues();
-            int foodID = dish.getDishID();
-            String foodName = dish.getDishName();
-            long foodPrice = dish.getDishPrice();
+            int dishID = dish.getDishID();
+            String dishName = dish.getDishName();
+            long dishPrice = dish.getDishPrice();
             int unitID = dish.getUnitID();
             String colorBackground = dish.getColorBackground();
-            String foodIcon = dish.getDishIcon();
-            String foodStatus = dish.getDishStatus();
-            values.put("dishID", foodID);
-            values.put("dishName", foodName);
-            values.put("dishPrice", foodPrice);
-            values.put("unitID", unitID);
-            values.put("colorBackground", colorBackground);
-            values.put("dishIcon", foodIcon);
-            values.put("dishStatus", foodStatus);
-            long rs = db.update("dish", values, "dishID" + "=" + foodID, null);
+            String Icon = dish.getDishIcon();
+            String Status = dish.getDishStatus();
+            values.put(ConstantKey.COLUMN_NAME_DISH_NAME, dishName);
+            values.put(ConstantKey.COLUMN_NAME_DISH_PRICE, dishPrice);
+            values.put(ConstantKey.COLUMN_NAME_UNIT_ID, unitID);
+            values.put(ConstantKey.COLUMN_NAME_COLOR, colorBackground);
+            values.put(ConstantKey.COLUMN_NAME_ICON, Icon);
+            values.put(ConstantKey.COLUMN_NAME_STATUS, Status);
+            long rs = db.update(ConstantKey.TABLE_NAME_DISH, values, ConstantKey.COLUMN_NAME_DISH_ID + "=" + dishID, null);
             if (rs > 0) {
                 result = true;
             }

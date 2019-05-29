@@ -47,7 +47,7 @@
                 android:background="@drawable/selector_button_back"
                 android:gravity="center"
                 android:paddingRight="@dimen/app_margin_small"
-                android:text="@string/btn_save"
+                android:text="@string/save"
                 android:textColor="@color/color_white"
                 android:textSize="@dimen/font_size_medium" />
         </LinearLayout>
@@ -85,7 +85,7 @@
                 android:layout_marginRight="40dp"
                 android:gravity="right"
                 android:layout_weight="1"
-                android:hint="@string/et_food_name_hint" />
+                android:hint="@string/enter_dish_name_hint" />
         </LinearLayout>
 
         <View
@@ -102,7 +102,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/app_margin_small"
-                android:text="@string/tv_price" />
+                android:text="@string/price" />
 
             <EditText
                 android:id="@+id/etPrice"
@@ -181,7 +181,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="@dimen/app_margin_small"
-                android:text="@string/tv_color" />
+                android:text="@string/color" />
 
             <FrameLayout
                 android:id="@+id/frmBackgroundColor"
@@ -206,7 +206,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_margin="@dimen/app_margin_small"
-                    android:text="@string/tv_icon" />
+                    android:text="@string/icon" />
 
                 <FrameLayout
                     android:id="@+id/frmBackgroundIcon"
@@ -234,11 +234,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="@dimen/app_margin_small"
-                android:text="@string/tv_status" />
+                android:text="@string/status" />
 
             <CheckBox
                 android:id="@+id/cbStatus"
-                android:text="@string/cb_status"
+                android:text="@string/stop_sell"
                 android:textSize="@dimen/font_size_medium"
                 android:textColor="@color/color_black"
                 android:layout_gravity="center_vertical"
@@ -263,7 +263,7 @@
             android:layout_marginLeft="@dimen/app_margin_medium"
             android:layout_marginRight="@dimen/app_margin_medium"
             android:background="@drawable/selector_button_delete_popup"
-            android:text="@string/btn_delete"
+            android:text="@string/delete"
             android:textColor="@color/color_white"
             android:textSize="@dimen/font_size_medium" />
 
@@ -274,7 +274,7 @@
             android:layout_weight="1"
             android:layout_marginRight="@dimen/app_margin_medium"
             android:background="@drawable/selector_button_ok_popup"
-            android:text="@string/btn_save"
+            android:text="@string/save"
             android:textColor="@color/color_white"
             android:textSize="@dimen/font_size_medium" />
 

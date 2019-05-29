@@ -1,17 +1,17 @@
-package vn.com.misa.CUKCUKLite.screen.login.loginPhoneNumber;
+package vn.com.misa.CUKCUKLite.screen.login.loginphone;
 
 /**
  * Lớp presenter đăng nhập bằng điện thoại
  * @Create_by: trand
  * @Date: 5/28/2019
  */
-public class LoginPresenter implements ILoginContract.ILoginPresenter {
+public class LoginPresenter implements ILoginPhoneContract.ILoginPresenter {
 
-    ILogin iLogin;
-    ILoginContract.ILoginView iLoginView;
+    ILoginPhoneModel iLoginPhoneModel;
+    ILoginPhoneContract.ILoginView iLoginView;
 
-    public LoginPresenter(ILogin iLogin, ILoginContract.ILoginView iLoginView) {
-        this.iLogin = iLogin;
+    public LoginPresenter(ILoginPhoneModel iLoginPhoneModel, ILoginPhoneContract.ILoginView iLoginView) {
+        this.iLoginPhoneModel = iLoginPhoneModel;
         this.iLoginView = iLoginView;
     }
 
@@ -23,7 +23,7 @@ public class LoginPresenter implements ILoginContract.ILoginPresenter {
     @Override
     public void loadAccount(String userName, String passWord) {
         try {
-            iLogin.getAccount(userName, passWord, new ILogin.IGetAccountCallback() {
+            iLoginPhoneModel.getAccount(userName, passWord, new ILoginPhoneModel.IGetAccountCallback() {
                 @Override
                 public void checkAccount(boolean check) {
                     if (check) {

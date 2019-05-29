@@ -3,52 +3,40 @@
     <string name="add_order">Thêm món</string>
     <string name="app_name_up_case">CUKCUK LITE</string>
     <string name="action_add">add</string>
-
-    <string name="btn_login_facebook">Đăng nhập bằng Facebook</string>
-    <string name="btn_login_google">Đăng nhập bằng Google</string>
-    <string name="btn_login_phone">Đăng nhập bằng số điện thoại hoặc email</string>
-    <string name="btn_login">Đăng nhập</string>
-    <string name="btn_sign_in">Đăng ký</string>
-    <string name="btn_save_login">Lưu thông tin</string>
-    <string name="btn_save">Cất</string>
-    <string name="btn_delete">Xóa</string>
-    <string name="btn_cancel">Hủy bỏ</string>
-    <string name="btn_done">Xong</string>
-    <string name="btn_no">Không</string>
-    <string name="btn_yes">Có</string>
-    <string name="content_unit_name">Nhập đơn vị tính</string>
-
-    <string name="cb_status">Ngừng bán</string>
-
-    <string name="et_forgot_password">Quên mật khẩu?</string>
-    <string name="et_password_hint">Mật khẩu</string>
-    <string name="et_login_number_phone_hint">Số điện thoại hoặc email</string>
-    <string name="et_food_name_hint">Nhập tên món</string>
-    <string name="edit_order">Nhập tên món</string>
-
+    <string name="add_unit">Thêm đơn vị tính</string>
+    <string name="add_dish">Thêm món</string>
+    <string name="login_with_facebook">Đăng nhập bằng Facebook</string>
+    <string name="login_with_google">Đăng nhập bằng Google</string>
+    <string name="login_with_phone">Đăng nhập bằng số điện thoại hoặc email</string>
+    <string name="login">Đăng nhập</string>
+    <string name="color">Màu sắc</string>
+    <string name="cancel">Hủy bỏ</string>
+    <string name="dish_name"><![CDATA[Tên món <font color=red>*</font>]]></string>
+    <string name="delete">Xóa</string>
+    <string name="done">Xong</string>
+    <string name="enter_dish_name_hint">Nhập tên món</string>
+    <string name="enter_dish_name">Nhập tên món</string>
+    <string name="enter_unit">Nhập đơn vị tính</string>
+    <string name="edit_dish">Sửa món</string>
+    <string name="edit_unit">Sửa đơn vị tính</string>
+    <string name="forgot_password">Quên mật khẩu?</string>
+    <string name="icon">Biểu tượng</string>
+    <string name="label_unit"><![CDATA[Đơn vị tính <font color=red>*</font>]]></string>
     <string name="menu_sale">Bán hàng</string>
     <string name="menu_order">Thực đơn</string>
     <string name="menu_slideshow">Báo cáo</string>
+    <string name="no_have_account">Bạn chưa có tài khoản?Tạo mới</string>
+    <string name="number_phone_or_email">Số điện thoại hoặc email</string>
+    <string name="no">Không</string>
+    <string name="password_hint">Mật khẩu</string>
+    <string name="price">Giá bán: </string>
+    <string name="stop_sell">Ngừng bán</string>
+    <string name="save_login">Lưu thông tin</string>
+    <string name="save">Cất</string>
+    <string name="sign_in">Đăng ký</string>
+    <string name="status">Trạng thái</string>
+    <string name="yes">Có</string>
+    <string name="you_can_delete_unit"><![CDATA[Bạn có chắc chắn muốn xóa đơn vị tính <font style=bold;color=black></font> không?]]></string>
 
-    <string name="nav_drawer_open">Open navigation drawer</string>
-    <string name="nav_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-
-    <string name="toolbar_title_add_food">Thêm món</string>
-    <string name="tv_no_account">Bạn chưa có tài khoản?Tạo mới</string>
-    <string name="tv_price">Giá bán: </string>
-    <string name="tv_color">Màu sắc</string>
-    <string name="tv_icon">Biểu tượng</string>
-    <string name="tv_status">Trạng thái</string>
-    <string name="tv_food_name"><![CDATA[Tên món <font color=red>*</font>]]></string>
-    <string name="tv_label_unit"><![CDATA[Đơn vị tính <font color=red>*</font>]]></string>
-    <string name="tv_dialog_delete_unit"><![CDATA[Bạn có chắc chắn muốn xóa đơn vị tính <font style=bold;color=black></font> không?]]></string>
-
-    <string name="title_add_order">Thêm món</string>
-    <string name="title_edit_order">Sửa món</string>
-    <string name="tv_title_edit_unit">Sửa đơn vị tính</string>
-    <string name="tv_title_add_unit">Thêm đơn vị tính</string>
 
 </resources>

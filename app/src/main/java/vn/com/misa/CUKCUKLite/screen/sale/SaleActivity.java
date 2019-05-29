@@ -16,10 +16,10 @@ import vn.com.misa.CUKCUKLite.R;
  * @Param:
  * @Return:
  */
-public class SaleMainView extends Fragment {
+public class SaleActivity extends Fragment {
 
 
-    public SaleMainView() {
+    public SaleActivity() {
     }
 
 
