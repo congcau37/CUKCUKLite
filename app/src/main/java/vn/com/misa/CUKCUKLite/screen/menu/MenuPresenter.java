@@ -1,5 +1,7 @@
 package vn.com.misa.CUKCUKLite.screen.menu;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,14 +12,16 @@ import vn.com.misa.CUKCUKLite.model.Dish;
  * @created_by tdcong
  * @date 5/10/2019
  */
-public class MenuPresenter implements IMenuContract.IOrderPresenter {
-    IMenuContract.IOrderView iOrderView;
-    IMenu iMenu;
+public class MenuPresenter implements IMenuContract.IPresenter {
+    IMenuModel iMenuModel;
+    IMenuContract.IView iView;
+    Context mContext;
     List<Dish> mDishList = new ArrayList<>();
 
-    public MenuPresenter(IMenu iMenu, IMenuContract.IOrderView iOrderView) {
-        this.iMenu = iMenu;
-        this.iOrderView = iOrderView;
+    public MenuPresenter(IMenuModel iMenuModel, IMenuContract.IView iView, Context mContext) {
+        this.iMenuModel = iMenuModel;
+        this.iView = iView;
+        this.mContext = mContext;
     }
 
     /**
@@ -28,11 +32,11 @@ public class MenuPresenter implements IMenuContract.IOrderPresenter {
     @Override
     public void loadAllFood() {
         try {
-            iMenu.getAllFood(new IMenu.IGetAllFoodCallBack() {
+            iMenuModel.getAllFood(new IMenuModel.IGetAllFoodCallBack() {
                 @Override
                 public void getAllFood(List<Dish> dishes) {
                     mDishList = dishes;
-                    iOrderView.displayListOrder(dishes);
+                    iView.displayListOrder(dishes);
                 }
             });
 

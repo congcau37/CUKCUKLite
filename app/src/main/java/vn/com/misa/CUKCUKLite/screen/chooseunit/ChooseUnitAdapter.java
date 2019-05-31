@@ -18,6 +18,7 @@ import vn.com.misa.CUKCUKLite.util.helper.UnitListener;
 
 /**
  * Lớp adapter đơn vị
+ *
  * @created_by tdcong
  * @date 5/23/2019
  */
@@ -27,7 +28,6 @@ public class ChooseUnitAdapter extends BaseAdapter {
 
     private UnitListener unitListener;
     private Unit unitCurrentSelected = null;
-    private int currentSelected;
 
     public ChooseUnitAdapter(Context mContext, List<Unit> mData) {
         this.mContext = mContext;
@@ -36,6 +36,7 @@ public class ChooseUnitAdapter extends BaseAdapter {
 
     /**
      * Hàm gán listener
+     *
      * @Create_by: trand
      * @Date: 5/29/2019
      * @Param: UnitListener
@@ -72,9 +73,8 @@ public class ChooseUnitAdapter extends BaseAdapter {
                 viewHolder = (ChooseUnitAdapter.ViewHolder) convertView.getTag();
             }
             final Unit unit = mData.get(position);
-            currentSelected = unitCurrentSelected.getUnitID(); //lấy ra id đơn vị đã chọn từ CSDL
             viewHolder.tvUnitName.setText(unit.getUnitName());
-            if (unit.getUnitID() == currentSelected) {
+            if (unit.getUnitID() == unitCurrentSelected.getUnitID()) {
                 viewHolder.ivChecked.setVisibility(View.VISIBLE);
             } else {
                 viewHolder.ivChecked.setVisibility(View.INVISIBLE);
@@ -83,8 +83,8 @@ public class ChooseUnitAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
                     try {
-                        currentSelected = unit.getUnitID();
-                        setUnitCurrentSelected(new Unit(unit.getUnitName(), currentSelected));
+                        unitCurrentSelected = unit;
+//                        setUnitCurrentSelected(new Unit(unit.getUnitName(), unitCurrentSelected.getUnitID()));
                         notifyDataSetChanged();
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -95,7 +95,7 @@ public class ChooseUnitAdapter extends BaseAdapter {
             viewHolder.lnRowUnit.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    if(unitListener!=null){
+                    if (unitListener != null) {
                         unitListener.showDialogDeleteUnit(unit);
                     }
                     return false;
@@ -105,7 +105,7 @@ public class ChooseUnitAdapter extends BaseAdapter {
             viewHolder.rlEditUnit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(unitListener!=null){
+                    if (unitListener != null) {
                         unitListener.showDialogEditUnit(unit);
                     }
                 }
@@ -119,6 +119,7 @@ public class ChooseUnitAdapter extends BaseAdapter {
 
     /**
      * Lớp viewholder
+     *
      * @Create_by: trand
      * @Date: 5/27/2019
      * @Param:
@@ -144,6 +145,7 @@ public class ChooseUnitAdapter extends BaseAdapter {
 
     /**
      * Hàm lấy ra đơn vị đã chọn
+     *
      * @Create_by: trand
      * @Date: 5/27/2019
      * @Param:
@@ -155,6 +157,7 @@ public class ChooseUnitAdapter extends BaseAdapter {
 
     /**
      * Hàm gán đơn vị đã chọn
+     *
      * @Create_by: trand
      * @Date: 5/27/2019
      * @Param: Unit
@@ -163,4 +166,20 @@ public class ChooseUnitAdapter extends BaseAdapter {
     public void setUnitCurrentSelected(Unit unitCurrentSelected) {
         this.unitCurrentSelected = unitCurrentSelected;
     }
+
+    public void checkUnitCurrenSelect(int id){
+        if (id == unitCurrentSelected.getUnitID()){
+            unitCurrentSelected = null;
+        }
+    }
+
+    public void remove(int id){
+        for (int i = mData.size()-1; i >=0 ; i--) {
+            if (mData.get(i).getUnitID() == id){
+                mData.remove(i);
+            }
+        }
+        notifyDataSetChanged();
+    }
+
 }

@@ -24,6 +24,8 @@
     <string name="label_unit"><![CDATA[Đơn vị tính <font color=red>*</font>]]></string>
     <string name="menu_sale">Bán hàng</string>
     <string name="menu_order">Thực đơn</string>
+    <string name="nav_drawer_close">đóng</string>
+    <string name="nav_drawer_open">mở</string>
     <string name="menu_slideshow">Báo cáo</string>
     <string name="no_have_account">Bạn chưa có tài khoản?Tạo mới</string>
     <string name="number_phone_or_email">Số điện thoại hoặc email</string>
@@ -37,6 +39,8 @@
     <string name="status">Trạng thái</string>
     <string name="yes">Có</string>
     <string name="you_can_delete_unit"><![CDATA[Bạn có chắc chắn muốn xóa đơn vị tính <font style=bold;color=black></font> không?]]></string>
-
+    <string name="unit_used">Đơn vị đã được sử dụng. Bạn không được phép xóa</string>
+    <string name="not_select_unit">Bạn chưa chọn đơn vị</string>
+    <string name="not_exist_unit">Đơn vị (%s) đã tồn tại</string>
 
 </resources>

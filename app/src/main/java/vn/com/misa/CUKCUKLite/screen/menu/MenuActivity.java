@@ -1,6 +1,9 @@
 package vn.com.misa.CUKCUKLite.screen.menu;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -27,22 +30,22 @@ import vn.com.misa.CUKCUKLite.util.ConstantKey;
  * @created_by tdcong
  * @date 5/17/2019
  */
-public class MenuActivity extends Fragment implements IMenuContract.IOrderView {
+public class MenuActivity extends Fragment implements IMenuContract.IView {
 
     Unbinder unbinder;
     @BindView(R.id.lvFood)
     ListView lvFood;
     View view;
     MenuAdapter adapter;
-    IMenuContract.IOrderPresenter iOrderPresenter;
+    IMenuContract.IPresenter iMenuPresenter;
+    BroadcastReceiver myBroadCast;
 
 
     /**
-     *
-     * @created_by tdcong
-     * @date 5/23/2019
      * @param
      * @return
+     * @created_by tdcong
+     * @date 5/23/2019
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,6 +53,7 @@ public class MenuActivity extends Fragment implements IMenuContract.IOrderView {
         try {
             view = inflater.inflate(R.layout.fragment_order, container, false);
             unbinder = ButterKnife.bind(this, view);
+            initBroadCast();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -57,11 +61,10 @@ public class MenuActivity extends Fragment implements IMenuContract.IOrderView {
     }
 
     /**
-     *
-     * @created_by tdcong
-     * @date 5/23/2019
      * @param
      * @return
+     * @created_by tdcong
+     * @date 5/23/2019
      */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -76,6 +79,7 @@ public class MenuActivity extends Fragment implements IMenuContract.IOrderView {
 
     /**
      * Hàm khởi tạp presenter
+     *
      * @Create_by: trand
      * @Date: 5/28/2019
      * @Param:
@@ -83,8 +87,8 @@ public class MenuActivity extends Fragment implements IMenuContract.IOrderView {
      */
     private void initPresenter() {
         try {
-            iOrderPresenter = new MenuPresenter(new MenuModel(getContext()), MenuActivity.this);
-            iOrderPresenter.loadAllFood();
+            iMenuPresenter = new MenuPresenter(new MenuModelModel(getContext()), MenuActivity.this,getContext());
+            iMenuPresenter.loadAllFood();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -92,10 +96,11 @@ public class MenuActivity extends Fragment implements IMenuContract.IOrderView {
 
     /**
      * Hàm xử lý sự kiện view
-     * @created_by tdcong
-     * @date 5/22/2019
+     *
      * @param
      * @return
+     * @created_by tdcong
+     * @date 5/22/2019
      */
     private void initEvent() {
         lvFood.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -107,7 +112,34 @@ public class MenuActivity extends Fragment implements IMenuContract.IOrderView {
     }
 
     /**
+     * Mục đích Methob: Khởi tạo broadcast và đăng ký
+     * @created_by tdcong
+     * @date 5/30/2019
+     * @param: 
+     * @return: 
+     */
+    private void initBroadCast() {
+        try {
+         myBroadCast = new BroadcastReceiver() {
+             @Override
+             public void onReceive(Context context, Intent intent) {
+                 if(intent.getAction().equals(ConstantKey.ACTION_NOTIFY_DATA)){
+                     iMenuPresenter.loadAllFood();
+                     adapter.notifyDataSetChanged();
+                 }
+             }
+         };
+
+         final IntentFilter filter = new IntentFilter(ConstantKey.ACTION_NOTIFY_DATA);
+         getActivity().registerReceiver(myBroadCast,filter);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Hàm gửi chị tiết món ăn đã chọn từ danh sách
+     *
      * @Create_by: trand
      * @Date: 5/27/2019
      * @Param: position
@@ -124,6 +156,7 @@ public class MenuActivity extends Fragment implements IMenuContract.IOrderView {
 
     /**
      * Hàm hiển thị danh sach món ăn trong thực đơn
+     *
      * @param arrayList
      * @return
      * @created_by tdcong
@@ -138,4 +171,5 @@ public class MenuActivity extends Fragment implements IMenuContract.IOrderView {
             e.printStackTrace();
         }
     }
+
 }

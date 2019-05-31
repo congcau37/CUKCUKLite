@@ -30,7 +30,7 @@ import butterknife.OnClick;
 import vn.com.misa.CUKCUKLite.R;
 import vn.com.misa.CUKCUKLite.model.Dish;
 import vn.com.misa.CUKCUKLite.model.Unit;
-import vn.com.misa.CUKCUKLite.screen.chooseunit.ChooseActivity;
+import vn.com.misa.CUKCUKLite.screen.chooseunit.ChooseUnitActivity;
 import vn.com.misa.CUKCUKLite.screen.chooseunit.IChooseUnitContract;
 import vn.com.misa.CUKCUKLite.screen.chooseunit.ChooseUnitModel;
 import vn.com.misa.CUKCUKLite.screen.chooseunit.ChooseUnitPresenter;
@@ -116,8 +116,8 @@ public class EditDishActivity extends AppCompatActivity implements IChooseUnitCo
      */
     private void initPresenter() {
         try {
-            iPresenterUnit = new ChooseUnitPresenter(new ChooseUnitModel(this), this);
-            iPresenterDish = new EditDishPresenter(new EditDishModel(this), this);
+            iPresenterUnit = new ChooseUnitPresenter(new ChooseUnitModel(this), this,this);
+            iPresenterDish = new EditDishPresenter(new EditDishModel(this), this,this);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -334,7 +334,7 @@ public class EditDishActivity extends AppCompatActivity implements IChooseUnitCo
      * @Return:
      */
     private void sendUnitSelected() {
-        Intent intent = new Intent(EditDishActivity.this, ChooseActivity.class);
+        Intent intent = new Intent(EditDishActivity.this, ChooseUnitActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable(ConstantKey.KEY_SEND_UNIT, unitSelected);
         bundle.putString(ConstantKey.KEY_SCREEN, ConstantKey.SCREEN_EDIT_DISH);
@@ -377,17 +377,17 @@ public class EditDishActivity extends AppCompatActivity implements IChooseUnitCo
     }
 
     @Override
-    public void updateUnitSuccess() {
+    public void updateUnitSuccess(Unit unit) {
 
     }
 
     @Override
-    public void updateUnitFail() {
+    public void updateUnitFail(String error) {
 
     }
 
     @Override
-    public void deleteUnitSuccess() {
+    public void deleteUnitSuccess(int id) {
 
     }
 

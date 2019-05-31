@@ -35,7 +35,7 @@ import vn.com.misa.CUKCUKLite.util.helper.UnitListener;
  * @date 5/23/2019
  * @return
  */
-public class ChooseActivity extends AppCompatActivity implements IChooseUnitContract.IView, UnitListener {
+public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnitContract.IView, UnitListener {
 
     ChooseUnitAdapter adapter;
     IChooseUnitContract.IPresenter iPresenter;
@@ -56,8 +56,8 @@ public class ChooseActivity extends AppCompatActivity implements IChooseUnitCont
 
     Unit unitSelected;
     Dialog dialogAddUnit, dialogDeleteUnit, dialogEditUnit;
-    final int REQUEST_CODE = 0;
     final int RESULT_CODE = 1;
+    private boolean unitSelectedDeleted = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +80,7 @@ public class ChooseActivity extends AppCompatActivity implements IChooseUnitCont
      */
     private void initPresenter() {
         try {
-            iPresenter = new ChooseUnitPresenter(new ChooseUnitModel(this), this);
+            iPresenter = new ChooseUnitPresenter(new ChooseUnitModel(this), this,this);
             iPresenter.loadAllUnit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -100,6 +100,7 @@ public class ChooseActivity extends AppCompatActivity implements IChooseUnitCont
             switch (view.getId()) {
                 case R.id.ivBack:
                     try {
+
                         finish();
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -109,8 +110,12 @@ public class ChooseActivity extends AppCompatActivity implements IChooseUnitCont
                     showDialogAddUnit();
                     break;
                 case R.id.btnDone:
-                    sendUnitSelected();
-                    finish();
+                    if(adapter.getUnitCurrentSelected() == null){
+                        Toast.makeText(this, getString(R.string.not_select_unit), Toast.LENGTH_SHORT).show();
+                    }else {
+                        sendUnitSelected();
+                        finish();
+                    }
                     break;
             }
         } catch (Exception e) {
@@ -150,6 +155,7 @@ public class ChooseActivity extends AppCompatActivity implements IChooseUnitCont
             Intent intent = getIntent();
             Bundle bundle = new Bundle();
             bundle.putSerializable(ConstantKey.KEY_SEND_UNIT, unitSelected);
+            bundle.putBoolean(ConstantKey.KEY_SEND_UNIT_SELECTED_DELETED,unitSelectedDeleted);
             intent.putExtra(ConstantKey.KEY_SEND_UNIT, bundle);
             setResult(RESULT_CODE, intent);
         } catch (Exception e) {
@@ -167,118 +173,8 @@ public class ChooseActivity extends AppCompatActivity implements IChooseUnitCont
     private void loadUnitSelected() {
         try {
             Bundle bundle = getIntent().getBundleExtra(ConstantKey.KEY_SEND_UNIT);
-//            String keyScreen = bundle.getString(ConstantKey.KEY_SCREEN);
             unitSelected = (Unit) bundle.getSerializable(ConstantKey.KEY_SEND_UNIT);
             adapter.setUnitCurrentSelected(unitSelected);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Hàm hiển thị khi thêm mới đơn vị thành công
-     * @Create_by: trand
-     * @Date: 5/28/2019
-     * @Param: newUnit
-     * @Return:
-     */
-    @Override
-    public void saveNewUnitSuccess(Unit newUnit) {
-        try {
-            iPresenter.loadAllUnit();
-            adapter.setUnitCurrentSelected(newUnit);
-            sendUnitSelected();
-            dialogAddUnit.dismiss();
-            finish();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Hàm hiển thị khi thêm mới đơn vị thất bại
-     * @Create_by: trand
-     * @Date: 5/28/2019
-     * @Param: error
-     * @Return:
-     */
-    @Override
-    public void saveNewUnitFail(String error) {
-        try {
-            Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Hàm xóa đơn vị
-     * @Create_by: trand
-     * @Date: 5/28/2019
-     * @Param: unitID
-     * @Return:
-     */
-    @Override
-    public void deleteUnit(int unitID) {
-        iPresenter.deleteUnit(unitID);
-    }
-
-    /**
-     * Hàm hiển thị cập nhật đơn vị thành công
-     * @Create_by: trand
-     * @Date: 5/28/2019
-     * @Param:
-     * @Return:
-     */
-    @Override
-    public void updateUnitSuccess() {
-        try {
-            dialogEditUnit.dismiss();
-            iPresenter.loadAllUnit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Hàm hiển thị cập nhật đơn vị thất bại
-     * @Create_by: trand
-     * @Date: 5/28/2019
-     * @Param:
-     * @Return:
-     */
-    @Override
-    public void updateUnitFail() {
-
-    }
-
-    /**
-     * Hàm hiển thị xóa đơn vị thành công
-     * @Create_by: trand
-     * @Date: 5/28/2019
-     * @Param:
-     * @Return:
-     */
-    @Override
-    public void deleteUnitSuccess() {
-        try {
-            iPresenter.loadAllUnit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Hàm hiển thị xóa đơn vị thất bại
-     * @Create_by: trand
-     * @Date: 5/28/2019
-     * @Param:
-     * @Return:
-     */
-    @Override
-    public void deleteUnitFail() {
-        try {
-            Toast.makeText(this, "Đơn vị đã được sử dụng. Bạn không được phép xóa", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -370,7 +266,6 @@ public class ChooseActivity extends AppCompatActivity implements IChooseUnitCont
             String uniName = unit.getUnitName();
             tvTitle.setText(getString(R.string.edit_unit));
             etUnitName.setText(uniName);
-
             btnTitleClose.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -398,7 +293,6 @@ public class ChooseActivity extends AppCompatActivity implements IChooseUnitCont
                         String newUnitName = etUnitName.getText().toString().trim();
                         unit.setUnitName(newUnitName);
                         iPresenter.updateUnit(unit);
-                        dialogEditUnit.dismiss();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -419,6 +313,7 @@ public class ChooseActivity extends AppCompatActivity implements IChooseUnitCont
      */
     @Override
     public void showDialogDeleteUnit(final Unit unit) {
+        final int unitID = unit.getUnitID();
         try {
             dialogDeleteUnit = new Dialog(this, R.style.Theme_Dialog);
             dialogDeleteUnit.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -430,9 +325,8 @@ public class ChooseActivity extends AppCompatActivity implements IChooseUnitCont
             Button btnNo = dialogDeleteUnit.findViewById(R.id.btnNo);
             Button btnYes = dialogDeleteUnit.findViewById(R.id.btnYes);
             ImageView btnTitleClose = dialogDeleteUnit.findViewById(R.id.btnTitleClose);
-            TextView tvConfirm = dialogDeleteUnit.findViewById(R.id.tvConfirm);
+            final TextView tvConfirm = dialogDeleteUnit.findViewById(R.id.tvConfirm);
 
-            final int unitID = unit.getUnitID();
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 tvConfirm.setText(Html.fromHtml(getString(R.string.you_can_delete_unit), Html.FROM_HTML_MODE_COMPACT));
             } else {
@@ -463,6 +357,124 @@ public class ChooseActivity extends AppCompatActivity implements IChooseUnitCont
                 }
             });
             dialogDeleteUnit.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Hàm hiển thị khi thêm mới đơn vị thành công
+     * @Create_by: trand
+     * @Date: 5/28/2019
+     * @Param: newUnit
+     * @Return:
+     */
+    @Override
+    public void saveNewUnitSuccess(Unit newUnit) {
+        try {
+            iPresenter.loadAllUnit();
+            adapter.setUnitCurrentSelected(newUnit);
+            sendUnitSelected();
+            dialogAddUnit.dismiss();
+            finish();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Hàm hiển thị khi thêm mới đơn vị thất bại
+     * @Create_by: trand
+     * @Date: 5/28/2019
+     * @Param: error
+     * @Return:
+     */
+    @Override
+    public void saveNewUnitFail(String error) {
+        try {
+            Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Hàm hiển thị cập nhật đơn vị thành công
+     * @Create_by: trand
+     * @Date: 5/28/2019
+     * @Param:
+     * @Return:
+     */
+    @Override
+    public void updateUnitSuccess(Unit unit) {
+        try {
+            iPresenter.loadAllUnit();
+            adapter.setUnitCurrentSelected(unit);
+            sendUnitSelected();
+            dialogEditUnit.dismiss();
+            finish();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Hàm hiển thị cập nhật đơn vị thất bại
+     * @Create_by: trand
+     * @Date: 5/28/2019
+     * @Param:
+     * @Return:
+     */
+    @Override
+    public void updateUnitFail(String error) {
+        try {
+            Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Hàm xóa đơn vị
+     * @Create_by: trand
+     * @Date: 5/28/2019
+     * @Param: unitID
+     * @Return:
+     */
+    @Override
+    public void deleteUnit(int unitID) {
+        iPresenter.deleteUnit(unitID);
+    }
+
+    /**
+     * Hàm hiển thị xóa đơn vị thành công
+     * @Create_by: trand
+     * @Date: 5/28/2019
+     * @Param:
+     * @Return:
+     */
+    @Override
+    public void deleteUnitSuccess(int id) {
+        try {
+            adapter.checkUnitCurrenSelect(id);
+            adapter.remove(id);
+            unitSelectedDeleted=false;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Hàm hiển thị xóa đơn vị thất bại
+     * @Create_by: trand
+     * @Date: 5/28/2019
+     * @Param:
+     * @Return:
+     */
+    @Override
+    public void deleteUnitFail() {
+        try {
+            Toast.makeText(this, getString(R.string.unit_used), Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             e.printStackTrace();
         }

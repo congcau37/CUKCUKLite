@@ -4574,7 +4574,7 @@ instanceKlass org/gradle/launcher/daemon/server/NotMostRecentlyUsedDaemonExpirat
 instanceKlass com/google/common/base/Functions$ConstantFunction
 instanceKlass com/google/common/base/Functions
 instanceKlass org/gradle/launcher/daemon/server/DaemonIdleTimeoutExpirationStrategy
-instanceKlass org/gradle/launcher/daemon/context/DaemonCompatibilitySpec
+instanceKlass org/gradle/launcher/daemon/mContext/DaemonCompatibilitySpec
 instanceKlass org/gradle/api/internal/specs/ExplainingSpec
 instanceKlass org/gradle/launcher/daemon/server/CompatibleDaemonExpirationStrategy
 instanceKlass org/gradle/launcher/daemon/server/expiry/AllDaemonExpirationStrategy
@@ -4620,7 +4620,7 @@ instanceKlass org/gradle/cache/internal/SimpleStateCache$1Updater
 instanceKlass org/gradle/cache/internal/FileIntegrityViolationSuppressingPersistentStateCacheDecorator$1
 instanceKlass org/gradle/launcher/daemon/registry/PersistentDaemonRegistry$8
 instanceKlass org/gradle/launcher/daemon/registry/DaemonInfo
-instanceKlass org/gradle/launcher/daemon/context/DaemonConnectDetails
+instanceKlass org/gradle/launcher/daemon/mContext/DaemonConnectDetails
 instanceKlass sun/util/locale/provider/TimeZoneNameUtility$TimeZoneNameGetter
 instanceKlass sun/util/locale/provider/TimeZoneNameUtility
 instanceKlass org/gradle/internal/concurrent/GradleThread
@@ -5135,8 +5135,8 @@ instanceKlass org/gradle/internal/IoActions
 instanceKlass java/util/regex/Pattern$CharPropertyNames$CharPropertyFactory
 instanceKlass java/util/regex/Pattern$CharPropertyNames
 instanceKlass org/gradle/util/GradleVersion
-instanceKlass org/gradle/launcher/daemon/context/DefaultDaemonContext$Serializer
-instanceKlass org/gradle/launcher/daemon/context/DefaultDaemonContext
+instanceKlass org/gradle/launcher/daemon/mContext/DefaultDaemonContext$Serializer
+instanceKlass org/gradle/launcher/daemon/mContext/DefaultDaemonContext
 instanceKlass net/rubygrapefruit/platform/internal/jni/PosixProcessFunctions
 instanceKlass org/gradle/internal/FileUtils$1
 instanceKlass org/gradle/internal/FileUtils
@@ -5146,7 +5146,7 @@ instanceKlass org/gradle/internal/nativeintegration/processenvironment/AbstractP
 instanceKlass net/rubygrapefruit/platform/internal/DefaultProcess
 instanceKlass net/rubygrapefruit/platform/internal/WrapperProcess
 instanceKlass net/rubygrapefruit/platform/WindowsFiles
-instanceKlass org/gradle/launcher/daemon/context/DaemonContextBuilder
+instanceKlass org/gradle/launcher/daemon/mContext/DaemonContextBuilder
 instanceKlass org/gradle/tooling/internal/provider/runner/ToolingApiSubscribableBuildActionRunnerRegistration
 instanceKlass org/gradle/tooling/internal/provider/runner/ToolingBuilderServices$1
 instanceKlass org/gradle/nativeplatform/NativeBinarySpec
@@ -5398,7 +5398,7 @@ instanceKlass sun/reflect/generics/tree/TypeVariableSignature
 instanceKlass org/gradle/launcher/daemon/server/api/DaemonCommandAction
 instanceKlass org/gradle/internal/invocation/BuildAction
 instanceKlass org/gradle/launcher/exec/BuildExecuter
-instanceKlass org/gradle/launcher/daemon/context/DaemonContext
+instanceKlass org/gradle/launcher/daemon/mContext/DaemonContext
 instanceKlass org/gradle/launcher/daemon/server/health/DaemonHealthCheck
 instanceKlass org/gradle/internal/serialize/Serializer
 instanceKlass org/gradle/launcher/daemon/server/health/DaemonMemoryStatus

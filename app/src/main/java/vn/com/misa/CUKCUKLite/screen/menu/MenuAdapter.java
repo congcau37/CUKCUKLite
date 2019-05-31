@@ -18,9 +18,11 @@ import java.util.List;
 import vn.com.misa.CUKCUKLite.R;
 import vn.com.misa.CUKCUKLite.model.Dish;
 import vn.com.misa.CUKCUKLite.util.AppUtil;
+import vn.com.misa.CUKCUKLite.util.ConstantKey;
 
 /**
  * Lớp adapter của danh sách món ăn
+ *
  * @Create_by: trand
  * @Date: 5/28/2019
  */
@@ -36,10 +38,6 @@ public class MenuAdapter extends BaseAdapter {
 
     /**
      * Hàm lấy ra size
-     * @Create_by: trand
-     * @Date: 5/27/2019
-     * @Param:
-     * @Return: int
      */
     @Override
     public int getCount() {
@@ -48,10 +46,6 @@ public class MenuAdapter extends BaseAdapter {
 
     /**
      * Hàm lấy ra đối tượng món ăn tại từng vị trí
-     * @Create_by: trand
-     * @Date: 5/27/2019
-     * @Param: position
-     * @Return:
      */
     @Override
     public Object getItem(int position) {
@@ -60,10 +54,6 @@ public class MenuAdapter extends BaseAdapter {
 
     /**
      * hàm lấy ra vị trí
-     * @Create_by: trand
-     * @Date: 5/27/2019
-     * @Param: position
-     * @Return: position
      */
     @Override
     public long getItemId(int position) {
@@ -72,10 +62,6 @@ public class MenuAdapter extends BaseAdapter {
 
     /**
      * Hàm lấy ra view
-     * @Create_by: trand
-     * @Date: 5/27/2019
-     * @Param: position, convertView, parent
-     * @Return: View
      */
     @SuppressLint("ResourceType")
     @Override
@@ -95,22 +81,22 @@ public class MenuAdapter extends BaseAdapter {
             String iconName = dish.getDishIcon();
             String backgroundCode = dish.getColorBackground();
             try {
-                if (!iconName.equals("")) {
+                if (!iconName.equals(ConstantKey.VALUE_EMPTY)) {
                     //Xử lý khi có ảnh
-                    InputStream ims = mContext.getAssets().open("icondefault/" + dish.getDishIcon() + ".png");
+                    InputStream ims = mContext.getAssets().open(ConstantKey.PACKAGE_ICON + dish.getDishIcon() + ConstantKey.TAIL_ICON);
                     Drawable d = Drawable.createFromStream(ims, null);
                     viewHolder.ivFood.setImageDrawable(d);
                     ims.close();
-                }else {
+                } else {
                     //Xử lý khi không có ảnh sẽ lấy ảnh mặc định
-                    InputStream ims = mContext.getAssets().open("icondefault/ic_default.png");
+                    InputStream ims = mContext.getAssets().open(ConstantKey.PACKAGE_ICON + ConstantKey.ICON_DEFAULT);
                     Drawable d = Drawable.createFromStream(ims, null);
                     viewHolder.ivFood.setImageDrawable(d);
                     ims.close();
                 }
-                if(!backgroundCode.equals("")){
+                if (!backgroundCode.equals(ConstantKey.VALUE_EMPTY)) {
                     viewHolder.frmBackgroundColor.setBackground(AppUtil.createCircleBackground(backgroundCode));
-                }else {
+                } else {
                     viewHolder.frmBackgroundColor.setBackground(AppUtil.createCircleBackground(mContext.getString(R.color.color_primary)));
                 }
 
@@ -125,6 +111,7 @@ public class MenuAdapter extends BaseAdapter {
 
     /**
      * Lớp ViewHolder
+     *
      * @Create_by: trand
      * @Date: 5/27/2019
      */

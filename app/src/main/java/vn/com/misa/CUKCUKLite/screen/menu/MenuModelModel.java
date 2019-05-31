@@ -11,11 +11,11 @@ import vn.com.misa.CUKCUKLite.data.db.DBOpenHeplper;
  * @date 5/15/2019
 
  */
-public class MenuModel extends DBOpenHeplper implements IMenu {
+public class MenuModelModel extends DBOpenHeplper implements IMenuModel {
 
     ControllerSQLite controllerSQLite;
 
-    public MenuModel(Context context) {
+    public MenuModelModel(Context context) {
         super(context);
         controllerSQLite = new ControllerSQLite(context);
         controllerSQLite.createDataBase();

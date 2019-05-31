@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".screen.chooseunit.ChooseActivity"></activity>
+        <activity android:name=".screen.chooseunit.ChooseUnitActivity"></activity>
         <activity android:name=".screen.editdish.EditDishActivity" />
         <activity android:name=".screen.login.loginphone.LoginPhoneActivity" />
         <activity android:name=".spash.SplashApp" >

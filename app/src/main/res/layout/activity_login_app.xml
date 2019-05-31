@@ -4,7 +4,7 @@
     android:layout_height="fill_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:fitsSystemWindows="true"
-    tools:context=".screen.login.LoginActivity"
+    tools:mContext=".screen.login.LoginActivity"
     android:background="@drawable/bg_login">
 
     <RelativeLayout

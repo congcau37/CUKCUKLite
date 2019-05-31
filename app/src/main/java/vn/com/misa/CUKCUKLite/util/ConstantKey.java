@@ -7,6 +7,7 @@ package vn.com.misa.CUKCUKLite.util;
  */
 public class ConstantKey {
     public static final String KEY_SEND_UNIT = "send_unit";
+    public static final String KEY_SEND_UNIT_SELECTED_DELETED = "send_unit";
     public static final String KEY_SEND_DISH = "send_food";
     public static final String KEY_SCREEN = "screen";
     public static final String SCREEN_EDIT_DISH = "edit_food";
@@ -26,4 +27,9 @@ public class ConstantKey {
     public static final String DEFAULT_PRICE = "0";
     public static final int VALUE_ZERO = 0;
     public static final String VALUE_EMPTY= "";
+    public static final String PACKAGE_ICON= "icondefault/";
+    public static final String TAIL_ICON= ".png";
+    public static final String ICON_DEFAULT= "ic_default.png";
+    public static final String ACTION_NOTIFY_DATA= "update_data";
+    public static final int UNIT_EMPTY= 000;
 }

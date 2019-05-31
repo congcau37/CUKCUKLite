@@ -11,13 +11,13 @@ import vn.com.misa.CUKCUKLite.model.Dish;
  */
 public interface IMenuContract {
 
-    interface IOrderView {
+    interface IView {
 
         void displayListOrder(List<Dish> arrayList);
 
 
     }
-    interface IOrderPresenter {
+    interface IPresenter {
 
         void loadAllFood();
 

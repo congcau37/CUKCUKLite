@@ -19,11 +19,11 @@ public interface IChooseUnitContract {
 
         void saveNewUnitFail(String error);
 
-        void updateUnitSuccess();
+        void updateUnitSuccess(Unit unit);
 
-        void updateUnitFail();
+        void updateUnitFail(String error);
 
-        void deleteUnitSuccess();
+        void deleteUnitSuccess(int id);
 
         void deleteUnitFail();
 

@@ -199,7 +199,7 @@ public class ControllerSQLite extends DBOpenHeplper {
     public boolean checkUnit(int unitID) {
         try {
             SQLiteDatabase db = getReadableDatabase();
-            Cursor cursor = db.rawQuery("SELECT * FROM food WHERE unitID = '" + unitID + "'", null);
+            Cursor cursor = db.rawQuery("SELECT * FROM dish WHERE unitID = '" + unitID + "'", null);
             if (cursor.getCount() > 0) {
                 return true;
             }

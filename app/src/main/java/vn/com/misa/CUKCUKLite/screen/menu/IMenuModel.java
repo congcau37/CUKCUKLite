@@ -9,7 +9,7 @@ import vn.com.misa.CUKCUKLite.model.Dish;
  * @created_by tdcong
  * @date 5/20/2019
  */
-public interface IMenu {
+public interface IMenuModel {
 
     interface IGetAllFoodCallBack{
         void getAllFood(List<Dish> dishes);

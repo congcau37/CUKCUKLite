@@ -26,6 +26,16 @@ public class Converter {
         return status;
     }
 
+    public static boolean checkUnitSelectedDeleted(boolean dStatus) {
+        boolean status;
+        if (!dStatus) {
+            status = false;
+        } else {
+            status = true;
+        }
+        return status;
+    }
+
     public static long convertToLong(String number) {
         String currency="";
         String [] splitNumber = number.split(",");

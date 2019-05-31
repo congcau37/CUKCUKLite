@@ -24,7 +24,7 @@ import butterknife.OnClick;
 import vn.com.misa.CUKCUKLite.R;
 import vn.com.misa.CUKCUKLite.model.Dish;
 import vn.com.misa.CUKCUKLite.model.Unit;
-import vn.com.misa.CUKCUKLite.screen.chooseunit.ChooseActivity;
+import vn.com.misa.CUKCUKLite.screen.chooseunit.ChooseUnitActivity;
 import vn.com.misa.CUKCUKLite.screen.chooseunit.IChooseUnitContract;
 import vn.com.misa.CUKCUKLite.screen.chooseunit.ChooseUnitModel;
 import vn.com.misa.CUKCUKLite.screen.chooseunit.ChooseUnitPresenter;
@@ -33,6 +33,7 @@ import vn.com.misa.CUKCUKLite.util.helper.Converter;
 
 /**
  * Lớp thêm món ăn
+ *
  * @Create_by: trand
  * @Date: 5/28/2019
  */
@@ -71,6 +72,7 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
     final int RESULT_CODE = 1;
     final int FIRST_UNIT = 0;
     Unit unitSelected; // đơn vị đã chọn, mặc định là đầu tiên
+    boolean unitSelectedDeleted;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -89,17 +91,19 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
 
     /**
      * Hàm khởi tạo presenter
+     *
      * @Create_by: trand
      * @Date: 5/28/2019
      */
     private void initPresenter() {
-        iPresenterUnit = new ChooseUnitPresenter(new ChooseUnitModel(this),this);
-        iPresenterDish = new AddDishPresenter(new AddDishModel(this),this);
+        iPresenterUnit = new ChooseUnitPresenter(new ChooseUnitModel(this), this, this);
+        iPresenterDish = new AddDishPresenter(new AddDishModel(this), this, this);
         iPresenterUnit.loadAllUnit();
     }
 
     /**
      * Hàm ánh xạ view
+     *
      * @param
      * @return
      * @created_by tdcong
@@ -119,14 +123,16 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
             etPrice.addTextChangedListener(new TextWatcher() {
                 public void onTextChanged(CharSequence s, int start, int before,
                                           int count) {
-                    if(etPrice.getText().toString().equals(ConstantKey.VALUE_EMPTY) ) {
+                    if (etPrice.getText().toString().equals(ConstantKey.VALUE_EMPTY)) {
                         etPrice.setText(ConstantKey.VALUE_ZERO);
                     }
                 }
+
                 public void beforeTextChanged(CharSequence s, int start, int count,
                                               int after) {
 
                 }
+
                 public void afterTextChanged(Editable s) {
 
                 }
@@ -139,6 +145,7 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
 
     /**
      * Hàm ánh xạ toolbar
+     *
      * @Create_by: trand
      * @Date: 5/28/2019
      * @Param:
@@ -154,12 +161,13 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
 
     /**
      * Hàm xử lý các sự kiên
+     *
      * @param
      * @return
      * @created_by tdcong
      * @date 5/23/2019
      */
-    @OnClick({R.id.ivBack, R.id.tvSaveDish, R.id.tvUnit, R.id.ivSelectUnit,R.id.btnSave})
+    @OnClick({R.id.ivBack, R.id.tvSaveDish, R.id.tvUnit, R.id.ivSelectUnit, R.id.btnSave})
     public void onViewClicked(View view) {
         try {
             switch (view.getId()) {
@@ -173,7 +181,6 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
                 case R.id.tvSaveDish:
                 case R.id.btnSave:
                     saveNewFood();
-                    finish();
                     break;
                 case R.id.tvUnit:
                     try {
@@ -184,10 +191,10 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
                     break;
                 case R.id.ivSelectUnit:
                     try {
-                     sendUnitSelected();
-                     } catch (Exception e) {
-                     e.printStackTrace();
-                     }
+                        sendUnitSelected();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     break;
             }
         } catch (Exception e) {
@@ -197,16 +204,21 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
 
     /**
      * Hàm thêm mới món ăn
+     *
      * @Create_by: trand
      * @Date: 5/28/2019
-     * @Param: 
-     * @Return: 
+     * @Param:
+     * @Return:
      */
     private void saveNewFood() {
         try {
             String dishName = etDishName.getText().toString().trim();
             long dishPrice = Converter.convertToLong(etPrice.getText().toString().trim());
-            int unitID = unitSelected.getUnitID();
+            int unitID;
+//            if (!unitSelectedDeleted) {
+//                unitID = ConstantKey.UNIT_EMPTY;
+//            }
+            unitID = unitSelected.getUnitID();
             String backgroundColor = ConstantKey.VALUE_EMPTY;
             String foodIcon = ConstantKey.VALUE_EMPTY;
             Dish dish = new Dish(ConstantKey.VALUE_ZERO, dishName, dishPrice, unitID, backgroundColor, foodIcon, ConstantKey.SELLING);
@@ -218,22 +230,24 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
 
     /**
      * Hàm gửi đơn vị đã chọn
+     *
      * @Create_by: trand
      * @Date: 5/28/2019
      * @Param:
      * @Return:
      */
     private void sendUnitSelected() {
-        Intent intent = new Intent(this, ChooseActivity.class);
+        Intent intent = new Intent(this, ChooseUnitActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable(ConstantKey.KEY_SEND_UNIT, unitSelected);
-        bundle.putString(ConstantKey.KEY_SCREEN,ConstantKey.SCREEN_ADD_DISH);
+        bundle.putString(ConstantKey.KEY_SCREEN, ConstantKey.SCREEN_ADD_DISH);
         intent.putExtra(ConstantKey.KEY_SEND_UNIT, bundle);
         startActivityForResult(intent, REQUEST_CODE);
     }
 
     /**
      * Hàm trả về kết quả đơn vị đã chọn bên màn hình đơn vị
+     *
      * @Create_by: trand
      * @Date: 5/27/2019
      * @Param: requestCode, resultCode, data
@@ -246,8 +260,8 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
             Bundle bundle = new Bundle();
             bundle = data.getBundleExtra(ConstantKey.KEY_SEND_UNIT);
             unitSelected = (Unit) bundle.getSerializable(ConstantKey.KEY_SEND_UNIT);
-            String unitName = unitSelected.getUnitName();
-            tvUnit.setText(unitName);
+            unitSelectedDeleted = bundle.getBoolean(ConstantKey.KEY_SEND_UNIT_SELECTED_DELETED);
+            tvUnit.setText(unitSelected.getUnitName());
         }
     }
 
@@ -267,17 +281,17 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
     }
 
     @Override
-    public void updateUnitSuccess() {
+    public void updateUnitSuccess(Unit unit) {
 
     }
 
     @Override
-    public void updateUnitFail() {
+    public void updateUnitFail(String error) {
 
     }
 
     @Override
-    public void deleteUnitSuccess() {
+    public void deleteUnitSuccess(int id) {
 
     }
 
@@ -288,7 +302,9 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
 
     @Override
     public void saveNewDishSuccess() {
-
+        Intent intentBroadCast = new Intent(ConstantKey.ACTION_NOTIFY_DATA);
+        sendBroadcast(intentBroadCast);
+        finish();
     }
 
     @Override

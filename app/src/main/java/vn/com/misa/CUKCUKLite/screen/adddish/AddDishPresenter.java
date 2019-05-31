@@ -1,5 +1,7 @@
 package vn.com.misa.CUKCUKLite.screen.adddish;
 
+import android.content.Context;
+
 import vn.com.misa.CUKCUKLite.model.Dish;
 
 /**
@@ -12,11 +14,13 @@ import vn.com.misa.CUKCUKLite.model.Dish;
 public class AddDishPresenter implements IAddDishContract.IPresenter {
     IAddDishModel iAddDishModel;
     IAddDishContract.IView iView;
+    Context mContext;
     String error = "";
 
-    public AddDishPresenter(IAddDishModel iAddDishModel, IAddDishContract.IView iView) {
+    public AddDishPresenter(IAddDishModel iAddDishModel, IAddDishContract.IView iView, Context mContext) {
         this.iAddDishModel = iAddDishModel;
         this.iView = iView;
+        this.mContext = mContext;
     }
 
     /**
@@ -28,16 +32,21 @@ public class AddDishPresenter implements IAddDishContract.IPresenter {
      */
     @Override
     public void saveNewDish(Dish newDish) {
-        boolean result;
         try {
-            result = iAddDishModel.saveNewDish(newDish);
-            if (result == true) {
-                iView.saveNewDishSuccess();
-            } else {
-                error = "";
-                iView.saveNewDishFail(error);
-            }
+            if (newDish!=null) {
+                boolean result;
+                try {
+                    result = iAddDishModel.saveNewDish(newDish);
+                    if (result == true) {
+                        iView.saveNewDishSuccess();
+                    } else {
+                        iView.saveNewDishFail(error);
+                    }
 
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
