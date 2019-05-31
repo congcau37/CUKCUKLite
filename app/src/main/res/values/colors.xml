@@ -7,11 +7,45 @@
     <color name="color_black">#2B2B2B</color>
     <color name="color_black_light">#524E4E</color>
     <color name="color_white">#FFFFFF</color>
-    <color name="color_gray">#E0DADA</color>
+    <color name="color_gray">#C7C6BD</color>
     <color name="color_red">#F44336</color>
     <color name="btn_login_phone_green">#93CF71</color>
     <color name="btn_login_google_orange">#E04516</color>
     <color name="btn_login_facebook_blue">#365899</color>
     <color name="btn_delete_orange">#F44336</color>
 
+    <array name="arr_colors">
+        <item>#26C6DA</item>
+        <item>#0097A7</item>
+        <item>#0D47A1</item>
+        <item>#1565C0</item>
+        <item>#039BE5</item>
+        <item>#64B5F6</item>
+        <item>#FF6F00</item>
+        <item>#FFA000</item>
+        <item>#FFB300</item>
+        <item>#CF9A0A</item>
+        <item>#8D6E63</item>
+        <item>#6D4C41</item>
+        <item>#D32F2F</item>
+        <item>#FF1744</item>
+        <item>#F44336</item>
+        <item>#EC407A</item>
+        <item>#AD1457</item>
+        <item>#6A1B9A</item>
+        <item>#AB47BC</item>
+        <item>#BA68C8</item>
+        <item>#00695C</item>
+        <item>#00897B</item>
+        <item>#4DB6AC</item>
+        <item>#2E7D32</item>
+        <item>#43A047</item>
+        <item>#64DD17</item>
+        <item>#212121</item>
+        <item>#5F7C8A</item>
+        <item>#B0BEC5</item>
+        <item>#455A64</item>
+        <item>#607D8B</item>
+        <item>#90A4AE</item>
+    </array>
 </resources>

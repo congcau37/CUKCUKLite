@@ -2,11 +2,13 @@ package vn.com.misa.CUKCUKLite.screen.chooseunit;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -14,6 +16,7 @@ import java.util.List;
 
 import vn.com.misa.CUKCUKLite.R;
 import vn.com.misa.CUKCUKLite.model.Unit;
+import vn.com.misa.CUKCUKLite.util.ConstantKey;
 import vn.com.misa.CUKCUKLite.util.helper.UnitListener;
 
 /**
@@ -74,8 +77,12 @@ public class ChooseUnitAdapter extends BaseAdapter {
             }
             final Unit unit = mData.get(position);
             viewHolder.tvUnitName.setText(unit.getUnitName());
-            if (unit.getUnitID() == unitCurrentSelected.getUnitID()) {
-                viewHolder.ivChecked.setVisibility(View.VISIBLE);
+            if (unitCurrentSelected != ConstantKey.UNIT_NO_SELECT) {
+                if (unit.getUnitID() == unitCurrentSelected.getUnitID()) {
+                    viewHolder.ivChecked.setVisibility(View.VISIBLE);
+                } else {
+                    viewHolder.ivChecked.setVisibility(View.INVISIBLE);
+                }
             } else {
                 viewHolder.ivChecked.setVisibility(View.INVISIBLE);
             }
@@ -84,7 +91,6 @@ public class ChooseUnitAdapter extends BaseAdapter {
                 public void onClick(View v) {
                     try {
                         unitCurrentSelected = unit;
-//                        setUnitCurrentSelected(new Unit(unit.getUnitName(), unitCurrentSelected.getUnitID()));
                         notifyDataSetChanged();
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -145,11 +151,6 @@ public class ChooseUnitAdapter extends BaseAdapter {
 
     /**
      * Hàm lấy ra đơn vị đã chọn
-     *
-     * @Create_by: trand
-     * @Date: 5/27/2019
-     * @Param:
-     * @Return: Unit
      */
     public Unit getUnitCurrentSelected() {
         return unitCurrentSelected;
@@ -157,29 +158,45 @@ public class ChooseUnitAdapter extends BaseAdapter {
 
     /**
      * Hàm gán đơn vị đã chọn
-     *
-     * @Create_by: trand
-     * @Date: 5/27/2019
-     * @Param: Unit
-     * @Return:
      */
     public void setUnitCurrentSelected(Unit unitCurrentSelected) {
         this.unitCurrentSelected = unitCurrentSelected;
     }
 
-    public void checkUnitCurrenSelect(int id){
-        if (id == unitCurrentSelected.getUnitID()){
-            unitCurrentSelected = null;
+    public void checkUnitCurrenSelect(int id) {
+        if (id == unitCurrentSelected.getUnitID()) {
+            unitCurrentSelected = ConstantKey.UNIT_NO_SELECT;
         }
     }
 
-    public void remove(int id){
-        for (int i = mData.size()-1; i >=0 ; i--) {
-            if (mData.get(i).getUnitID() == id){
+    public void remove(int unitID) {
+        for (int i = mData.size() - 1; i >= 0; i--) {
+            if (mData.get(i).getUnitID() == unitID) {
                 mData.remove(i);
             }
         }
         notifyDataSetChanged();
     }
 
+    public void showPopUpDeleteUnit(View view, final Unit unit) {
+        try {
+            PopupMenu popupMenu = new PopupMenu(mContext, view);
+            popupMenu.getMenuInflater().inflate(R.menu.main, popupMenu.getMenu());
+            popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    try {
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    return true;
+                }
+            });
+//            setForceShowIcon(popupMenu);
+            popupMenu.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

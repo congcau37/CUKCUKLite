@@ -20,6 +20,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.InputStream;
 import java.util.List;
@@ -40,6 +41,7 @@ import vn.com.misa.CUKCUKLite.util.helper.Converter;
 
 /**
  * Lớp cập nhật món ăn
+ *
  * @Create_by: trand
  * @Date: 5/28/2019
  * @Param:
@@ -96,7 +98,7 @@ public class EditDishActivity extends AppCompatActivity implements IChooseUnitCo
     protected void onCreate(Bundle savedInstanceState) {
         try {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_form_edit_dish);
+            setContentView(R.layout.activity_form_add_edit_dish);
             ButterKnife.bind(this);
             initPresenter();
             initToolBar();
@@ -109,6 +111,7 @@ public class EditDishActivity extends AppCompatActivity implements IChooseUnitCo
 
     /**
      * Hàm khỏi tạo presenter
+     *
      * @Create_by: trand
      * @Date: 5/27/2019
      * @Param:
@@ -116,70 +119,8 @@ public class EditDishActivity extends AppCompatActivity implements IChooseUnitCo
      */
     private void initPresenter() {
         try {
-            iPresenterUnit = new ChooseUnitPresenter(new ChooseUnitModel(this), this,this);
-            iPresenterDish = new EditDishPresenter(new EditDishModel(this), this,this);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Hàm lấy ra chi tiết mon ăn
-     * @Create_by: trand
-     * @Date: 5/27/2019
-     * @Param:
-     * @Return:
-     */
-    private void getDetailFood() {
-        try {
-            Bundle bundle = getIntent().getExtras();
-            detailDish = (Dish) bundle.getSerializable(ConstantKey.KEY_SEND_DISH);
-            setDetailDish(detailDish);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Hàm hiển thị chi tiết món ăn
-     * @Create_by: trand
-     * @Date: 5/27/2019
-     * @Param: Dish
-     * @Return:
-     */
-    private void setDetailDish(Dish detailDish) {
-        try {
-            unitSelected = iPresenterUnit.getUnit(detailDish.getUnitID());
-            foodID = detailDish.getDishID();
-            String dishName = detailDish.getDishName();
-            String dishPrice = Converter.convertToCurrency(detailDish.getDishPrice());
-            String unitName = unitSelected.getUnitName();
-            String iconName = detailDish.getDishIcon();
-            String foodBackgroundColor = detailDish.getColorBackground();
-            String foodBackgroundIcon = detailDish.getColorBackground();
-            boolean Status = Converter.convertStatusOrder(detailDish.getDishStatus());
-            etDishName.setText(dishName);
-            etPrice.setText(dishPrice);
-            tvUnit.setText(unitName);
-            if (!iconName.equals("")) {
-                try {
-                    InputStream ims = getAssets().open("icondefault/" + iconName + ".png");
-                    Drawable d = Drawable.createFromStream(ims, null);
-                    ivDish.setImageDrawable(d);
-                    ims.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-            if (!foodBackgroundColor.equals("")) {
-                try {
-                    frmBackgroundColor.setBackground(AppUtil.createCircleBackground(foodBackgroundColor));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-            frmBackgroundIcon.setBackground(AppUtil.createCircleBackground(foodBackgroundIcon));
-            cbStatus.setChecked(Status);
+            iPresenterUnit = new ChooseUnitPresenter(new ChooseUnitModel(this), this, this);
+            iPresenterDish = new EditDishPresenter(new EditDishModel(this), this, this);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -187,6 +128,7 @@ public class EditDishActivity extends AppCompatActivity implements IChooseUnitCo
 
     /**
      * Hàm ánh xạ view
+     *
      * @param
      * @return
      * @created_by tdcong
@@ -223,13 +165,15 @@ public class EditDishActivity extends AppCompatActivity implements IChooseUnitCo
             etPrice.addTextChangedListener(new TextWatcher() {
                 public void onTextChanged(CharSequence s, int start, int before,
                                           int count) {
-                    if(etPrice.getText().toString().equals(ConstantKey.VALUE_EMPTY) ) {
+                    if (etPrice.getText().toString().equals(ConstantKey.VALUE_EMPTY)) {
                         etPrice.setText(ConstantKey.VALUE_ZERO);
                     }
                 }
+
                 public void beforeTextChanged(CharSequence s, int start, int count,
                                               int after) {
                 }
+
                 public void afterTextChanged(Editable s) {
                 }
             });
@@ -240,6 +184,7 @@ public class EditDishActivity extends AppCompatActivity implements IChooseUnitCo
 
     /**
      * Hàm ánh xạ toolbar
+     *
      * @param
      * @return
      * @created_by tdcong
@@ -255,6 +200,7 @@ public class EditDishActivity extends AppCompatActivity implements IChooseUnitCo
 
     /**
      * Hàm xử lý bắt sự kiên view
+     *
      * @param
      * @return
      * @created_by tdcong
@@ -273,8 +219,8 @@ public class EditDishActivity extends AppCompatActivity implements IChooseUnitCo
                     break;
                 case R.id.tvSaveDish:
                 case R.id.btnSave:
-                    updateFood();
-                    finish();
+                    if (checkValidateForm())
+                        updateDish();
                     break;
                 case R.id.btnDelete:
                     break;
@@ -301,33 +247,130 @@ public class EditDishActivity extends AppCompatActivity implements IChooseUnitCo
     }
 
     /**
-     * Hàm cập nhật món ăn
+     * Hàm lấy ra chi tiết mon ăn
+     *
      * @Create_by: trand
-     * @Date: 5/29/2019
+     * @Date: 5/27/2019
      * @Param:
      * @Return:
      */
-    private void updateFood() {
+    private void getDetailFood() {
         try {
-            String foodName = etDishName.getText().toString().trim();
-            long foodPrice = Converter.convertToLong(etPrice.getText().toString().trim());
-            int unitID = unitSelected.getUnitID();
-            @SuppressLint("ResourceType") String backgroundColor = getString(R.color.color_primary);
-            String foodIcon = detailDish.getDishIcon();
-            detailDish.setDishName(foodName);
-            detailDish.setDishPrice(foodPrice);
-            detailDish.setUnitID(unitID);
-            detailDish.setColorBackground(backgroundColor);
-            detailDish.setDishIcon(foodIcon);
-            detailDish.setDishStatus(foodStatus);
-            iPresenterDish.updateDish(detailDish);
+            Bundle bundle = getIntent().getExtras();
+            if (bundle != null) {
+                detailDish = (Dish) bundle.getSerializable(ConstantKey.KEY_SEND_DISH);
+                setDetailDish(detailDish);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     /**
+     * Hàm hiển thị chi tiết món ăn
+     *
+     * @Create_by: trand
+     * @Date: 5/27/2019
+     * @Param: Dish
+     * @Return:
+     */
+    private void setDetailDish(Dish detailDish) {
+        try {
+            String unitName = ConstantKey.VALUE_EMPTY;
+            unitSelected = iPresenterUnit.getUnit(detailDish.getUnitID());
+            foodID = detailDish.getDishID();
+            String dishName = detailDish.getDishName();
+            String dishPrice = Converter.convertToCurrency(detailDish.getDishPrice());
+            if (unitSelected == null) {
+                unitSelected = ConstantKey.UNIT_NO_SELECT;
+                tvUnit.setText(getString(R.string.select_unit));
+            } else {
+                unitName = unitSelected.getUnitName();
+                tvUnit.setText(unitName);
+            }
+            String iconName = detailDish.getDishIcon();
+            String foodBackgroundColor = detailDish.getColorBackground();
+            String foodBackgroundIcon = detailDish.getColorBackground();
+            boolean Status = Converter.convertStatusMenu(detailDish.getDishStatus());
+            etDishName.setText(dishName);
+            etPrice.setText(dishPrice);
+            if (!iconName.equals(ConstantKey.VALUE_EMPTY)) {
+                try {
+                    InputStream ims = getAssets().open(ConstantKey.PACKAGE_ICON + iconName + ConstantKey.TAIL_ICON);
+                    Drawable d = Drawable.createFromStream(ims, null);
+                    ivDish.setImageDrawable(d);
+                    ims.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            if (!foodBackgroundColor.equals(ConstantKey.VALUE_EMPTY)) {
+                try {
+                    frmBackgroundColor.setBackground(AppUtil.createCircleBackground(foodBackgroundColor));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            frmBackgroundIcon.setBackground(AppUtil.createCircleBackground(foodBackgroundIcon));
+            cbStatus.setChecked(Status);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Hàm cập nhật món ăn
+     *
+     * @Create_by: trand
+     * @Date: 5/29/2019
+     * @Param:
+     * @Return:
+     */
+    private void updateDish() {
+        try {
+            if (checkValidateForm()) {
+                String foodName = etDishName.getText().toString().trim();
+                long foodPrice = Converter.convertToLong(etPrice.getText().toString().trim());
+                if (unitSelected == null) {
+                    detailDish.setUnitID(ConstantKey.UNIT_NO_SELECT.getUnitID());
+                } else {
+                    detailDish.setUnitID(unitSelected.getUnitID());
+                }
+                @SuppressLint("ResourceType") String backgroundColor = getString(R.color.color_primary);
+                String foodIcon = detailDish.getDishIcon();
+                detailDish.setDishName(foodName);
+                detailDish.setDishID(detailDish.getDishID());
+                detailDish.setDishPrice(foodPrice);
+                detailDish.setColorBackground(backgroundColor);
+                detailDish.setDishIcon(foodIcon);
+                detailDish.setDishStatus(foodStatus);
+                iPresenterDish.updateDish(detailDish);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Mục đích Methob:
+     *
+     * @created_by tdcong
+     * @date 5/31/2019
+     */
+    private boolean checkValidateForm() {
+        String error = ConstantKey.VALUE_EMPTY;
+        String dishName = etDishName.getText().toString().trim();
+        if (dishName.equals(ConstantKey.VALUE_EMPTY)) {
+            error = getString(R.string.not_empty_dish_name);
+            Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * Hàm gửi đơn vị tính đã chọn
+     *
      * @Create_by: trand
      * @Date: 5/27/2019
      * @Param:
@@ -337,13 +380,13 @@ public class EditDishActivity extends AppCompatActivity implements IChooseUnitCo
         Intent intent = new Intent(EditDishActivity.this, ChooseUnitActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable(ConstantKey.KEY_SEND_UNIT, unitSelected);
-        bundle.putString(ConstantKey.KEY_SCREEN, ConstantKey.SCREEN_EDIT_DISH);
         intent.putExtra(ConstantKey.KEY_SEND_UNIT, bundle);
         startActivityForResult(intent, REQUEST_CODE);
     }
 
     /**
      * Hàm trả về đơn vị tính đã chọn từ màn hình đơn vị tính
+     *
      * @Create_by: trand
      * @Date: 5/27/2019
      * @Param: requestCode, resultCode, data
@@ -352,12 +395,19 @@ public class EditDishActivity extends AppCompatActivity implements IChooseUnitCo
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE && resultCode == RESULT_CODE) {
-            Bundle bundle = new Bundle();
-            bundle = data.getBundleExtra(ConstantKey.KEY_SEND_UNIT);
-            unitSelected = (Unit) bundle.getSerializable(ConstantKey.KEY_SEND_UNIT);
-            String unitName = unitSelected.getUnitName();
-            tvUnit.setText(unitName);
+        try {
+            if (requestCode == REQUEST_CODE && resultCode == RESULT_CODE) {
+                Bundle bundle = new Bundle();
+                bundle = data.getBundleExtra(ConstantKey.KEY_SEND_UNIT);
+                unitSelected = (Unit) bundle.getSerializable(ConstantKey.KEY_SEND_UNIT);
+                if (unitSelected == ConstantKey.UNIT_NO_SELECT) {
+                    tvUnit.setHint(getString(R.string.select_unit));
+                } else {
+                    tvUnit.setText(unitSelected.getUnitName());
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -398,7 +448,9 @@ public class EditDishActivity extends AppCompatActivity implements IChooseUnitCo
 
     @Override
     public void updateDishSuccess() {
-
+        Intent intentBroadCast = new Intent(ConstantKey.ACTION_NOTIFY_DATA);
+        sendBroadcast(intentBroadCast);
+        finish();
     }
 
     @Override

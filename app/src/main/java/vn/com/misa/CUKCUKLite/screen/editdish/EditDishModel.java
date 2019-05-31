@@ -26,7 +26,7 @@ public class EditDishModel extends DBOpenHeplper implements IEditDishModel {
     public boolean updateDish(Dish dish) {
         boolean result = false;
         try {
-            result = controllerSQLite.updateFood(dish);
+            result = controllerSQLite.updateDish(dish);
         } catch (Exception e) {
             e.printStackTrace();
         }

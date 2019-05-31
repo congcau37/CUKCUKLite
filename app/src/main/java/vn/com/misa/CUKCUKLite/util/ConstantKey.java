@@ -1,5 +1,7 @@
 package vn.com.misa.CUKCUKLite.util;
 
+import vn.com.misa.CUKCUKLite.model.Unit;
+
 /**
  *
  * @Create_by: trand
@@ -28,8 +30,11 @@ public class ConstantKey {
     public static final int VALUE_ZERO = 0;
     public static final String VALUE_EMPTY= "";
     public static final String PACKAGE_ICON= "icondefault/";
+    public static final String PACKAGE_ICON_DEFAULT= "icondefault";
     public static final String TAIL_ICON= ".png";
     public static final String ICON_DEFAULT= "ic_default.png";
     public static final String ACTION_NOTIFY_DATA= "update_data";
     public static final int UNIT_EMPTY= 000;
+    public static final Unit UNIT_NO_SELECT = new Unit("Chọn đơn vị",-1);
+    public static final String DIALOG = "dialog";
 }

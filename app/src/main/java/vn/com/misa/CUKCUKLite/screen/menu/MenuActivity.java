@@ -51,7 +51,7 @@ public class MenuActivity extends Fragment implements IMenuContract.IView {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         try {
-            view = inflater.inflate(R.layout.fragment_order, container, false);
+            view = inflater.inflate(R.layout.fragment_menu, container, false);
             unbinder = ButterKnife.bind(this, view);
             initBroadCast();
         } catch (Exception e) {

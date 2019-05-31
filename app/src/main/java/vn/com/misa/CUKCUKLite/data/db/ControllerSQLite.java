@@ -284,7 +284,7 @@ public class ControllerSQLite extends DBOpenHeplper {
      * @Param: dish
      * @Return: result
      */
-    public boolean updateFood(Dish dish) {
+    public boolean updateDish(Dish dish) {
         boolean result = false;
         try {
             SQLiteDatabase db = getWritableDatabase();

@@ -13,22 +13,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import de.hdodenhof.circleimageview.CircleImageView;
 import vn.com.misa.CUKCUKLite.R;
 import vn.com.misa.CUKCUKLite.screen.adddish.AddDishActivity;
-import vn.com.misa.CUKCUKLite.screen.sale.SaleActivity;
 import vn.com.misa.CUKCUKLite.screen.menu.MenuActivity;
+import vn.com.misa.CUKCUKLite.screen.sale.SaleActivity;
 
 /**
  * Lớp màn hình chính của ứng dụng
+ *
  * @created_by tdcong
  * @date 5/17/2019
  */
-public class HomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class HomeActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.content_main)
@@ -39,12 +44,20 @@ public class HomeActivity extends AppCompatActivity
     DrawerLayout drawerLayout;
     @BindView(R.id.tvTitleToolbar)
     TextView tvTitleToolbar;
+    @BindView(R.id.ivAvatar)
+    CircleImageView ivAvatar;
+    @BindView(R.id.lnSale)
+    LinearLayout lnSale;
+    @BindView(R.id.lnMenu)
+    LinearLayout lnMenu;
+    @BindView(R.id.lnReport)
+    LinearLayout lnReport;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         try {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_main_app);
+            setContentView(R.layout.activity_home);
             ButterKnife.bind(this);
             initView();
         } catch (Exception e) {
@@ -62,13 +75,31 @@ public class HomeActivity extends AppCompatActivity
         try {
             setSupportActionBar(toolbar);
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
-            NavigationView navigationView = findViewById(R.id.nav_view);
+            lnSale.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    tvTitleToolbar.setText(R.string.menu_sale);
+                    initFragment(R.id.content_main, new SaleActivity());
+                    DrawerLayout drawer = findViewById(R.id.drawer_layout);
+                    drawer.closeDrawer(GravityCompat.START);
+                }
+            });
+
+            lnMenu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    tvTitleToolbar.setText(R.string.menu_order);
+                    initFragment(R.id.content_main, new MenuActivity());
+                    DrawerLayout drawer = findViewById(R.id.drawer_layout);
+                    drawer.closeDrawer(GravityCompat.START);
+                }
+            });
             ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                     this, drawer, toolbar, R.string.nav_drawer_open, R.string.nav_drawer_close);
             drawer.addDrawerListener(toggle);
             toggle.syncState();
-            navigationView.setNavigationItemSelectedListener(this);
             tvTitleToolbar.setText(R.string.menu_order);
+
             initFragment(R.id.content_main, new MenuActivity());
         } catch (Exception e) {
             e.printStackTrace();
@@ -90,32 +121,33 @@ public class HomeActivity extends AppCompatActivity
     }
 
     /**
-     * 
+     * @param
+     * @return
      * @created_by tdcong
      * @date 5/23/2019
-     * @param 
-     * @return
      */
     @Override
     public void onBackPressed() {
         try {
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
+
             if (drawer.isDrawerOpen(GravityCompat.START)) {
                 drawer.closeDrawer(GravityCompat.START);
             } else {
                 super.onBackPressed();
             }
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     /**
-     * 
+     * @param
+     * @return
      * @created_by tdcong
      * @date 5/23/2019
-     * @param 
-     * @return
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -129,10 +161,11 @@ public class HomeActivity extends AppCompatActivity
 
     /**
      * hàm xử lý sự kiên toolbar
-     * @created_by tdcong
-     * @date 5/22/2019
+     *
      * @param
      * @return
+     * @created_by tdcong
+     * @date 5/22/2019
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -151,34 +184,4 @@ public class HomeActivity extends AppCompatActivity
         }
         return super.onOptionsItemSelected(item);
     }
-
-    /**
-     * 
-     * @created_by tdcong
-     * @date 5/23/2019
-     * @param 
-     * @return
-     */
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        try {
-            int id = item.getItemId();
-
-            if (id == R.id.nav_sale) {
-                tvTitleToolbar.setText(R.string.menu_sale);
-                initFragment(R.id.content_main, new SaleActivity());
-            } else if (id == R.id.nav_order) {
-                tvTitleToolbar.setText(R.string.menu_order);
-                initFragment(R.id.content_main, new MenuActivity());
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
-
 }

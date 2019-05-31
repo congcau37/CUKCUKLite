@@ -16,7 +16,7 @@ public class Converter {
      * @Param:
      * @Return:
      */
-    public static boolean convertStatusOrder(String dStatus) {
+    public static boolean convertStatusMenu(String dStatus) {
         boolean status;
         if (dStatus.equals("false")) {
             status = false;
@@ -38,7 +38,7 @@ public class Converter {
 
     public static long convertToLong(String number) {
         String currency="";
-        String [] splitNumber = number.split(",");
+        String [] splitNumber = number.split("\\.");
         for (String newNumber: splitNumber) {
         currency += newNumber;
         }

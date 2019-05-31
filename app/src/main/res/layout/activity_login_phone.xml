@@ -150,7 +150,7 @@
             android:layout_height="wrap_content" />
 
         <Button
-            android:id="@id/btnLogin"
+            android:id="@+id/btnLogin"
             android:layout_width="fill_parent"
             android:layout_height="@dimen/btn_login_height"
             android:textColor="@color/color_white"

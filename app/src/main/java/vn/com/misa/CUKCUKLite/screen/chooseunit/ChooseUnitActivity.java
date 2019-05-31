@@ -54,10 +54,9 @@ public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnit
     @BindView(R.id.btnDone)
     Button btnDone;
 
+    final int RESULT_CODE = 1;
     Unit unitSelected;
     Dialog dialogAddUnit, dialogDeleteUnit, dialogEditUnit;
-    final int RESULT_CODE = 1;
-    private boolean unitSelectedDeleted = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +65,7 @@ public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnit
             setContentView(R.layout.activity_form_select_unit);
             ButterKnife.bind(this);
             initPresenter();
+            initToolBar();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -88,6 +88,22 @@ public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnit
     }
 
     /**
+     * Hàm ánh xạ toolbar
+     *
+     * @param
+     * @return
+     * @created_by tdcong
+     * @date 5/23/2019
+     */
+    private void initToolBar() {
+        try {
+            tvTitleToolbar.setText(getString(R.string.unit));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Hàm xử lý sự kiện view
      * @param
      * @return
@@ -100,7 +116,12 @@ public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnit
             switch (view.getId()) {
                 case R.id.ivBack:
                     try {
-
+                        unitSelected = adapter.getUnitCurrentSelected();
+                        if(unitSelected == ConstantKey.UNIT_NO_SELECT){
+                            sendUnitSelected(ConstantKey.UNIT_NO_SELECT);
+                        }else {
+                            sendUnitSelected(unitSelected);
+                        }
                         finish();
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -113,7 +134,8 @@ public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnit
                     if(adapter.getUnitCurrentSelected() == null){
                         Toast.makeText(this, getString(R.string.not_select_unit), Toast.LENGTH_SHORT).show();
                     }else {
-                        sendUnitSelected();
+                        unitSelected = adapter.getUnitCurrentSelected();
+                        sendUnitSelected(unitSelected);
                         finish();
                     }
                     break;
@@ -149,13 +171,11 @@ public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnit
      * @Param:
      * @Return:
      */
-    private void sendUnitSelected() {
+    private void sendUnitSelected(Unit unit) {
         try {
-            unitSelected = adapter.getUnitCurrentSelected();
             Intent intent = getIntent();
             Bundle bundle = new Bundle();
-            bundle.putSerializable(ConstantKey.KEY_SEND_UNIT, unitSelected);
-            bundle.putBoolean(ConstantKey.KEY_SEND_UNIT_SELECTED_DELETED,unitSelectedDeleted);
+            bundle.putSerializable(ConstantKey.KEY_SEND_UNIT, unit);
             intent.putExtra(ConstantKey.KEY_SEND_UNIT, bundle);
             setResult(RESULT_CODE, intent);
         } catch (Exception e) {
@@ -173,8 +193,13 @@ public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnit
     private void loadUnitSelected() {
         try {
             Bundle bundle = getIntent().getBundleExtra(ConstantKey.KEY_SEND_UNIT);
-            unitSelected = (Unit) bundle.getSerializable(ConstantKey.KEY_SEND_UNIT);
-            adapter.setUnitCurrentSelected(unitSelected);
+            if(bundle!=null){
+                unitSelected = (Unit) bundle.getSerializable(ConstantKey.KEY_SEND_UNIT);
+                if(unitSelected == ConstantKey.UNIT_NO_SELECT){
+                    adapter.setUnitCurrentSelected(null);
+                }
+                adapter.setUnitCurrentSelected(unitSelected);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -374,7 +399,8 @@ public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnit
         try {
             iPresenter.loadAllUnit();
             adapter.setUnitCurrentSelected(newUnit);
-            sendUnitSelected();
+            unitSelected = adapter.getUnitCurrentSelected();
+            sendUnitSelected(unitSelected);
             dialogAddUnit.dismiss();
             finish();
         } catch (Exception e) {
@@ -410,7 +436,8 @@ public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnit
         try {
             iPresenter.loadAllUnit();
             adapter.setUnitCurrentSelected(unit);
-            sendUnitSelected();
+            unitSelected = adapter.getUnitCurrentSelected();
+            sendUnitSelected(unitSelected);
             dialogEditUnit.dismiss();
             finish();
         } catch (Exception e) {
@@ -454,11 +481,10 @@ public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnit
      * @Return:
      */
     @Override
-    public void deleteUnitSuccess(int id) {
+    public void deleteUnitSuccess(int unitID) {
         try {
-            adapter.checkUnitCurrenSelect(id);
-            adapter.remove(id);
-            unitSelectedDeleted=false;
+            adapter.checkUnitCurrenSelect(unitID);
+            adapter.remove(unitID);
         } catch (Exception e) {
             e.printStackTrace();
         }

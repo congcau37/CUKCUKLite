@@ -13,12 +13,15 @@ import android.widget.TextView;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 import vn.com.misa.CUKCUKLite.R;
 import vn.com.misa.CUKCUKLite.model.Dish;
 import vn.com.misa.CUKCUKLite.util.AppUtil;
 import vn.com.misa.CUKCUKLite.util.ConstantKey;
+import vn.com.misa.CUKCUKLite.util.helper.Converter;
 
 /**
  * Lớp adapter của danh sách món ăn
@@ -69,7 +72,7 @@ public class MenuAdapter extends BaseAdapter {
         try {
             ViewHolder viewHolder;
             if (convertView == null) {
-                convertView = LayoutInflater.from(mContext).inflate(R.layout.item_list_order, parent, false);
+                convertView = LayoutInflater.from(mContext).inflate(R.layout.item_list_menu, parent, false);
                 viewHolder = new ViewHolder(convertView);
                 convertView.setTag(viewHolder);
             } else {
@@ -77,9 +80,17 @@ public class MenuAdapter extends BaseAdapter {
             }
             Dish dish = mData.get(position);
             viewHolder.tvFoodName.setText(dish.getDishName());
-            viewHolder.tvPrice.setText(String.valueOf(dish.getDishPrice()));
+            long price = (long) dish.getDishPrice();
+            String s = NumberFormat.getIntegerInstance(Locale.GERMAN).format(price);
+            viewHolder.tvPrice.setText(s);
+
             String iconName = dish.getDishIcon();
             String backgroundCode = dish.getColorBackground();
+            if(Converter.convertStatusMenu(dish.getDishStatus())){
+                viewHolder.tvStopSell.setVisibility(View.VISIBLE);
+            }else {
+                viewHolder.tvStopSell.setVisibility(View.INVISIBLE);
+            }
             try {
                 if (!iconName.equals(ConstantKey.VALUE_EMPTY)) {
                     //Xử lý khi có ảnh
@@ -116,7 +127,7 @@ public class MenuAdapter extends BaseAdapter {
      * @Date: 5/27/2019
      */
     private class ViewHolder {
-        TextView tvFoodName, tvPrice;
+        TextView tvFoodName, tvPrice, tvStopSell;
         ImageView ivFood;
         FrameLayout frmBackgroundColor;
 
@@ -126,6 +137,7 @@ public class MenuAdapter extends BaseAdapter {
                 tvPrice = view.findViewById(R.id.etPrice);
                 ivFood = view.findViewById(R.id.ivDish);
                 frmBackgroundColor = view.findViewById(R.id.frmBackgroundColor);
+                tvStopSell = view.findViewById(R.id.tvStopSell);
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -42,5 +42,30 @@
     <string name="unit_used">Đơn vị đã được sử dụng. Bạn không được phép xóa</string>
     <string name="not_select_unit">Bạn chưa chọn đơn vị</string>
     <string name="not_exist_unit">Đơn vị (%s) đã tồn tại</string>
+    <string name="select_unit">Chọn đơn vị tính</string>
+    <string name="unit">Đơn vị tính</string>
+    <string name="not_empty_dish_name">Tên món không được để trống</string>
+
+    //nav
+    <string name="cong">Trần Đình Công</string>
+    <string name="image_view">ImageView</string>
+    <string name="sell">Bán hàng</string>
+    <string name="report">Báo cáo</string>
+    <string name="setting">Thiết lập</string>
+    <string name="sync">Đồng bộ dữ liệu</string>
+    <string name="connect">Liên kết tài khoản</string>
+    <string name="help">Trợ giúp</string>
+    <string name="noti">Thông báo</string>
+    <string name="suggest">Giới thiệu cho bạn</string>
+    <string name="rate">Đánh giá ứng dụng</string>
+    <string name="feed_back">Góp ý cho nhà phát triển</string>
+    <string name="info">Thông tin sản phẩm</string>
+    <string name="account">Tài khoản</string>
+    <string name="logout">Đăng xuât</string>
+    <string name="change_pass">Đặt mật khẩu</string>
+    <string name="menu">Thực đơn</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

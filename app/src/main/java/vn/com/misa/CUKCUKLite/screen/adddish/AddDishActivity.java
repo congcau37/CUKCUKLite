@@ -5,16 +5,21 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.AppBarLayout;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -25,9 +30,10 @@ import vn.com.misa.CUKCUKLite.R;
 import vn.com.misa.CUKCUKLite.model.Dish;
 import vn.com.misa.CUKCUKLite.model.Unit;
 import vn.com.misa.CUKCUKLite.screen.chooseunit.ChooseUnitActivity;
-import vn.com.misa.CUKCUKLite.screen.chooseunit.IChooseUnitContract;
 import vn.com.misa.CUKCUKLite.screen.chooseunit.ChooseUnitModel;
 import vn.com.misa.CUKCUKLite.screen.chooseunit.ChooseUnitPresenter;
+import vn.com.misa.CUKCUKLite.screen.chooseunit.IChooseUnitContract;
+import vn.com.misa.CUKCUKLite.screen.dialogicon.IconPickerDialog;
 import vn.com.misa.CUKCUKLite.util.ConstantKey;
 import vn.com.misa.CUKCUKLite.util.helper.Converter;
 
@@ -53,9 +59,9 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
     EditText etPrice;
     @BindView(R.id.tvUnit)
     TextView tvUnit;
-    @BindView(R.id.frmColor)
+    @BindView(R.id.frmBackgroundColor)
     FrameLayout frmColor;
-    @BindView(R.id.frmIcon)
+    @BindView(R.id.frmBackgroundIcon)
     FrameLayout frmIcon;
     @BindView(R.id.tvdishName)
     TextView tvDishName;
@@ -63,8 +69,18 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
     EditText etDishName;
     @BindView(R.id.tvLabelUnit)
     TextView tvLabelUnit;
+    @BindView(R.id.cbStatus)
+    CheckBox cbStatus;
+    @BindView(R.id.llStatus)
+    LinearLayout llStatus;
     @BindView(R.id.ivSelectUnit)
     ImageView ivSelectUnit;
+    @BindView(R.id.ivDish)
+    ImageView ivDish;
+    @BindView(R.id.btnDelete)
+    Button btnDelete;
+    @BindView(R.id.btnSave)
+    Button btnSave;
 
     IChooseUnitContract.IPresenter iPresenterUnit;
     IAddDishContract.IPresenter iPresenterDish;
@@ -72,14 +88,13 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
     final int RESULT_CODE = 1;
     final int FIRST_UNIT = 0;
     Unit unitSelected; // đơn vị đã chọn, mặc định là đầu tiên
-    boolean unitSelectedDeleted;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         try {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_form_add_dish);
+            setContentView(R.layout.activity_form_add_edit_dish);
             ButterKnife.bind(this);
             initPresenter();
             initToolBar();
@@ -102,6 +117,22 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
     }
 
     /**
+     * Hàm ánh xạ toolbar
+     *
+     * @Create_by: trand
+     * @Date: 5/28/2019
+     * @Param:
+     * @Return:
+     */
+    private void initToolBar() {
+        try {
+            tvTitleToolbar.setText(getString(R.string.add_dish));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Hàm ánh xạ view
      *
      * @param
@@ -112,6 +143,7 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void initView() {
         try {
+            llStatus.setVisibility(View.INVISIBLE);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 tvDishName.setText(Html.fromHtml(getString(R.string.dish_name), Html.FROM_HTML_MODE_COMPACT));
                 tvLabelUnit.setText(Html.fromHtml(getString(R.string.label_unit), Html.FROM_HTML_MODE_COMPACT));
@@ -120,6 +152,7 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
                 tvLabelUnit.setText(Html.fromHtml(getString(R.string.label_unit)));
             }
 
+            etPrice.setText("0");
             etPrice.addTextChangedListener(new TextWatcher() {
                 public void onTextChanged(CharSequence s, int start, int before,
                                           int count) {
@@ -144,22 +177,6 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
     }
 
     /**
-     * Hàm ánh xạ toolbar
-     *
-     * @Create_by: trand
-     * @Date: 5/28/2019
-     * @Param:
-     * @Return:
-     */
-    private void initToolBar() {
-        try {
-            tvTitleToolbar.setText(getString(R.string.add_dish));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
      * Hàm xử lý các sự kiên
      *
      * @param
@@ -167,7 +184,7 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
      * @created_by tdcong
      * @date 5/23/2019
      */
-    @OnClick({R.id.ivBack, R.id.tvSaveDish, R.id.tvUnit, R.id.ivSelectUnit, R.id.btnSave})
+    @OnClick({R.id.ivBack, R.id.tvSaveDish, R.id.tvUnit, R.id.ivSelectUnit, R.id.btnSave, R.id.frmBackgroundIcon})
     public void onViewClicked(View view) {
         try {
             switch (view.getId()) {
@@ -180,7 +197,8 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
                     break;
                 case R.id.tvSaveDish:
                 case R.id.btnSave:
-                    saveNewFood();
+                    if (checkValidateForm())
+                        saveNewFood();
                     break;
                 case R.id.tvUnit:
                     try {
@@ -192,6 +210,13 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
                 case R.id.ivSelectUnit:
                     try {
                         sendUnitSelected();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case R.id.frmBackgroundIcon:
+                    try {
+                        showIconPickerDialog();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -215,10 +240,7 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
             String dishName = etDishName.getText().toString().trim();
             long dishPrice = Converter.convertToLong(etPrice.getText().toString().trim());
             int unitID;
-//            if (!unitSelectedDeleted) {
-//                unitID = ConstantKey.UNIT_EMPTY;
-//            }
-            unitID = unitSelected.getUnitID();
+            unitID = getUnitSelected().getUnitID();
             String backgroundColor = ConstantKey.VALUE_EMPTY;
             String foodIcon = ConstantKey.VALUE_EMPTY;
             Dish dish = new Dish(ConstantKey.VALUE_ZERO, dishName, dishPrice, unitID, backgroundColor, foodIcon, ConstantKey.SELLING);
@@ -226,6 +248,23 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Mục đích Methob:
+     *
+     * @created_by tdcong
+     * @date 5/31/2019
+     */
+    private boolean checkValidateForm() {
+        String error = ConstantKey.VALUE_EMPTY;
+        String dishName = etDishName.getText().toString().trim();
+        if (dishName.equals(ConstantKey.VALUE_EMPTY)) {
+            error = getString(R.string.not_empty_dish_name);
+            Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -239,10 +278,23 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
     private void sendUnitSelected() {
         Intent intent = new Intent(this, ChooseUnitActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable(ConstantKey.KEY_SEND_UNIT, unitSelected);
-        bundle.putString(ConstantKey.KEY_SCREEN, ConstantKey.SCREEN_ADD_DISH);
+        if (getUnitSelected() != ConstantKey.UNIT_NO_SELECT) {
+            bundle.putSerializable(ConstantKey.KEY_SEND_UNIT, getUnitSelected());
+        } else {
+            bundle.putSerializable(ConstantKey.KEY_SEND_UNIT, null);
+        }
         intent.putExtra(ConstantKey.KEY_SEND_UNIT, bundle);
         startActivityForResult(intent, REQUEST_CODE);
+    }
+
+    /**
+     * Mục đích Methob:
+     *
+     * @created_by tdcong
+     * @date 5/31/2019
+     */
+    public Unit getUnitSelected() {
+        return unitSelected;
     }
 
     /**
@@ -259,15 +311,41 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
         if (requestCode == REQUEST_CODE && resultCode == RESULT_CODE) {
             Bundle bundle = new Bundle();
             bundle = data.getBundleExtra(ConstantKey.KEY_SEND_UNIT);
-            unitSelected = (Unit) bundle.getSerializable(ConstantKey.KEY_SEND_UNIT);
-            unitSelectedDeleted = bundle.getBoolean(ConstantKey.KEY_SEND_UNIT_SELECTED_DELETED);
-            tvUnit.setText(unitSelected.getUnitName());
+            if (bundle != null) {
+                unitSelected = (Unit) bundle.getSerializable(ConstantKey.KEY_SEND_UNIT);
+                if (getUnitSelected() == ConstantKey.UNIT_NO_SELECT) {
+                    tvUnit.setHint(getString(R.string.select_unit));
+                }
+                tvUnit.setText(getUnitSelected().getUnitName());
+            }
         }
     }
 
+    public void showIconPickerDialog(){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        IconPickerDialog iconPickerDialog = new IconPickerDialog();
+        iconPickerDialog.show(fragmentManager,ConstantKey.DIALOG);
+    }
+
+    /**
+     * Mục đích Methob:
+     * @created_by tdcong
+     * @date 5/31/2019
+     * @param:
+     * @return:
+     */
     @Override
     public void displayUnit(List<Unit> unitList) {
-        unitSelected = unitList.get(FIRST_UNIT);
+        try {
+            unitSelected = unitList.get(FIRST_UNIT);
+            if (unitSelected == ConstantKey.UNIT_NO_SELECT) {
+                tvUnit.setHint(getString(R.string.select_unit));
+            } else {
+                tvUnit.setText(unitSelected.getUnitName());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
