@@ -5,7 +5,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.AppBarLayout;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -197,8 +196,8 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
                     break;
                 case R.id.tvSaveDish:
                 case R.id.btnSave:
-                    if (checkValidateForm())
-                        saveNewFood();
+                    if (validateForm())
+                        saveNewDish();
                     break;
                 case R.id.tvUnit:
                     try {
@@ -235,14 +234,14 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
      * @Param:
      * @Return:
      */
-    private void saveNewFood() {
+    private void saveNewDish() {
         try {
             String dishName = etDishName.getText().toString().trim();
             long dishPrice = Converter.convertToLong(etPrice.getText().toString().trim());
             int unitID;
             unitID = getUnitSelected().getUnitID();
-            String backgroundColor = ConstantKey.VALUE_EMPTY;
-            String foodIcon = ConstantKey.VALUE_EMPTY;
+            String backgroundColor = ConstantKey.COLOR_DEFAULT;
+            String foodIcon = ConstantKey.PACKAGE_ICON_DEFAULT;
             Dish dish = new Dish(ConstantKey.VALUE_ZERO, dishName, dishPrice, unitID, backgroundColor, foodIcon, ConstantKey.SELLING);
             iPresenterDish.saveNewDish(dish);
         } catch (Exception e) {
@@ -256,7 +255,7 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
      * @created_by tdcong
      * @date 5/31/2019
      */
-    private boolean checkValidateForm() {
+    private boolean validateForm() {
         String error = ConstantKey.VALUE_EMPTY;
         String dishName = etDishName.getText().toString().trim();
         if (dishName.equals(ConstantKey.VALUE_EMPTY)) {

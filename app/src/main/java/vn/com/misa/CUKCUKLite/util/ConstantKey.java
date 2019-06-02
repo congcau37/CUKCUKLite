@@ -37,4 +37,5 @@ public class ConstantKey {
     public static final int UNIT_EMPTY= 000;
     public static final Unit UNIT_NO_SELECT = new Unit("Chọn đơn vị",-1);
     public static final String DIALOG = "dialog";
+    public static final String COLOR_DEFAULT = "#03A9F4";
 }

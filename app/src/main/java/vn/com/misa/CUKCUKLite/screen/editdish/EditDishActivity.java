@@ -23,7 +23,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.InputStream;
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -219,7 +221,7 @@ public class EditDishActivity extends AppCompatActivity implements IChooseUnitCo
                     break;
                 case R.id.tvSaveDish:
                 case R.id.btnSave:
-                    if (checkValidateForm())
+                    if (validateForm())
                         updateDish();
                     break;
                 case R.id.btnDelete:
@@ -280,7 +282,7 @@ public class EditDishActivity extends AppCompatActivity implements IChooseUnitCo
             unitSelected = iPresenterUnit.getUnit(detailDish.getUnitID());
             foodID = detailDish.getDishID();
             String dishName = detailDish.getDishName();
-            String dishPrice = Converter.convertToCurrency(detailDish.getDishPrice());
+            String dishPrice = NumberFormat.getIntegerInstance(Locale.GERMAN).format(detailDish.getDishPrice());
             if (unitSelected == null) {
                 unitSelected = ConstantKey.UNIT_NO_SELECT;
                 tvUnit.setText(getString(R.string.select_unit));
@@ -294,23 +296,11 @@ public class EditDishActivity extends AppCompatActivity implements IChooseUnitCo
             boolean Status = Converter.convertStatusMenu(detailDish.getDishStatus());
             etDishName.setText(dishName);
             etPrice.setText(dishPrice);
-            if (!iconName.equals(ConstantKey.VALUE_EMPTY)) {
-                try {
-                    InputStream ims = getAssets().open(ConstantKey.PACKAGE_ICON + iconName + ConstantKey.TAIL_ICON);
-                    Drawable d = Drawable.createFromStream(ims, null);
-                    ivDish.setImageDrawable(d);
-                    ims.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-            if (!foodBackgroundColor.equals(ConstantKey.VALUE_EMPTY)) {
-                try {
-                    frmBackgroundColor.setBackground(AppUtil.createCircleBackground(foodBackgroundColor));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
+            InputStream ims = getAssets().open(ConstantKey.PACKAGE_ICON + iconName + ConstantKey.TAIL_ICON);
+            Drawable d = Drawable.createFromStream(ims, null);
+            ivDish.setImageDrawable(d);
+            ims.close();
+            frmBackgroundColor.setBackground(AppUtil.createCircleBackground(foodBackgroundColor));
             frmBackgroundIcon.setBackground(AppUtil.createCircleBackground(foodBackgroundIcon));
             cbStatus.setChecked(Status);
         } catch (Exception e) {
@@ -328,7 +318,7 @@ public class EditDishActivity extends AppCompatActivity implements IChooseUnitCo
      */
     private void updateDish() {
         try {
-            if (checkValidateForm()) {
+            if (validateForm()) {
                 String foodName = etDishName.getText().toString().trim();
                 long foodPrice = Converter.convertToLong(etPrice.getText().toString().trim());
                 if (unitSelected == null) {
@@ -357,7 +347,7 @@ public class EditDishActivity extends AppCompatActivity implements IChooseUnitCo
      * @created_by tdcong
      * @date 5/31/2019
      */
-    private boolean checkValidateForm() {
+    private boolean validateForm() {
         String error = ConstantKey.VALUE_EMPTY;
         String dishName = etDishName.getText().toString().trim();
         if (dishName.equals(ConstantKey.VALUE_EMPTY)) {

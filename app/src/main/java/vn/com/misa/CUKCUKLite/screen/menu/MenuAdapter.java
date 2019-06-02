@@ -83,37 +83,17 @@ public class MenuAdapter extends BaseAdapter {
             long price = (long) dish.getDishPrice();
             String s = NumberFormat.getIntegerInstance(Locale.GERMAN).format(price);
             viewHolder.tvPrice.setText(s);
-
-            String iconName = dish.getDishIcon();
             String backgroundCode = dish.getColorBackground();
-            if(Converter.convertStatusMenu(dish.getDishStatus())){
+            if (Converter.convertStatusMenu(dish.getDishStatus())) {
                 viewHolder.tvStopSell.setVisibility(View.VISIBLE);
-            }else {
+            } else {
                 viewHolder.tvStopSell.setVisibility(View.INVISIBLE);
             }
-            try {
-                if (!iconName.equals(ConstantKey.VALUE_EMPTY)) {
-                    //Xử lý khi có ảnh
-                    InputStream ims = mContext.getAssets().open(ConstantKey.PACKAGE_ICON + dish.getDishIcon() + ConstantKey.TAIL_ICON);
-                    Drawable d = Drawable.createFromStream(ims, null);
-                    viewHolder.ivFood.setImageDrawable(d);
-                    ims.close();
-                } else {
-                    //Xử lý khi không có ảnh sẽ lấy ảnh mặc định
-                    InputStream ims = mContext.getAssets().open(ConstantKey.PACKAGE_ICON + ConstantKey.ICON_DEFAULT);
-                    Drawable d = Drawable.createFromStream(ims, null);
-                    viewHolder.ivFood.setImageDrawable(d);
-                    ims.close();
-                }
-                if (!backgroundCode.equals(ConstantKey.VALUE_EMPTY)) {
-                    viewHolder.frmBackgroundColor.setBackground(AppUtil.createCircleBackground(backgroundCode));
-                } else {
-                    viewHolder.frmBackgroundColor.setBackground(AppUtil.createCircleBackground(mContext.getString(R.color.color_primary)));
-                }
-
-            } catch (IOException ex) {
-                ex.getStackTrace();
-            }
+            InputStream ims = mContext.getAssets().open(ConstantKey.PACKAGE_ICON + dish.getDishIcon() + ConstantKey.TAIL_ICON);
+            Drawable d = Drawable.createFromStream(ims, null);
+            viewHolder.ivFood.setImageDrawable(d);
+            ims.close();
+            viewHolder.frmBackgroundColor.setBackground(AppUtil.createCircleBackground(backgroundCode));
         } catch (Exception e) {
             e.printStackTrace();
         }
