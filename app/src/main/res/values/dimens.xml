@@ -39,5 +39,6 @@
     <dimen name="navi_padding_start">8dp</dimen>
     <dimen name="line_thick">1dp</dimen>
     <dimen name="header_h">150dp</dimen>
+    <dimen name="list_icon_margin">50dp</dimen>
 
 </resources>

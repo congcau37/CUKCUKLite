@@ -28,8 +28,11 @@ import vn.com.misa.CUKCUKLite.model.Unit;
 import vn.com.misa.CUKCUKLite.util.ConstantKey;
 import vn.com.misa.CUKCUKLite.util.helper.UnitListener;
 
+import static vn.com.misa.CUKCUKLite.util.ConstantKey.RESULT_CODE;
+
 /**
  * Lớp chọn đơn vị
+ *
  * @param
  * @created_by tdcong
  * @date 5/23/2019
@@ -54,7 +57,6 @@ public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnit
     @BindView(R.id.btnDone)
     Button btnDone;
 
-    final int RESULT_CODE = 1;
     Unit unitSelected;
     Dialog dialogAddUnit, dialogDeleteUnit, dialogEditUnit;
 
@@ -73,6 +75,7 @@ public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnit
 
     /**
      * Hàm khởi tạp presenter
+     *
      * @Create_by: trand
      * @Date: 5/27/2019
      * @Param:
@@ -80,7 +83,7 @@ public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnit
      */
     private void initPresenter() {
         try {
-            iPresenter = new ChooseUnitPresenter(new ChooseUnitModel(this), this,this);
+            iPresenter = new ChooseUnitPresenter(new ChooseUnitModel(this), this, this);
             iPresenter.loadAllUnit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -105,6 +108,7 @@ public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnit
 
     /**
      * Hàm xử lý sự kiện view
+     *
      * @param
      * @return
      * @created_by tdcong
@@ -114,10 +118,11 @@ public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnit
     public void onViewClicked(View view) {
         try {
             switch (view.getId()) {
+                //Nhấn trở về
                 case R.id.ivBack:
                     try {
-                        unitSelected = adapter.getUnitCurrentSelected();
-                        if(unitSelected == ConstantKey.UNIT_NO_SELECT) {
+                        // Nếu chưa chọn đơn vị thì gửi rỗng
+                        if (adapter.getUnitCurrentSelected() == ConstantKey.UNIT_NO_SELECT) {
                             sendUnitSelected(ConstantKey.UNIT_NO_SELECT);
                         }
                         finish();
@@ -125,13 +130,16 @@ public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnit
                         e.printStackTrace();
                     }
                     break;
+                    //Thêm đơn vị
                 case R.id.ivAddUnit:
                     showDialogAddUnit();
                     break;
+                    //chọn xong
                 case R.id.btnDone:
-                    if(adapter.getUnitCurrentSelected() == null){
+                    // kiểm tra nếu chưa chọn đơn vị thì thông báo chưa chọn
+                    if (adapter.getUnitCurrentSelected() == ConstantKey.UNIT_NO_SELECT) {
                         Toast.makeText(this, getString(R.string.not_select_unit), Toast.LENGTH_SHORT).show();
-                    }else {
+                    } else {
                         unitSelected = adapter.getUnitCurrentSelected();
                         sendUnitSelected(unitSelected);
                         finish();
@@ -145,8 +153,8 @@ public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnit
 
     /**
      * Hàm hiển thị danh sách đơn vị
-     * @param unitList
-     * @return
+     *
+     * @param unitList: danh sách đơn vị
      * @created_by tdcong
      * @date 5/23/2019
      */
@@ -164,10 +172,9 @@ public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnit
 
     /**
      * Hàm gửi đơn vị đã chọn
+     *
      * @Create_by: trand
      * @Date: 5/28/2019
-     * @Param:
-     * @Return:
      */
     private void sendUnitSelected(Unit unit) {
         try {
@@ -183,17 +190,16 @@ public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnit
 
     /**
      * Hàm lấy ra đơn vị đã chọn
+     *
      * @Create_by: trand
      * @Date: 5/28/2019
-     * @Param:
-     * @Return:
      */
     private void loadUnitSelected() {
         try {
             Bundle bundle = getIntent().getBundleExtra(ConstantKey.KEY_SEND_UNIT);
-            if(bundle!=null){
+            if (bundle != null) {
                 unitSelected = (Unit) bundle.getSerializable(ConstantKey.KEY_SEND_UNIT);
-                if(unitSelected == ConstantKey.UNIT_NO_SELECT){
+                if (unitSelected == ConstantKey.UNIT_NO_SELECT) {
                     adapter.setUnitCurrentSelected(null);
                 }
                 adapter.setUnitCurrentSelected(unitSelected);
@@ -205,6 +211,7 @@ public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnit
 
     /**
      * Hàm hiển thị dialog Thêm đơn vị
+     *
      * @Create_by: trand
      * @Date: 5/28/2019
      * @Param:
@@ -226,6 +233,7 @@ public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnit
             ImageView btnTitleClose = dialogAddUnit.findViewById(R.id.btnTitleClose);
             tvTitle.setText(getString(R.string.add_unit));
 
+            // Đóng dialog
             btnTitleClose.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -236,6 +244,7 @@ public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnit
                     }
                 }
             });
+            // Đóng dialog
             btnCancel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -246,6 +255,7 @@ public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnit
                     }
                 }
             });
+            // Chọn cất để lưu đơn vị
             btnSave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -265,14 +275,15 @@ public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnit
 
     /**
      * Hàm hiển thị dialog sửa đơn vị
+     *
      * @Create_by: trand
      * @Date: 5/28/2019
-     * @Param:
-     * @Return:
+     * @Param: Unit: đơn vị tính
      */
     @Override
     public void showDialogEditUnit(final Unit unit) {
         try {
+            //Khởi tạo dialog
             dialogEditUnit = new Dialog(this, R.style.Theme_Dialog);
             dialogEditUnit.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialogEditUnit.setContentView(R.layout.dialog_add_edit_unit);
@@ -280,15 +291,18 @@ public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnit
             dialogEditUnit.setCancelable(true);
             dialogEditUnit.setCanceledOnTouchOutside(true);
 
+            //Ánh xạ
             Button btnCancel = dialogEditUnit.findViewById(R.id.btnCancel);
             Button btnSave = dialogEditUnit.findViewById(R.id.btnSave);
             TextView tvTitle = dialogEditUnit.findViewById(R.id.tvTitleDialog);
             final EditText etUnitName = dialogEditUnit.findViewById(R.id.etUnitName);
             ImageView btnTitleClose = dialogEditUnit.findViewById(R.id.btnTitleClose);
 
+            //hiển thị dữ liệu lên dialog
             String uniName = unit.getUnitName();
             tvTitle.setText(getString(R.string.edit_unit));
             etUnitName.setText(uniName);
+            //đóng dialog
             btnTitleClose.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -309,6 +323,7 @@ public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnit
                     }
                 }
             });
+            //Chọn cất để lưu đơn vị tính
             btnSave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -329,6 +344,7 @@ public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnit
 
     /**
      * Hàm hiển thị dialog xóa đơn vị
+     *
      * @Create_by: trand
      * @Date: 5/28/2019
      * @Param:
@@ -338,6 +354,7 @@ public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnit
     public void showDialogDeleteUnit(final Unit unit) {
         final int unitID = unit.getUnitID();
         try {
+            //khởi tạo dialog
             dialogDeleteUnit = new Dialog(this, R.style.Theme_Dialog);
             dialogDeleteUnit.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialogDeleteUnit.setContentView(R.layout.dialog_delete_unit);
@@ -345,17 +362,20 @@ public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnit
             dialogDeleteUnit.setCancelable(true);
             dialogDeleteUnit.setCanceledOnTouchOutside(true);
 
+            //ánh xạ
             Button btnNo = dialogDeleteUnit.findViewById(R.id.btnNo);
             Button btnYes = dialogDeleteUnit.findViewById(R.id.btnYes);
             ImageView btnTitleClose = dialogDeleteUnit.findViewById(R.id.btnTitleClose);
             final TextView tvConfirm = dialogDeleteUnit.findViewById(R.id.tvConfirm);
 
+            //Hiển thị text theo đúng định dạng bằng html
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 tvConfirm.setText(Html.fromHtml(getString(R.string.you_can_delete_unit), Html.FROM_HTML_MODE_COMPACT));
             } else {
                 tvConfirm.setText(Html.fromHtml(getString(R.string.you_can_delete_unit)));
             }
 
+            // Chọn có xóa đơn vị
             btnNo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -369,6 +389,7 @@ public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnit
                     dialogDeleteUnit.dismiss();
                 }
             });
+            // Chọn không để đóng dialog
             btnTitleClose.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -387,10 +408,10 @@ public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnit
 
     /**
      * Hàm hiển thị khi thêm mới đơn vị thành công
+     *
      * @Create_by: trand
      * @Date: 5/28/2019
-     * @Param: newUnit
-     * @Return:
+     * @Param: newUnit: đơn vị tính mới
      */
     @Override
     public void saveNewUnitSuccess(Unit newUnit) {
@@ -408,6 +429,7 @@ public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnit
 
     /**
      * Hàm hiển thị khi thêm mới đơn vị thất bại
+     *
      * @Create_by: trand
      * @Date: 5/28/2019
      * @Param: error
@@ -424,6 +446,7 @@ public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnit
 
     /**
      * Hàm hiển thị cập nhật đơn vị thành công
+     *
      * @Create_by: trand
      * @Date: 5/28/2019
      * @Param:
@@ -445,6 +468,7 @@ public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnit
 
     /**
      * Hàm hiển thị cập nhật đơn vị thất bại
+     *
      * @Create_by: trand
      * @Date: 5/28/2019
      * @Param:
@@ -461,6 +485,7 @@ public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnit
 
     /**
      * Hàm xóa đơn vị
+     *
      * @Create_by: trand
      * @Date: 5/28/2019
      * @Param: unitID
@@ -473,6 +498,7 @@ public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnit
 
     /**
      * Hàm hiển thị xóa đơn vị thành công
+     *
      * @Create_by: trand
      * @Date: 5/28/2019
      * @Param:
@@ -490,6 +516,7 @@ public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnit
 
     /**
      * Hàm hiển thị xóa đơn vị thất bại
+     *
      * @Create_by: trand
      * @Date: 5/28/2019
      * @Param:

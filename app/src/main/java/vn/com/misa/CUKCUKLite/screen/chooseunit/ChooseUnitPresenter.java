@@ -73,7 +73,7 @@ public class ChooseUnitPresenter implements IChooseUnitContract.IPresenter {
                     iView.saveNewUnitFail(error);
                 }
             } else {
-                error = String.format(mContext.getString(R.string.not_exist_unit),newUnitName);
+                error = String.format(mContext.getString(R.string.not_exist_unit), newUnitName);
                 iView.saveNewUnitFail(error);
             }
         } catch (Exception e) {
@@ -91,30 +91,32 @@ public class ChooseUnitPresenter implements IChooseUnitContract.IPresenter {
      */
     @Override
     public void updateUnit(Unit unit) {
-        try {
-            if (unit!=null) {
-                boolean result;
-                try {
-                    if (unit.getUnitName().equals(getUnit(unit.getUnitID()).getUnitName())) {
-                        iView.updateUnitSuccess(unit);
-                    } else if (checkUnitData(unit.getUnitName()) == false) {
-                        result = iChooseUnitModel.updateUnit(unit);
-                        if (result == true) {
+        if (unit!=null) {
+            try {
+                if (unit != null) {
+                    boolean result;
+                    try {
+                        if (unit.getUnitName().equals(getUnit(unit.getUnitID()).getUnitName())) {
                             iView.updateUnitSuccess(unit);
+                        } else if (checkUnitData(unit.getUnitName()) == false) {
+                            result = iChooseUnitModel.updateUnit(unit);
+                            if (result == true) {
+                                iView.updateUnitSuccess(unit);
+                            } else {
+                                iView.updateUnitFail(error);
+                            }
                         } else {
+                            error = String.format(mContext.getString(R.string.not_exist_unit), unit.getUnitName());
                             iView.updateUnitFail(error);
                         }
-                    } else {
-                        error = String.format(mContext.getString(R.string.not_exist_unit),unit.getUnitName());
-                        iView.updateUnitFail(error);
-                    }
 
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
@@ -171,16 +173,16 @@ public class ChooseUnitPresenter implements IChooseUnitContract.IPresenter {
      */
     @Override
     public void deleteUnit(int unitID) {
-            boolean check = iChooseUnitModel.deleteUnit(unitID);
-            try {
-                if (check == true) {
-                    iView.deleteUnitSuccess(unitID);
-                } else {
-                    iView.deleteUnitFail();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+        boolean check = iChooseUnitModel.deleteUnit(unitID);
+        try {
+            if (check == true) {
+                iView.deleteUnitSuccess(unitID);
+            } else {
+                iView.deleteUnitFail();
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

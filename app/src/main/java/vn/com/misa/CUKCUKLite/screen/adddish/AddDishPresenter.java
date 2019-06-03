@@ -39,23 +39,25 @@ public class AddDishPresenter implements IAddDishContract.IPresenter {
      */
     @Override
     public void saveNewDish(Dish newDish) {
-        try {
-            if (newDish!=null) {
-                boolean result;
-                try {
-                    result = iAddDishModel.saveNewDish(newDish);
-                    if (result == true) {
-                        iView.saveNewDishSuccess();
-                    } else {
-                        iView.saveNewDishFail(error);
-                    }
+        if (newDish!=null) {
+            try {
+                if (newDish!=null) {
+                    boolean result;
+                    try {
+                        result = iAddDishModel.saveNewDish(newDish);
+                        if (result == true) {
+                            iView.saveNewDishSuccess();
+                        } else {
+                            iView.saveNewDishFail(error);
+                        }
 
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 

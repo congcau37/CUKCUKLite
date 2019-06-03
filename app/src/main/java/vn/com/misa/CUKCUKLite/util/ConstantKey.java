@@ -39,4 +39,8 @@ public class ConstantKey {
     public static final String DIALOG = "dialog";
     public static final String COLOR_DEFAULT = "#03A9F4";
     public static final int VALUE_SPAN_COUNT = 5;
+    public static final int REQUEST_CODE = 0;
+    public static final int RESULT_CODE = 1;
+    public static final int FIRST_UNIT = 0;
+    public static final int COLOR_DEF = -14235942;
 }

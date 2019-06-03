@@ -38,16 +38,18 @@ public class EditDishPresenter implements IEditDishContract.IPresenter{
      */
     @Override
     public void updateDish(Dish dish) {
-        boolean result;
-        try {
-            result = iAddDishModel.updateDish(dish);
-            if (result == true) {
-                iView.updateDishSuccess();
-            } else {
-                iView.updateDishFail();
+        if (dish!=null) {
+            boolean result;
+            try {
+                result = iAddDishModel.updateDish(dish);
+                if (result == true) {
+                    iView.updateDishSuccess();
+                } else {
+                    iView.updateDishFail();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
@@ -59,16 +61,18 @@ public class EditDishPresenter implements IEditDishContract.IPresenter{
      */
     @Override
     public void deleteDish(Dish dish) {
-        boolean result;
-        try {
-            result = iAddDishModel.deleteDish(dish);
-            if (result == true) {
-                iView.deleteDishSuccess();
-            } else {
-                iView.deleteDishFail();
+        if (dish!=null) {
+            boolean result;
+            try {
+                result = iAddDishModel.deleteDish(dish);
+                if (result == true) {
+                    iView.deleteDishSuccess();
+                } else {
+                    iView.deleteDishFail();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 

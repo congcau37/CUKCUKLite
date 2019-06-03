@@ -70,4 +70,9 @@
     <string name="pick_color">Chọn màu</string>
     <string name="confirm_remove_dish">Bạn có chắc chắn muốn xóa món %s không?</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="zero">0</string>
+    <string name="price_sale">Giá bán</string>
+
 </resources>

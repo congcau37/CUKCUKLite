@@ -9,7 +9,9 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
 import android.text.Html;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -23,7 +25,9 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.thebluealliance.spectrum.SpectrumDialog;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,6 +43,9 @@ import vn.com.misa.CUKCUKLite.screen.dialogicon.IconPickerDialog;
 import vn.com.misa.CUKCUKLite.util.AppUtil;
 import vn.com.misa.CUKCUKLite.util.ConstantKey;
 import vn.com.misa.CUKCUKLite.util.helper.Converter;
+
+import static vn.com.misa.CUKCUKLite.util.ConstantKey.REQUEST_CODE;
+import static vn.com.misa.CUKCUKLite.util.ConstantKey.RESULT_CODE;
 
 /**
  * Lớp thêm món ăn
@@ -87,13 +94,9 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
 
     IChooseUnitContract.IPresenter iPresenterUnit;
     IAddDishContract.IPresenter iPresenterDish;
-    final int REQUEST_CODE = 0;
-    final int RESULT_CODE = 1;
-    final int FIRST_UNIT = 0;
     Unit unitSelected; // đơn vị đã chọn, mặc định là đầu tiên
-    private int selectedColor;
     private Dish mDish = new Dish();
-    private static final int COLOR_DEF = -14235942;
+    private int selectedColor;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -154,7 +157,6 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
                 tvLabelUnit.setText(Html.fromHtml(getString(R.string.label_unit)));
             }
 
-            etPrice.setText("0");
             tvUnit.setText(unitSelected.getUnitName());
             btnDelete.setVisibility(View.GONE);
         } catch (Exception e) {
@@ -174,6 +176,7 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
     public void onViewClicked(View view) {
         try {
             switch (view.getId()) {
+                //trở về
                 case R.id.ivBack:
                     try {
                         finish();
@@ -181,18 +184,14 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
                         e.printStackTrace();
                     }
                     break;
+                //lưu mới món
                 case R.id.tvSaveDish:
                 case R.id.btnSave:
                     if (validateFormAddDish())
                         saveNewDish();
                     break;
+                //chọn đơn vị
                 case R.id.tvUnit:
-                    try {
-                        sendUnitSelected();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    break;
                 case R.id.ivSelectUnit:
                     try {
                         sendUnitSelected();
@@ -234,6 +233,7 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
             unitID = getUnitSelected().getUnitID();
             String backgroundColor = mDish.getColorBackground();
             String dishIcon = mDish.getDishIcon();
+            //không chọn màu và  icon sẽ lấy mặc định
             if (backgroundColor == null) {
                 backgroundColor = ConstantKey.COLOR_DEFAULT;
             } else {
@@ -245,6 +245,7 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
                 dishIcon = mDish.getDishIcon();
             }
             Dish dish = new Dish(ConstantKey.VALUE_ZERO, dishName, dishPrice, unitID, backgroundColor, dishIcon, ConstantKey.SELLING);
+            //lưu mới món
             iPresenterDish.saveNewDish(dish);
         } catch (Exception e) {
             e.printStackTrace();
@@ -322,6 +323,7 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
                 if (getUnitSelected() == ConstantKey.UNIT_NO_SELECT) {
                     tvUnit.setHint(getString(R.string.select_unit));
                 }
+                //hiển thị đơn vị
                 tvUnit.setText(getUnitSelected().getUnitName());
             }
         }
@@ -368,7 +370,7 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
         try {
             final SpectrumDialog dialog = new SpectrumDialog.Builder(this)
                     .setTitle(getString(R.string.pick_color))
-                    .setSelectedColor(selectedColor != 0 ? selectedColor : COLOR_DEF)
+                    .setSelectedColor(selectedColor != 0 ? selectedColor : ConstantKey.COLOR_DEF)
                     .setColors(R.array.arr_colors)
 //                    .setFixedColumnCount(4)
                     .setOnColorSelectedListener(new SpectrumDialog.OnColorSelectedListener() {
@@ -386,7 +388,6 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
                             }
                         }
                     }).build();
-//            dialog.setCancelable(false);
             dialog.show(getSupportFragmentManager(), getString(R.string.fragment_picker));
         } catch (Resources.NotFoundException e) {
             e.printStackTrace();
@@ -403,7 +404,7 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
     @Override
     public void displayUnit(List<Unit> unitList) {
         try {
-            unitSelected = unitList.get(FIRST_UNIT);
+            unitSelected = unitList.get(ConstantKey.FIRST_UNIT);
             if (unitSelected == ConstantKey.UNIT_NO_SELECT) {
                 tvUnit.setHint(getString(R.string.select_unit));
             } else {
@@ -414,11 +415,21 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
         }
     }
 
+    /**
+     * Mục đích Methob: Lưu món thành công rồi load lại list ở màn hình chính
+     *
+     * @created_by tdcong
+     * @date 6/3/2019
+     */
     @Override
     public void saveNewDishSuccess() {
-        Intent intentBroadCast = new Intent(ConstantKey.ACTION_NOTIFY_DATA);
-        sendBroadcast(intentBroadCast);
-        finish();
+        try {
+            Intent intentBroadCast = new Intent(ConstantKey.ACTION_NOTIFY_DATA);
+            sendBroadcast(intentBroadCast);
+            finish();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

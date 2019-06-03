@@ -48,6 +48,10 @@ import vn.com.misa.CUKCUKLite.util.AppUtil;
 import vn.com.misa.CUKCUKLite.util.ConstantKey;
 import vn.com.misa.CUKCUKLite.util.helper.Converter;
 
+import static vn.com.misa.CUKCUKLite.util.ConstantKey.COLOR_DEF;
+import static vn.com.misa.CUKCUKLite.util.ConstantKey.REQUEST_CODE;
+import static vn.com.misa.CUKCUKLite.util.ConstantKey.RESULT_CODE;
+
 /**
  * Lớp cập nhật món ăn
  *
@@ -100,10 +104,7 @@ public class EditDishActivity extends AppCompatActivity implements IChooseUnitCo
     Unit unitSelected;
     int foodID;
     String foodStatus = "";
-    final int REQUEST_CODE = 0;
-    final int RESULT_CODE = 1;
     private int selectedColor;
-    private static final int COLOR_DEF = -14235942;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -219,12 +220,6 @@ public class EditDishActivity extends AppCompatActivity implements IChooseUnitCo
                     showConfirmDialog();
                     break;
                 case R.id.tvUnit:
-                    try {
-                        sendUnitSelected();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    break;
                 case R.id.ivSelectUnit:
                     try {
                         sendUnitSelected();
@@ -282,12 +277,13 @@ public class EditDishActivity extends AppCompatActivity implements IChooseUnitCo
      */
     private void setDetailDish(Dish detailDish) {
         try {
-            String unitName = ConstantKey.VALUE_EMPTY;
+            String unitName;
             //láy ra đơn vị đã chọn dựa theo với id món hiện tại
             unitSelected = iPresenterUnit.getUnit(detailDish.getUnitID());
             //lấy các giá trị gán vào thuộc tính
             foodID = detailDish.getDishID();
             String dishName = detailDish.getDishName();
+            //định dạng hiển thị giá bán
             String dishPrice = NumberFormat.getIntegerInstance(Locale.GERMAN).format(detailDish.getDishPrice());
             String icon = detailDish.getDishIcon();
             String foodBackgroundColor = detailDish.getColorBackground();
@@ -320,6 +316,7 @@ public class EditDishActivity extends AppCompatActivity implements IChooseUnitCo
      */
     private void updateDish() {
         try {
+            //kiểm tra form nếu đúng thì cập nhập
             if (validateFormEditDish()) {
                 String foodName = etDishName.getText().toString().trim();
                 long foodPrice = Converter.convertToLong(etPrice.getText().toString().trim());
