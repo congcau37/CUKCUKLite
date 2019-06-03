@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -24,6 +25,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import vn.com.misa.CUKCUKLite.R;
+import vn.com.misa.CUKCUKLite.screen.adddish.AddDishActivity;
+import vn.com.misa.CUKCUKLite.screen.editdish.EditDishActivity;
 import vn.com.misa.CUKCUKLite.util.ConstantKey;
 
 @SuppressLint("ValidFragment")
@@ -35,23 +38,23 @@ public class IconPickerDialog extends DialogFragment implements IconPickerAdapte
     TextView tvCancel;
     Unbinder unbinder;
 
+    Activity mActivity;
+
     private IconPickerAdapter adapter;
-    private Activity mActivity;
     View view;
-
-//    public IconPickerDialog(AddDishActivity addDishActivity) {
-//        mActivity = addDishActivity;
-//    }
-//
-//    public IconPickerDialog(EditDishActivity editDishActivity) {
-//        mActivity = editDishActivity;
-//    }
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setStyle(DialogFragment.STYLE_NORMAL, R.style.AppTheme_NoActionBar);
+
+    }
+
+    public IconPickerDialog(AddDishActivity addDishActivity) {
+        mActivity = addDishActivity;
+    }
+
+    public IconPickerDialog(EditDishActivity editDishActivity) {
+        mActivity = editDishActivity;
     }
 
     @Override
@@ -59,6 +62,7 @@ public class IconPickerDialog extends DialogFragment implements IconPickerAdapte
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_icon_picker_dialog, container, false);
         unbinder = ButterKnife.bind(this, view);
+        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         return view;
     }
 
@@ -69,10 +73,9 @@ public class IconPickerDialog extends DialogFragment implements IconPickerAdapte
         try {
             String[] images = getContext().getAssets().list(ConstantKey.PACKAGE_ICON_DEFAULT);
             List<String> listImages = new ArrayList<String>(Arrays.asList(images));
-            rvIcon = view.findViewById(R.id.rvIcon);
             adapter = new IconPickerAdapter(getContext(), listImages, this);
             rvIcon.setAdapter(adapter);
-            rvIcon.setLayoutManager(new GridLayoutManager(getActivity(), 5));
+            rvIcon.setLayoutManager(new GridLayoutManager(getActivity(), ConstantKey.VALUE_SPAN_COUNT));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -80,12 +83,34 @@ public class IconPickerDialog extends DialogFragment implements IconPickerAdapte
 
     @Override
     public void onClick(View v) {
-
+        switch (v.getId()) {
+            case R.id.tvCancel:
+                dismiss();
+                break;
+        }
     }
 
     @Override
     public void onClick(String icon) {
+        try {
+            if (mActivity instanceof AddDishActivity) {
+                ((AddDishActivity) mActivity).setIcon(icon);
+            } else if (mActivity instanceof EditDishActivity) {
+                ((EditDishActivity) mActivity).setIcon(icon);
+            }
+            dismiss();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        ViewGroup.LayoutParams params = getDialog().getWindow().getAttributes();
+        params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        params.height = ViewGroup.LayoutParams.MATCH_PARENT;
+        getDialog().getWindow().setAttributes((android.view.WindowManager.LayoutParams) params);
     }
 
     @Override

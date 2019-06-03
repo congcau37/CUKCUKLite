@@ -4,4 +4,6 @@ import vn.com.misa.CUKCUKLite.model.Dish;
 
 public interface IEditDishModel {
     boolean updateDish(Dish dish);
+
+    boolean deleteDish(Dish dish);
 }

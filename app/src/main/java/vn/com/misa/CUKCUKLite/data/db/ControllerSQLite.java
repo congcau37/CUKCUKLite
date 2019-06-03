@@ -312,4 +312,27 @@ public class ControllerSQLite extends DBOpenHeplper {
         }
         return result;
     }
+
+    /**
+     * Mục đích Methob: Hàm xóa món ăn
+     * @created_by tdcong
+     * @date 6/3/2019
+     * @param:
+     * @return:
+     */
+    public boolean deleteDish(Dish dish) {
+        boolean result = false;
+        try {
+            SQLiteDatabase db = getWritableDatabase();
+            int dishID = dish.getDishID();
+            long rs = db.delete(ConstantKey.TABLE_NAME_DISH, ConstantKey.COLUMN_NAME_DISH_ID + "=" + dishID, null);
+            if (rs > 0) {
+                result = true;
+            }
+            db.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 }

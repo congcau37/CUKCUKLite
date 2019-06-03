@@ -2,6 +2,9 @@ package vn.com.misa.CUKCUKLite.screen.menu;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +13,9 @@ import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -89,10 +95,11 @@ public class MenuAdapter extends BaseAdapter {
             } else {
                 viewHolder.tvStopSell.setVisibility(View.INVISIBLE);
             }
-            InputStream ims = mContext.getAssets().open(ConstantKey.PACKAGE_ICON + dish.getDishIcon() + ConstantKey.TAIL_ICON);
-            Drawable d = Drawable.createFromStream(ims, null);
-            viewHolder.ivFood.setImageDrawable(d);
-            ims.close();
+//            InputStream ims = mContext.getAssets().open(ConstantKey.PACKAGE_ICON + dish.getDishIcon() + ConstantKey.TAIL_ICON);
+//            Drawable d = Drawable.createFromStream(ims, null);
+//            viewHolder.ivFood.setImageDrawable(d);
+//            ims.close();
+            Glide.with(mContext).load(getBitmapFromAssets(dish.getDishIcon())).apply(new RequestOptions().centerCrop()).into(viewHolder.ivFood);
             viewHolder.frmBackgroundColor.setBackground(AppUtil.createCircleBackground(backgroundCode));
         } catch (Exception e) {
             e.printStackTrace();
@@ -122,5 +129,16 @@ public class MenuAdapter extends BaseAdapter {
                 e.printStackTrace();
             }
         }
+    }
+
+    Bitmap getBitmapFromAssets(String fileName) {
+        AssetManager assetManager = mContext.getAssets();
+        InputStream istr = null;
+        try {
+            istr = assetManager.open(ConstantKey.PACKAGE_ICON + fileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return BitmapFactory.decodeStream(istr);
     }
 }

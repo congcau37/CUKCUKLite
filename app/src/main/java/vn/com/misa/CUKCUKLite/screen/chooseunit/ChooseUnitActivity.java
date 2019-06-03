@@ -62,7 +62,7 @@ public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnit
     protected void onCreate(Bundle savedInstanceState) {
         try {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_form_select_unit);
+            setContentView(R.layout.activity_select_unit);
             ButterKnife.bind(this);
             initPresenter();
             initToolBar();
@@ -117,10 +117,8 @@ public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnit
                 case R.id.ivBack:
                     try {
                         unitSelected = adapter.getUnitCurrentSelected();
-                        if(unitSelected == ConstantKey.UNIT_NO_SELECT){
+                        if(unitSelected == ConstantKey.UNIT_NO_SELECT) {
                             sendUnitSelected(ConstantKey.UNIT_NO_SELECT);
-                        }else {
-                            sendUnitSelected(unitSelected);
                         }
                         finish();
                     } catch (Exception e) {

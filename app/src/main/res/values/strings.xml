@@ -38,6 +38,7 @@
     <string name="sign_in">Đăng ký</string>
     <string name="status">Trạng thái</string>
     <string name="yes">Có</string>
+    <string name="ok">Chọn</string>
     <string name="you_can_delete_unit"><![CDATA[Bạn có chắc chắn muốn xóa đơn vị tính <font style=bold;color=black></font> không?]]></string>
     <string name="unit_used">Đơn vị đã được sử dụng. Bạn không được phép xóa</string>
     <string name="not_select_unit">Bạn chưa chọn đơn vị</string>
@@ -65,7 +66,8 @@
     <string name="change_pass">Đặt mật khẩu</string>
     <string name="menu">Thực đơn</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fragment_picker">fragment_picker</string>
+    <string name="pick_color">Chọn màu</string>
+    <string name="confirm_remove_dish">Bạn có chắc chắn muốn xóa món %s không?</string>
 
 </resources>

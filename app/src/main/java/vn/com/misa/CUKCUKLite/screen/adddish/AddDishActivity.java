@@ -1,15 +1,15 @@
 package vn.com.misa.CUKCUKLite.screen.adddish;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.ColorInt;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
 import android.text.Html;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -19,6 +19,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.thebluealliance.spectrum.SpectrumDialog;
 
 import java.util.List;
 
@@ -33,6 +36,7 @@ import vn.com.misa.CUKCUKLite.screen.chooseunit.ChooseUnitModel;
 import vn.com.misa.CUKCUKLite.screen.chooseunit.ChooseUnitPresenter;
 import vn.com.misa.CUKCUKLite.screen.chooseunit.IChooseUnitContract;
 import vn.com.misa.CUKCUKLite.screen.dialogicon.IconPickerDialog;
+import vn.com.misa.CUKCUKLite.util.AppUtil;
 import vn.com.misa.CUKCUKLite.util.ConstantKey;
 import vn.com.misa.CUKCUKLite.util.helper.Converter;
 
@@ -87,13 +91,16 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
     final int RESULT_CODE = 1;
     final int FIRST_UNIT = 0;
     Unit unitSelected; // đơn vị đã chọn, mặc định là đầu tiên
+    private int selectedColor;
+    private Dish mDish = new Dish();
+    private static final int COLOR_DEF = -14235942;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         try {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_form_add_edit_dish);
+            setContentView(R.layout.activity_add_edit_dish);
             ButterKnife.bind(this);
             initPresenter();
             initToolBar();
@@ -120,8 +127,6 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
      *
      * @Create_by: trand
      * @Date: 5/28/2019
-     * @Param:
-     * @Return:
      */
     private void initToolBar() {
         try {
@@ -134,8 +139,6 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
     /**
      * Hàm ánh xạ view
      *
-     * @param
-     * @return
      * @created_by tdcong
      * @date 5/23/2019
      */
@@ -152,38 +155,22 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
             }
 
             etPrice.setText("0");
-            etPrice.addTextChangedListener(new TextWatcher() {
-                public void onTextChanged(CharSequence s, int start, int before,
-                                          int count) {
-                    if (etPrice.getText().toString().equals(ConstantKey.VALUE_EMPTY)) {
-                        etPrice.setText(ConstantKey.VALUE_ZERO);
-                    }
-                }
-
-                public void beforeTextChanged(CharSequence s, int start, int count,
-                                              int after) {
-
-                }
-
-                public void afterTextChanged(Editable s) {
-
-                }
-            });
+            tvUnit.setText(unitSelected.getUnitName());
+            btnDelete.setVisibility(View.GONE);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        tvUnit.setText(unitSelected.getUnitName());
     }
 
     /**
-     * Hàm xử lý các sự kiên
+     * Hàm xử lý các sự kiên onclick
      *
      * @param
      * @return
      * @created_by tdcong
      * @date 5/23/2019
      */
-    @OnClick({R.id.ivBack, R.id.tvSaveDish, R.id.tvUnit, R.id.ivSelectUnit, R.id.btnSave, R.id.frmBackgroundIcon})
+    @OnClick({R.id.ivBack, R.id.tvSaveDish, R.id.tvUnit, R.id.ivSelectUnit, R.id.btnSave, R.id.frmBackgroundIcon, R.id.frmBackgroundColor})
     public void onViewClicked(View view) {
         try {
             switch (view.getId()) {
@@ -196,7 +183,7 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
                     break;
                 case R.id.tvSaveDish:
                 case R.id.btnSave:
-                    if (validateForm())
+                    if (validateFormAddDish())
                         saveNewDish();
                     break;
                 case R.id.tvUnit:
@@ -220,6 +207,13 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
                         e.printStackTrace();
                     }
                     break;
+                case R.id.frmBackgroundColor:
+                    try {
+                        showDialogPickColor();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -231,18 +225,26 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
      *
      * @Create_by: trand
      * @Date: 5/28/2019
-     * @Param:
-     * @Return:
      */
     private void saveNewDish() {
         try {
+            int unitID;
             String dishName = etDishName.getText().toString().trim();
             long dishPrice = Converter.convertToLong(etPrice.getText().toString().trim());
-            int unitID;
             unitID = getUnitSelected().getUnitID();
-            String backgroundColor = ConstantKey.COLOR_DEFAULT;
-            String foodIcon = ConstantKey.PACKAGE_ICON_DEFAULT;
-            Dish dish = new Dish(ConstantKey.VALUE_ZERO, dishName, dishPrice, unitID, backgroundColor, foodIcon, ConstantKey.SELLING);
+            String backgroundColor = mDish.getColorBackground();
+            String dishIcon = mDish.getDishIcon();
+            if (backgroundColor == null) {
+                backgroundColor = ConstantKey.COLOR_DEFAULT;
+            } else {
+                backgroundColor = mDish.getColorBackground();
+            }
+            if (dishIcon == null) {
+                dishIcon = ConstantKey.ICON_DEFAULT;
+            } else {
+                dishIcon = mDish.getDishIcon();
+            }
+            Dish dish = new Dish(ConstantKey.VALUE_ZERO, dishName, dishPrice, unitID, backgroundColor, dishIcon, ConstantKey.SELLING);
             iPresenterDish.saveNewDish(dish);
         } catch (Exception e) {
             e.printStackTrace();
@@ -250,40 +252,46 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
     }
 
     /**
-     * Mục đích Methob:
+     * Mục đích Methob: Kiểm tra form khi người dung nhập
      *
      * @created_by tdcong
      * @date 5/31/2019
      */
-    private boolean validateForm() {
-        String error = ConstantKey.VALUE_EMPTY;
-        String dishName = etDishName.getText().toString().trim();
-        if (dishName.equals(ConstantKey.VALUE_EMPTY)) {
-            error = getString(R.string.not_empty_dish_name);
-            Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
-            return false;
+    private boolean validateFormAddDish() {
+        try {
+            String error = ConstantKey.VALUE_EMPTY;
+            String dishName = etDishName.getText().toString().trim();
+            if (dishName.equals(ConstantKey.VALUE_EMPTY)) {
+                error = getString(R.string.not_empty_dish_name);
+                Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return true;
     }
 
     /**
-     * Hàm gửi đơn vị đã chọn
+     * Hàm gửi đơn vị đã chọn sang màn hình đơn vị tính
      *
      * @Create_by: trand
      * @Date: 5/28/2019
-     * @Param:
-     * @Return:
      */
     private void sendUnitSelected() {
-        Intent intent = new Intent(this, ChooseUnitActivity.class);
-        Bundle bundle = new Bundle();
-        if (getUnitSelected() != ConstantKey.UNIT_NO_SELECT) {
-            bundle.putSerializable(ConstantKey.KEY_SEND_UNIT, getUnitSelected());
-        } else {
-            bundle.putSerializable(ConstantKey.KEY_SEND_UNIT, null);
+        try {
+            Intent intent = new Intent(this, ChooseUnitActivity.class);
+            Bundle bundle = new Bundle();
+            if (getUnitSelected() != ConstantKey.UNIT_NO_SELECT) {
+                bundle.putSerializable(ConstantKey.KEY_SEND_UNIT, getUnitSelected());
+            } else {
+                bundle.putSerializable(ConstantKey.KEY_SEND_UNIT, null);
+            }
+            intent.putExtra(ConstantKey.KEY_SEND_UNIT, bundle);
+            startActivityForResult(intent, REQUEST_CODE);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        intent.putExtra(ConstantKey.KEY_SEND_UNIT, bundle);
-        startActivityForResult(intent, REQUEST_CODE);
     }
 
     /**
@@ -297,12 +305,11 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
     }
 
     /**
-     * Hàm trả về kết quả đơn vị đã chọn bên màn hình đơn vị
+     * Hàm trả về kết quả đơn vị đã chọn bên màn hình đơn vị tính
      *
      * @Create_by: trand
      * @Date: 5/27/2019
      * @Param: requestCode, resultCode, data
-     * @Return:
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -320,18 +327,78 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
         }
     }
 
-    public void showIconPickerDialog(){
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        IconPickerDialog iconPickerDialog = new IconPickerDialog();
-        iconPickerDialog.show(fragmentManager,ConstantKey.DIALOG);
+    /**
+     * Mục đích Methob:
+     *
+     * @created_by tdcong
+     * @date 6/3/2019
+     */
+    public void setIcon(String icon) {
+        try {
+            Glide.with(this).load(iPresenterDish.getBitmapFromAssets(this, icon)).into(ivDish);
+            mDish.setDishIcon(icon);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Mục đích Methob: Hiển thị dialog chọn icon
+     *
+     * @created_by tdcong
+     * @date 6/3/2019
+     */
+    public void showIconPickerDialog() {
+        try {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            IconPickerDialog iconPickerDialog = new IconPickerDialog(this);
+            iconPickerDialog.show(fragmentManager, ConstantKey.DIALOG);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Mục đích Methob:
+     *
+     * @created_by tdcong
+     * @date 6/3/2019
+     */
+    void showDialogPickColor() {
+        try {
+            final SpectrumDialog dialog = new SpectrumDialog.Builder(this)
+                    .setTitle(getString(R.string.pick_color))
+                    .setSelectedColor(selectedColor != 0 ? selectedColor : COLOR_DEF)
+                    .setColors(R.array.arr_colors)
+//                    .setFixedColumnCount(4)
+                    .setOnColorSelectedListener(new SpectrumDialog.OnColorSelectedListener() {
+                        @Override
+                        public void onColorSelected(boolean positiveResult, @ColorInt int color) {
+                            if (positiveResult) {
+                                try {
+                                    frmColor.setBackground(AppUtil.setCircleBackground(color, AddDishActivity.this));
+                                    frmIcon.setBackground(AppUtil.setCircleBackground(color, AddDishActivity.this));
+                                    selectedColor = color;
+                                    mDish.setColorBackground(Converter.covertColorToHexString(color));
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }).build();
+//            dialog.setCancelable(false);
+            dialog.show(getSupportFragmentManager(), getString(R.string.fragment_picker));
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Mục đích Methob:
+     *
      * @created_by tdcong
      * @date 5/31/2019
-     * @param:
-     * @return:
+     * @param: unitList: danh sách đơn vị
      */
     @Override
     public void displayUnit(List<Unit> unitList) {
@@ -345,6 +412,18 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void saveNewDishSuccess() {
+        Intent intentBroadCast = new Intent(ConstantKey.ACTION_NOTIFY_DATA);
+        sendBroadcast(intentBroadCast);
+        finish();
+    }
+
+    @Override
+    public void saveNewDishFail(String error) {
+
     }
 
     @Override
@@ -374,18 +453,6 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
 
     @Override
     public void deleteUnitFail() {
-
-    }
-
-    @Override
-    public void saveNewDishSuccess() {
-        Intent intentBroadCast = new Intent(ConstantKey.ACTION_NOTIFY_DATA);
-        sendBroadcast(intentBroadCast);
-        finish();
-    }
-
-    @Override
-    public void saveNewDishFail(String error) {
 
     }
 }

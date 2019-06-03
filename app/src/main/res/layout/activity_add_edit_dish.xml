@@ -186,7 +186,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="@dimen/app_margin_large"
-                android:background="@drawable/bg_color_round">
+                android:background="@drawable/bg_circle">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -210,13 +210,14 @@
                     android:id="@+id/frmBackgroundIcon"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:background="@drawable/bg_color_round">
+                    android:background="@drawable/bg_circle">
 
                     <ImageView
                         android:id="@+id/ivDish"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:scaleType="fitXY"
+                        android:src="@drawable/ic_default"
                         android:layout_gravity="center"/>
                 </FrameLayout>
             </LinearLayout>
@@ -251,16 +252,17 @@
         android:gravity="center"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/app_margin_small"
+        android:layout_marginRight="@dimen/app_margin_small"
+        android:layout_marginLeft="@dimen/app_margin_small"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <Button
             android:id="@+id/btnDelete"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/app_margin_small"
             android:layout_weight="1"
-            android:layout_marginLeft="@dimen/app_margin_medium"
-            android:layout_marginRight="@dimen/app_margin_medium"
             android:background="@drawable/selector_button_delete_popup"
             android:text="@string/delete"
             android:textColor="@color/color_white"
@@ -268,10 +270,9 @@
 
         <Button
             android:id="@+id/btnSave"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginRight="@dimen/app_margin_medium"
             android:background="@drawable/selector_button_ok_popup"
             android:text="@string/save"
             android:textColor="@color/color_white"

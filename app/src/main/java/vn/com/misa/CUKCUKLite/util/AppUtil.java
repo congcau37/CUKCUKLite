@@ -1,7 +1,12 @@
 package vn.com.misa.CUKCUKLite.util;
 
+import android.content.Context;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+
+import vn.com.misa.CUKCUKLite.R;
 
 /**
  *
@@ -28,5 +33,18 @@ public class AppUtil {
             e.printStackTrace();
         }
         return backgroundCircle;
+    }
+
+    /**
+     * Mục đích Methob:
+     * @created_by tdcong
+     * @date 6/3/2019
+     * @param:
+     * @return:
+     */
+    public static Drawable setCircleBackground(int color, Context context){
+        Drawable drawableBg = context.getResources().getDrawable(R.drawable.bg_circle);
+        drawableBg.setColorFilter(color, PorterDuff.Mode.SRC);
+        return drawableBg;
     }
 }

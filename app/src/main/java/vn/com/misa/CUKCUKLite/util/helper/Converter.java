@@ -26,16 +26,13 @@ public class Converter {
         return status;
     }
 
-    public static boolean checkUnitSelectedDeleted(boolean dStatus) {
-        boolean status;
-        if (!dStatus) {
-            status = false;
-        } else {
-            status = true;
-        }
-        return status;
-    }
-
+    /**
+     * Mục đích Methob:
+     * @created_by tdcong
+     * @date 6/3/2019
+     * @param: number số dạng chuỗi
+     * @return: long tiền
+     */
     public static long convertToLong(String number) {
         String currency="";
         String [] splitNumber = number.split("\\.");
@@ -45,9 +42,7 @@ public class Converter {
         return Long.parseLong(String.valueOf(currency));
     }
 
-    public static String convertToCurrency(long number) {
-        NumberFormat formatter = new DecimalFormat("###,###,###.##");
-        return formatter.format(number);
+    public static String covertColorToHexString(int color){
+        return String.format("#%06X", 0xFFFFFF & color);
     }
-
 }

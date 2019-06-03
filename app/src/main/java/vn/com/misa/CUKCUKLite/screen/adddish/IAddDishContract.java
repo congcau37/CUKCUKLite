@@ -1,5 +1,8 @@
 package vn.com.misa.CUKCUKLite.screen.adddish;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+
 import vn.com.misa.CUKCUKLite.model.Dish;
 
 /**
@@ -18,6 +21,8 @@ public interface IAddDishContract {
     interface IPresenter {
 
         void saveNewDish(Dish newDish);
+
+        Bitmap getBitmapFromAssets(Context context, String icon);
 
     }
 }

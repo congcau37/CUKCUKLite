@@ -1,8 +1,15 @@
 package vn.com.misa.CUKCUKLite.screen.editdish;
 
 import android.content.Context;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 import vn.com.misa.CUKCUKLite.model.Dish;
+import vn.com.misa.CUKCUKLite.util.ConstantKey;
 
 /**
  * Lớp: 
@@ -42,5 +49,45 @@ public class EditDishPresenter implements IEditDishContract.IPresenter{
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Mục đích Methob: Xóa món
+     * @created_by tdcong
+     * @date 6/3/2019
+     * @param: dish món
+     */
+    @Override
+    public void deleteDish(Dish dish) {
+        boolean result;
+        try {
+            result = iAddDishModel.deleteDish(dish);
+            if (result == true) {
+                iView.deleteDishSuccess();
+            } else {
+                iView.deleteDishFail();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Mục đích Methob: lấy ảnh từ asset
+     * @created_by tdcong
+     * @date 6/3/2019
+     * @param: context, icon
+     * @return: bitmap
+     */
+    @Override
+    public Bitmap getBitmapFromAssets(Context context, String icon) {
+        AssetManager assetManager = context.getAssets();
+        InputStream istr = null;
+        try {
+            istr = assetManager.open(ConstantKey.PACKAGE_ICON + icon);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return BitmapFactory.decodeStream(istr);
     }
 }

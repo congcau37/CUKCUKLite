@@ -154,8 +154,6 @@ public class LoginPhoneActivity extends AppCompatActivity implements ILoginPhone
      * Hàm lưu trạng thái đăng nhập
      * @Create_by: trand
      * @Date: 5/28/2019
-     * @Param:
-     * @Return:
      */
     public void savingPreferences() {
         try {

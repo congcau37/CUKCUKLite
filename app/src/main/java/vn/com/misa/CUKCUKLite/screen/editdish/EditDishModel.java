@@ -32,4 +32,22 @@ public class EditDishModel extends DBOpenHeplper implements IEditDishModel {
         }
         return result;
     }
+
+    /**
+     * Mục đích Methob:
+     * @created_by tdcong
+     * @date 6/3/2019
+     * @param: dish:món ăn
+     * @return: boolean
+     */
+    @Override
+    public boolean deleteDish(Dish dish) {
+        boolean result = false;
+        try {
+            result = controllerSQLite.deleteDish(dish);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 }

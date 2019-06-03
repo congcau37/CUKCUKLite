@@ -1,8 +1,15 @@
 package vn.com.misa.CUKCUKLite.screen.adddish;
 
 import android.content.Context;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 import vn.com.misa.CUKCUKLite.model.Dish;
+import vn.com.misa.CUKCUKLite.util.ConstantKey;
 
 /**
  * Lớp presenter món ăn
@@ -50,5 +57,24 @@ public class AddDishPresenter implements IAddDishContract.IPresenter {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Mục đích Methob:
+     * @created_by tdcong
+     * @date 6/3/2019
+     * @param: context, icon
+     * @return: bitmap
+     */
+    @Override
+    public Bitmap getBitmapFromAssets(Context context, String icon) {
+        AssetManager assetManager = context.getAssets();
+        InputStream istr = null;
+        try {
+            istr = assetManager.open(ConstantKey.PACKAGE_ICON + icon);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return BitmapFactory.decodeStream(istr);
     }
 }
