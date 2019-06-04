@@ -39,6 +39,7 @@ import butterknife.OnClick;
 import vn.com.misa.CUKCUKLite.R;
 import vn.com.misa.CUKCUKLite.model.Dish;
 import vn.com.misa.CUKCUKLite.model.Unit;
+import vn.com.misa.CUKCUKLite.screen.caculator.CalculatorFragment;
 import vn.com.misa.CUKCUKLite.screen.chooseunit.ChooseUnitActivity;
 import vn.com.misa.CUKCUKLite.screen.chooseunit.IChooseUnitContract;
 import vn.com.misa.CUKCUKLite.screen.chooseunit.ChooseUnitModel;
@@ -200,7 +201,7 @@ public class EditDishActivity extends AppCompatActivity implements IChooseUnitCo
      * @created_by tdcong
      * @date 5/22/2019
      */
-    @OnClick({R.id.ivBack, R.id.tvSaveDish, R.id.tvUnit, R.id.cbStatus, R.id.ivSelectUnit, R.id.btnSave, R.id.btnDelete, R.id.frmBackgroundColor, R.id.frmBackgroundIcon})
+    @OnClick({R.id.ivBack, R.id.tvSaveDish, R.id.tvUnit, R.id.cbStatus, R.id.ivSelectUnit, R.id.btnSave, R.id.btnDelete, R.id.frmBackgroundColor, R.id.frmBackgroundIcon,R.id.etPrice})
     public void onViewClicked(View view) {
         try {
             switch (view.getId()) {
@@ -239,6 +240,13 @@ public class EditDishActivity extends AppCompatActivity implements IChooseUnitCo
                 case R.id.frmBackgroundIcon:
                     try {
                         showIconPickerDialog();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case R.id.etPrice:
+                    try {
+                        showDialogCalculator();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -289,6 +297,7 @@ public class EditDishActivity extends AppCompatActivity implements IChooseUnitCo
             String foodBackgroundColor = detailDish.getColorBackground();
             String foodBackgroundIcon = detailDish.getColorBackground();
             boolean Status = Converter.convertStatusMenu(detailDish.getDishStatus());
+            //Hiển thị dữ liệu lên view
             if (unitSelected == null) {
                 unitSelected = ConstantKey.UNIT_NO_SELECT;
                 tvUnit.setHint(getString(R.string.select_unit));
@@ -318,12 +327,13 @@ public class EditDishActivity extends AppCompatActivity implements IChooseUnitCo
         try {
             //kiểm tra form nếu đúng thì cập nhập
             if (validateFormEditDish()) {
-                String foodName = etDishName.getText().toString().trim();
-                long foodPrice = Converter.convertToLong(etPrice.getText().toString().trim());
                 Dish dish = new Dish();
+                String foodName = etDishName.getText().toString().trim();
+                long foodPrice = Converter.getNumberInput(etPrice.getText().toString().trim());
                 dish.setDishID(detailDish.getDishID());
                 String backgroundColor = (detailDish.getColorBackground());
                 String foodIcon = detailDish.getDishIcon();
+                //gán giá trị mới cập nhật cho món
                 if (unitSelected == null) {
                     dish.setUnitID(ConstantKey.UNIT_NO_SELECT.getUnitID());
                 } else {
@@ -334,6 +344,7 @@ public class EditDishActivity extends AppCompatActivity implements IChooseUnitCo
                 dish.setColorBackground(backgroundColor);
                 dish.setDishIcon(foodIcon);
                 dish.setDishStatus(foodStatus);
+                //gọi hàm cập nhật món
                 iPresenterDish.updateDish(dish);
             }
         } catch (Exception e) {
@@ -435,6 +446,23 @@ public class EditDishActivity extends AppCompatActivity implements IChooseUnitCo
     }
 
     /**
+     * Hàm hiển thị máy tính
+     * @Create_by: trand
+     * @Date: 6/4/2019
+     */
+    public void showDialogCalculator(){
+        String price = etPrice.getText().toString();
+        FragmentManager fm = getSupportFragmentManager();
+        CalculatorFragment calculatorFragment = CalculatorFragment.createInstance(price, new CalculatorFragment.IOnClickDone() {
+            @Override
+            public void onClickDone(long price, String priceShow) {
+                setPrice(price, priceShow);
+            }
+        });
+        calculatorFragment.show(fm, getString(R.string.dialog_calculator));
+    }
+
+    /**
      * Mục đích Methob: kiểm tra form chỉnh sửa đơn vị khi người dùng nhập
      *
      * @created_by tdcong
@@ -468,6 +496,14 @@ public class EditDishActivity extends AppCompatActivity implements IChooseUnitCo
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Mục đích method: Hiển thị và thêm giá trị trả về của máy tính
+     */
+    public void setPrice(long price, String priceShow) {
+        detailDish.setDishPrice(price);
+        etPrice.setText(priceShow);
     }
 
     /**

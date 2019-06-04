@@ -1,4 +1,4 @@
-package vn.com.misa.CUKCUKLite.data.db;
+package vn.com.misa.CUKCUKLite.data;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import vn.com.misa.CUKCUKLite.model.Dish;
@@ -13,7 +14,7 @@ import vn.com.misa.CUKCUKLite.model.Unit;
 import vn.com.misa.CUKCUKLite.util.ConstantKey;
 
 /**
- * Lớp chứa các phương thức truy vấn
+ * Lớp chứa các phương thức truy vấn đến csdl
  *
  * @Create_by: trand
  * @Date: 5/28/2019
@@ -32,7 +33,7 @@ public class ControllerSQLite extends DBOpenHeplper {
      * @Param:
      * @Return: List<Dish>
      */
-    public List<Dish> getFoodFromDatabase() {
+    public List<Dish> getDishFromDatabase() {
         List<Dish> dishList = new ArrayList<>();
         try {
             SQLiteDatabase db = getReadableDatabase();
@@ -51,6 +52,7 @@ public class ControllerSQLite extends DBOpenHeplper {
             }
             cursor.close();
             db.close();
+            Collections.reverse(dishList);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -79,6 +81,7 @@ public class ControllerSQLite extends DBOpenHeplper {
             }
             cursor.close();
             db.close();
+            Collections.reverse(unitList);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -100,7 +103,7 @@ public class ControllerSQLite extends DBOpenHeplper {
             ContentValues values = new ContentValues();
             values.put(ConstantKey.COLUMN_NAME_UNIT_NAME, newUnitName);
             long rs = db.insert(ConstantKey.TABLE_NAME_UNIT, null, values);
-            if (rs > 0) {
+            if (rs > ConstantKey.VALUE_ZERO) {
                 result = true;
             }
             db.close();
@@ -147,7 +150,7 @@ public class ControllerSQLite extends DBOpenHeplper {
      * @Return: unitID
      */
     public int getUnitID(String newUnitName) {
-        int unitID = 0;
+        int unitID = ConstantKey.VALUE_ZERO;
         try {
             SQLiteDatabase db = getReadableDatabase();
             Cursor cursor = db.rawQuery("SELECT * FROM unit WHERE unitName= '" + newUnitName + "'", null);
@@ -200,7 +203,7 @@ public class ControllerSQLite extends DBOpenHeplper {
         try {
             SQLiteDatabase db = getReadableDatabase();
             Cursor cursor = db.rawQuery("SELECT * FROM dish WHERE unitID = '" + unitID + "'", null);
-            if (cursor.getCount() > 0) {
+            if (cursor.getCount() > ConstantKey.VALUE_ZERO) {
                 return true;
             }
             cursor.close();
@@ -225,7 +228,7 @@ public class ControllerSQLite extends DBOpenHeplper {
                 try {
                     SQLiteDatabase db = getWritableDatabase();
                     long rs = db.delete(ConstantKey.TABLE_NAME_UNIT, ConstantKey.COLUMN_NAME_UNIT_ID + "=" + unitID, null);
-                    if (rs > 0) {
+                    if (rs > ConstantKey.VALUE_ZERO) {
                         return true;
                     }
                     db.close();
@@ -266,7 +269,7 @@ public class ControllerSQLite extends DBOpenHeplper {
             values.put(ConstantKey.COLUMN_NAME_ICON, Icon);
             values.put(ConstantKey.COLUMN_NAME_STATUS, Status);
             long rs = db.insert(ConstantKey.TABLE_NAME_DISH, null, values);
-            if (rs > 0) {
+            if (rs > ConstantKey.VALUE_ZERO) {
                 result = true;
             }
             db.close();
@@ -303,7 +306,7 @@ public class ControllerSQLite extends DBOpenHeplper {
             values.put(ConstantKey.COLUMN_NAME_ICON, Icon);
             values.put(ConstantKey.COLUMN_NAME_STATUS, Status);
             long rs = db.update(ConstantKey.TABLE_NAME_DISH, values, ConstantKey.COLUMN_NAME_DISH_ID + "=" + dishID, null);
-            if (rs > 0) {
+            if (rs > ConstantKey.VALUE_ZERO) {
                 result = true;
             }
             db.close();
@@ -326,7 +329,7 @@ public class ControllerSQLite extends DBOpenHeplper {
             SQLiteDatabase db = getWritableDatabase();
             int dishID = dish.getDishID();
             long rs = db.delete(ConstantKey.TABLE_NAME_DISH, ConstantKey.COLUMN_NAME_DISH_ID + "=" + dishID, null);
-            if (rs > 0) {
+            if (rs > ConstantKey.VALUE_ZERO) {
                 result = true;
             }
             db.close();

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rlItemContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="6dp"
+    android:background="@drawable/bg_border_radius_gray"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center"
+    android:minWidth="64dp"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/tvInputKe"
+        style="@style/FontButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="@dimen/item_input_min_w"
+        android:padding="@dimen/item_input_padding" />
+
+    <TextView
+        android:id="@+id/tvInputKey"
+        style="@style/FontBodyTextRegular"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/color_black" />
+
+    <ImageView
+        android:id="@+id/ivIconInput"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/app_name"
+        android:visibility="gone"
+        app:srcCompat="@drawable/ic_backspace_red_24dp"
+        tools:ignore="VectorDrawableCompat" />
+</RelativeLayout>

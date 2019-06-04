@@ -40,5 +40,7 @@
     <dimen name="line_thick">1dp</dimen>
     <dimen name="header_h">150dp</dimen>
     <dimen name="list_icon_margin">50dp</dimen>
+    <dimen name="item_input_min_w">64dp</dimen>
+    <dimen name="item_input_padding">10dp</dimen>
 
 </resources>

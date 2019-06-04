@@ -2,8 +2,8 @@ package vn.com.misa.CUKCUKLite.screen.menu;
 
 import android.content.Context;
 
-import vn.com.misa.CUKCUKLite.data.db.ControllerSQLite;
-import vn.com.misa.CUKCUKLite.data.db.DBOpenHeplper;
+import vn.com.misa.CUKCUKLite.data.ControllerSQLite;
+import vn.com.misa.CUKCUKLite.data.DBOpenHeplper;
 
 /**
  * Lớp model thực đơn
@@ -29,7 +29,7 @@ public class MenuModelModel extends DBOpenHeplper implements IMenuModel {
     @Override
     public void getAllFood(IGetAllFoodCallBack callBack) {
         try {
-            callBack.getAllFood(controllerSQLite.getFoodFromDatabase());
+            callBack.getAllFood(controllerSQLite.getDishFromDatabase());
         } catch (Exception e) {
             e.printStackTrace();
         }

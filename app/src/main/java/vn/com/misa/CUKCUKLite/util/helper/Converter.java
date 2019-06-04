@@ -1,6 +1,7 @@
 package vn.com.misa.CUKCUKLite.util.helper;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 
 /**
@@ -27,22 +28,46 @@ public class Converter {
     }
 
     /**
-     * Mục đích Methob:
-     * @created_by tdcong
-     * @date 6/3/2019
-     * @param: number số dạng chuỗi
-     * @return: long tiền
+     *
+     * @Create_by: trand
+     * @Date: 6/4/2019
+     * @Param:
+     * @Return:
      */
-    public static long convertToLong(String number) {
-        String currency="";
-        String [] splitNumber = number.split("\\.");
-        for (String newNumber: splitNumber) {
-        currency += newNumber;
-        }
-        return Long.parseLong(String.valueOf(currency));
-    }
-
     public static String covertColorToHexString(int color){
         return String.format("#%06X", 0xFFFFFF & color);
     }
+
+    /**
+     * chuyển định dạng tiền đã nhập sang kiểu long
+     * @Create_by: trand
+     * @Date: 6/4/2019
+     */
+    public static long getNumberInput(String text) {
+        try {
+            if (text.isEmpty()) {
+                return 0;
+            }
+            text = text.replaceAll("\\.", "");
+            return Long.parseLong(text);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    /**
+     * @Create_by: trand
+     * @Date: 6/4/2019
+     * @Param:
+     * @Return:
+     */
+    public static String formatAmount(long num) {
+        DecimalFormat decimalFormat = new DecimalFormat();
+        DecimalFormatSymbols decimalFormateSymbol = new DecimalFormatSymbols();
+        decimalFormateSymbol.setGroupingSeparator('.');
+        decimalFormat.setDecimalFormatSymbols(decimalFormateSymbol);
+        return decimalFormat.format(num);
+    }
+
 }

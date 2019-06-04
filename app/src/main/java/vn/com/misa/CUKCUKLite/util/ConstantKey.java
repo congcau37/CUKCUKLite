@@ -43,4 +43,10 @@ public class ConstantKey {
     public static final int RESULT_CODE = 1;
     public static final int FIRST_UNIT = 0;
     public static final int COLOR_DEF = -14235942;
+    public static final String JSON_ASSETS = "json/inputkeys.json";
+    public static final int NUMBER_COLUMN = 4;
+    public static final String TEXT_INPUT = "textInput";
+    public static final String DATA = "data";
+    public static final String ID = "id";
+    public static final String NAME = "name";
 }

@@ -2,8 +2,8 @@ package vn.com.misa.CUKCUKLite.screen.editdish;
 
 import android.content.Context;
 
-import vn.com.misa.CUKCUKLite.data.db.ControllerSQLite;
-import vn.com.misa.CUKCUKLite.data.db.DBOpenHeplper;
+import vn.com.misa.CUKCUKLite.data.ControllerSQLite;
+import vn.com.misa.CUKCUKLite.data.DBOpenHeplper;
 import vn.com.misa.CUKCUKLite.model.Dish;
 
 public class EditDishModel extends DBOpenHeplper implements IEditDishModel {
