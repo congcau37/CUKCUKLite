@@ -9,9 +9,7 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
 import android.text.Html;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -25,9 +23,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.thebluealliance.spectrum.SpectrumDialog;
 
-import java.text.NumberFormat;
 import java.util.List;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,7 +32,7 @@ import vn.com.misa.CUKCUKLite.R;
 import vn.com.misa.CUKCUKLite.model.Dish;
 import vn.com.misa.CUKCUKLite.model.Unit;
 import vn.com.misa.CUKCUKLite.screen.caculator.CalculatorFragment;
-import vn.com.misa.CUKCUKLite.screen.chooseunit.ChooseUnitActivity;
+import vn.com.misa.CUKCUKLite.screen.chooseunit.ChooseIUnitActivity;
 import vn.com.misa.CUKCUKLite.screen.chooseunit.ChooseUnitModel;
 import vn.com.misa.CUKCUKLite.screen.chooseunit.ChooseUnitPresenter;
 import vn.com.misa.CUKCUKLite.screen.chooseunit.IChooseUnitContract;
@@ -292,7 +288,7 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
      */
     private void sendUnitSelected() {
         try {
-            Intent intent = new Intent(this, ChooseUnitActivity.class);
+            Intent intent = new Intent(this, ChooseIUnitActivity.class);
             Bundle bundle = new Bundle();
             //kiểm tra đơn vị đã chọn để gửi sang màn hình đơn vị tính
             if (getUnitSelected() != ConstantKey.UNIT_NO_SELECT) {

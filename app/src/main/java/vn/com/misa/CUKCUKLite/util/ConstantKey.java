@@ -49,4 +49,6 @@ public class ConstantKey {
     public static final String DATA = "data";
     public static final String ID = "id";
     public static final String NAME = "name";
+    public static final String USERS = "USERS";
+    public static final int RC_SIGN_IN = 0;
 }

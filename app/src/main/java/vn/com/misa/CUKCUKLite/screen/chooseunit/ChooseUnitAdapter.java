@@ -17,7 +17,7 @@ import java.util.List;
 import vn.com.misa.CUKCUKLite.R;
 import vn.com.misa.CUKCUKLite.model.Unit;
 import vn.com.misa.CUKCUKLite.util.ConstantKey;
-import vn.com.misa.CUKCUKLite.util.helper.UnitListener;
+import vn.com.misa.CUKCUKLite.util.helper.IUnitListener;
 
 /**
  * Lớp adapter đơn vị
@@ -29,7 +29,7 @@ public class ChooseUnitAdapter extends BaseAdapter {
     private Context mContext;
     private List<Unit> mData;
 
-    private UnitListener unitListener;
+    private IUnitListener IUnitListener;
     private Unit unitCurrentSelected = null;
 
     public ChooseUnitAdapter(Context mContext, List<Unit> mData) {
@@ -42,11 +42,11 @@ public class ChooseUnitAdapter extends BaseAdapter {
      *
      * @Create_by: trand
      * @Date: 5/29/2019
-     * @Param: UnitListener
+     * @Param: IUnitListener
      * @Return:
      */
-    public void setUnitListener(UnitListener unitListener) {
-        this.unitListener = unitListener;
+    public void setIUnitListener(IUnitListener IUnitListener) {
+        this.IUnitListener = IUnitListener;
     }
 
     @Override
@@ -101,8 +101,8 @@ public class ChooseUnitAdapter extends BaseAdapter {
             viewHolder.lnRowUnit.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    if (unitListener != null) {
-                        unitListener.showDialogDeleteUnit(unit);
+                    if (IUnitListener != null) {
+                        IUnitListener.showDialogDeleteUnit(unit);
                     }
                     return false;
                 }
@@ -111,8 +111,8 @@ public class ChooseUnitAdapter extends BaseAdapter {
             viewHolder.rlEditUnit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (unitListener != null) {
-                        unitListener.showDialogEditUnit(unit);
+                    if (IUnitListener != null) {
+                        IUnitListener.showDialogEditUnit(unit);
                     }
                 }
             });

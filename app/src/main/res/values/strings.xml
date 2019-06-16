@@ -76,5 +76,11 @@
     <string name="price_sale">Giá bán</string>
     <string name="dialog_calculator">dialog_calculator</string>
 
+    <string name="facebook_app_id">2352052975042785</string>
+    <string name="fb_login_protocol_scheme">fb2352052975042785</string>
+    <string name="verifiation">Truy cập Email để xác thực tài khoản</string>
+    <string name="msg_login_success">Đăng nhập thành công!</string>
+    <string name="facebook_login_failed">Thất bại!</string>
+    <string name="facebook_registed">Đăng nhập thành công!</string>
 
 </resources>

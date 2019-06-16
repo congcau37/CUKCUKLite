@@ -26,7 +26,7 @@ import butterknife.OnClick;
 import vn.com.misa.CUKCUKLite.R;
 import vn.com.misa.CUKCUKLite.model.Unit;
 import vn.com.misa.CUKCUKLite.util.ConstantKey;
-import vn.com.misa.CUKCUKLite.util.helper.UnitListener;
+import vn.com.misa.CUKCUKLite.util.helper.IUnitListener;
 
 import static vn.com.misa.CUKCUKLite.util.ConstantKey.RESULT_CODE;
 
@@ -38,7 +38,7 @@ import static vn.com.misa.CUKCUKLite.util.ConstantKey.RESULT_CODE;
  * @date 5/23/2019
  * @return
  */
-public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnitContract.IView, UnitListener {
+public class ChooseIUnitActivity extends AppCompatActivity implements IChooseUnitContract.IView, IUnitListener {
 
     ChooseUnitAdapter adapter;
     IChooseUnitContract.IPresenter iPresenter;
@@ -162,7 +162,7 @@ public class ChooseUnitActivity extends AppCompatActivity implements IChooseUnit
     public void displayUnit(List<Unit> unitList) {
         try {
             adapter = new ChooseUnitAdapter(this, unitList);
-            adapter.setUnitListener((UnitListener) this);
+            adapter.setIUnitListener((IUnitListener) this);
             loadUnitSelected();
             lvUnit.setAdapter(adapter);
         } catch (Exception e) {

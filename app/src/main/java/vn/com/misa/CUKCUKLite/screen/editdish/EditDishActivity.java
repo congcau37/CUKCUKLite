@@ -10,9 +10,7 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
 import android.text.Html;
-import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -40,7 +38,7 @@ import vn.com.misa.CUKCUKLite.R;
 import vn.com.misa.CUKCUKLite.model.Dish;
 import vn.com.misa.CUKCUKLite.model.Unit;
 import vn.com.misa.CUKCUKLite.screen.caculator.CalculatorFragment;
-import vn.com.misa.CUKCUKLite.screen.chooseunit.ChooseUnitActivity;
+import vn.com.misa.CUKCUKLite.screen.chooseunit.ChooseIUnitActivity;
 import vn.com.misa.CUKCUKLite.screen.chooseunit.IChooseUnitContract;
 import vn.com.misa.CUKCUKLite.screen.chooseunit.ChooseUnitModel;
 import vn.com.misa.CUKCUKLite.screen.chooseunit.ChooseUnitPresenter;
@@ -516,7 +514,7 @@ public class EditDishActivity extends AppCompatActivity implements IChooseUnitCo
      */
     private void sendUnitSelected() {
         try {
-            Intent intent = new Intent(EditDishActivity.this, ChooseUnitActivity.class);
+            Intent intent = new Intent(EditDishActivity.this, ChooseIUnitActivity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable(ConstantKey.KEY_SEND_UNIT, unitSelected);
             intent.putExtra(ConstantKey.KEY_SEND_UNIT, bundle);

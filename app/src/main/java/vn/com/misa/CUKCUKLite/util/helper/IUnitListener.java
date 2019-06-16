@@ -7,7 +7,7 @@ import vn.com.misa.CUKCUKLite.model.Unit;
  * @Create_by: trand
  * @Date: 5/29/2019
  */
-public interface UnitListener {
+public interface IUnitListener {
     void deleteUnit(int unitID);
 
     void showDialogDeleteUnit(Unit unit);
