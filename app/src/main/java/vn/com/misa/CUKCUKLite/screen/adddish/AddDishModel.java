@@ -15,13 +15,23 @@ import vn.com.misa.CUKCUKLite.model.Dish;
  */
 public class AddDishModel extends DBOpenHeplper implements IAddDishModel {
 
-    ControllerSQLite controllerSQLite;
+//    ControllerSQLite controllerSQLite;
 
     public AddDishModel(Context context) {
         super(context);
         controllerSQLite = new ControllerSQLite(context);
         controllerSQLite.createDataBase();
     }
+
+    public static ControllerSQLite controllerSQLite;
+
+    public ControllerSQLite getControllerSQLite(Context context){
+        if(controllerSQLite==null){
+            controllerSQLite = new ControllerSQLite(context);
+        }
+        return controllerSQLite;
+    }
+
 
     /**
      * Hàm thêm mới món ăn

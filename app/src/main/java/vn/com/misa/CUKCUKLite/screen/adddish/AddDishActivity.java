@@ -387,6 +387,11 @@ public class AddDishActivity extends AppCompatActivity implements IChooseUnitCon
      */
     void showDialogPickColor() {
         try {
+            String [] color = getResources().getStringArray(R.array.arr_colors);
+
+
+
+
             final SpectrumDialog dialog = new SpectrumDialog.Builder(this)
                     .setTitle(getString(R.string.pick_color))
                     .setSelectedColor(selectedColor != 0 ? selectedColor : ConstantKey.COLOR_DEF)

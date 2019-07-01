@@ -9,6 +9,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -20,6 +28,9 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,7 +49,7 @@ import static vn.com.misa.CUKCUKLite.util.ConstantKey.RC_SIGN_IN;
  * @created_by tdcong
  * @date 5/17/2019
  */
-public class LoginActivity extends BaseActivity{
+public class LoginActivity extends BaseActivity {
 
     @BindView(R.id.llLogo)
     LinearLayout llLogo;
@@ -46,16 +57,19 @@ public class LoginActivity extends BaseActivity{
     Button btnLoginPhoneEmail;
     @BindView(R.id.tvNoAccount)
     TextView tvNoAccount;
-    @BindView(R.id.btnLoginFacebook)
-    Button btnLoginFacebook;
+
     @BindView(R.id.btnLoginGoogle)
     Button btnLoginGoogle;
+    @BindView(R.id.btnLoginFacebook)
+    LoginButton btnLoginFacebook;
+
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private LoginServices loginServices;
     private GoogleSignInClient mGoogleSignInClient;
     private GoogleApiClient mGoogleApiClient;
+    private CallbackManager callbackManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,17 +78,91 @@ public class LoginActivity extends BaseActivity{
             setContentView(R.layout.activity_login_app);
             ButterKnife.bind(this);
 
-
+            callbackManager = CallbackManager.Factory.create();
             //yêu cầu người dùng cung cấp các thông tin cơ bản
-            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                    .requestEmail()
-                    .build();
+            loginGoogle();
 
-            mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
+            loginFacebook();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Mục đính của methob:
+     * @Create_by: trand
+     * @Date: 7/1/2019
+     * @param
+     * @return
+     */
+    private void loginGoogle() {
+        GoogleSignInOptions gso = null;
+        try {
+            gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestEmail()
+                    .build();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+    }
+
+    /**
+     * Mục đính của methob:
+     * @Create_by: trand
+     * @Date: 7/1/2019
+     * @param
+     * @return
+     */
+    private void loginFacebook() {
+        try {
+            btnLoginFacebook.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+                @Override
+                public void onSuccess(LoginResult loginResult) {
+                    AccessToken accessToken = loginResult.getAccessToken();
+                    useLoginInformation(accessToken);
+                }
+
+                @Override
+                public void onCancel() {
+                }
+
+                @Override
+                public void onError(FacebookException e) {
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Mục đính của methob:
+     *
+     * @param
+     * @return
+     * @Create_by: trand
+     * @Date: 7/1/2019
+     */
+    private void useLoginInformation(AccessToken accessToken) {
+        GraphRequest request = GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
+            @Override
+            public void onCompleted(JSONObject object, GraphResponse response) {
+                try {
+                    String name = object.getString("name");
+                    String email = object.getString("email");
+//                    String image = object.getJSONObject("picture").getJSONObject("data").getString("url");
+                    Toast.makeText(LoginActivity.this, "tên: " + name + "\n" + "email: " + email, Toast.LENGTH_SHORT).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "id,name,email,picture.width(200)");
+        request.setParameters(parameters);
+        request.executeAsync();
     }
 
     /**
@@ -118,13 +206,11 @@ public class LoginActivity extends BaseActivity{
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
-            // The Task returned from this call is always completed, no need to attach
-            // a listener.
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
+        } else {
+            callbackManager.onActivityResult(requestCode, resultCode, data);
         }
     }
 
@@ -137,7 +223,7 @@ public class LoginActivity extends BaseActivity{
         }
     }
 
-    private void signOut(){
+    private void signOut() {
         Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(new ResultCallback<Status>() {
             @Override
             public void onResult(@NonNull Status status) {

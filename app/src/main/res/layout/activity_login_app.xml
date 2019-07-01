@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/bg_login"
     android:fitsSystemWindows="true"
-    tools:mContext=".screen.login.LoginActivity"
-    android:background="@drawable/bg_login">
+    tools:mContext=".screen.login.LoginActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -13,83 +13,98 @@
 
         <LinearLayout
             android:id="@+id/llLogo"
-            android:layout_marginTop="@dimen/app_margin_large"
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/app_margin_large"
+            android:orientation="vertical">
 
             <ImageView
-                android:layout_marginTop="@dimen/fab_margin"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_logo_flow"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/fab_margin"
+                android:src="@drawable/ic_logo_flow" />
 
             <ImageView
-                android:layout_marginTop="@dimen/fab_margin"
-                android:layout_gravity="center"
-                android:src="@drawable/icon_lite"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/fab_margin"
+                android:src="@drawable/icon_lite" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="@dimen/app_margin_large"
-            android:orientation="vertical"
-            android:layout_below="@id/llLogo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_below="@id/llLogo"
+            android:layout_marginTop="@dimen/app_margin_large"
+            android:orientation="vertical">
 
-            <Button
+            <!--<Button-->
+            <!--android:id="@+id/btnLoginFacebook"-->
+            <!--android:text="@string/login_with_facebook"-->
+            <!--android:textColor="@color/color_white"-->
+            <!--android:layout_marginTop="@dimen/app_margin_small"-->
+            <!--android:layout_marginLeft="@dimen/app_margin_medium"-->
+            <!--android:layout_marginRight="@dimen/app_margin_medium"-->
+            <!--android:background="@drawable/bg_icon_login_fb"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/btn_login_height" />-->
+
+            <com.facebook.login.widget.LoginButton
                 android:id="@+id/btnLoginFacebook"
-                android:text="@string/login_with_facebook"
-                android:textColor="@color/color_white"
-                android:layout_marginTop="@dimen/app_margin_small"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Đăng nhập bằng facebook"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="@dimen/app_margin_medium"
+                android:layout_marginTop="@dimen/app_margin_small"
                 android:layout_marginRight="@dimen/app_margin_medium"
                 android:background="@drawable/bg_icon_login_fb"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/btn_login_height" />
+                android:textColor="@color/color_white" />
+
             <Button
                 android:id="@+id/btnLoginGoogle"
-                android:text="@string/login_with_google"
-                android:textColor="@color/color_white"
-                android:layout_marginTop="@dimen/app_margin_small"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/btn_login_height"
                 android:layout_marginLeft="@dimen/app_margin_medium"
+                android:layout_marginTop="@dimen/app_margin_small"
                 android:layout_marginRight="@dimen/app_margin_medium"
                 android:background="@drawable/bg_icon_login_google"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/btn_login_height" />
+                android:text="@string/login_with_google"
+                android:textColor="@color/color_white" />
+
             <Button
                 android:id="@+id/btnLoginPhoneEmail"
-                android:text="@string/login_with_phone"
-                android:textColor="@color/color_white"
-                android:layout_marginTop="@dimen/app_margin_small"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/btn_login_height"
                 android:layout_marginLeft="@dimen/app_margin_medium"
+                android:layout_marginTop="@dimen/app_margin_small"
                 android:layout_marginRight="@dimen/app_margin_medium"
                 android:background="@drawable/bg_icon_login_phone_email"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/btn_login_height" />
+                android:text="@string/login_with_phone"
+                android:textColor="@color/color_white" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginBottom="@dimen/app_margin_medium"
-            android:layout_alignParentBottom="true"
-            android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/app_margin_medium"
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/tvNoAccount"
-                android:text="Bạn chưa có tài khoản?  "
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="Bạn chưa có tài khoản?  " />
+
             <TextView
-                android:text="Đăng ký"
-                android:textStyle="bold"
-                android:textSize="@dimen/font_size_medium"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="Đăng ký"
+                android:textSize="@dimen/font_size_medium"
+                android:textStyle="bold" />
         </LinearLayout>
     </RelativeLayout>
 </RelativeLayout>
